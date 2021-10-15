@@ -9,7 +9,7 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.*;
 
 
 @Data
-public class SignInDTO {
+public class LoginDTO {
 
     @Email(message = EMAIL_INVALID)
     @NotBlank(message = EMAIL_REQUIRED)

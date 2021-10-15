@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
-import pl.polsl.opinion_backend.entities.user.User;
+import pl.polsl.opinion_backend.dtos.user.UserResponseDTO;
 
 @Component
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthResponseDTO {
-    User user;
+    UserResponseDTO user;
     String accessToken;
     String refreshToken;
 }

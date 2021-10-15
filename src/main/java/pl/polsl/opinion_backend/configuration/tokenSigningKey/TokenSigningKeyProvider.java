@@ -1,4 +1,4 @@
-package pl.polsl.opinion_backend.tokenSigningKey;
+package pl.polsl.opinion_backend.configuration.tokenSigningKey;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

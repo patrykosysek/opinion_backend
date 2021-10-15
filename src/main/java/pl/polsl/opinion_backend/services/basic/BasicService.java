@@ -4,13 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
-import pl.polsl.opinion_backend.entities.base.AbstractBaseEntity;
-import pl.polsl.opinion_backend.repositories.base.BasePagingRepository;
+import pl.polsl.opinion_backend.entities.base.BasicEntity;
+import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public abstract class AbstractBaseService<E extends AbstractBaseEntity, R extends BasePagingRepository<E, UUID>> {
+public abstract class BasicService<E extends BasicEntity, R extends BasicRepository<E, UUID>> {
 
     @Autowired
     protected R repository;

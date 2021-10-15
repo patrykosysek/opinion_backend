@@ -18,19 +18,13 @@ import java.util.UUID;
 @MappedSuperclass
 @EqualsAndHashCode(callSuper = true)
 @EntityListeners(AuditingEntityListener.class)
-public abstract class DateAuditable extends AbstractBaseEntity {
+public abstract class BasicAuditing extends BasicEntity {
 
     @Column(nullable = false, updatable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
     @CreatedDate
     protected OffsetDateTime createDate;
 
-    @Column(nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
-    @LastModifiedDate
-    protected OffsetDateTime modifyDate;
-
     @CreatedBy
     protected UUID createBy;
 
-    @LastModifiedBy
-    protected UUID modifyBy;
 }

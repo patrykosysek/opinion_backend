@@ -1,4 +1,4 @@
-package pl.polsl.opinion_backend.tokenSigningKey;
+package pl.polsl.opinion_backend.configuration.tokenSigningKey;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.context.annotation.Condition;

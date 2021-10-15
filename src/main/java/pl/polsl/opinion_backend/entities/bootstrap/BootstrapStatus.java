@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pl.polsl.opinion_backend.entities.base.AbstractBaseEntity;
+import pl.polsl.opinion_backend.entities.base.BasicEntity;
 
 import javax.persistence.Entity;
 
@@ -13,7 +13,7 @@ import javax.persistence.Entity;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class BootstrapStatus extends AbstractBaseEntity {
+public class BootstrapStatus extends BasicEntity {
     private boolean done;
 }
 

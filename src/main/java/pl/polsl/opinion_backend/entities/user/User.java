@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.polsl.opinion_backend.entities.base.DateAuditable;
+import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 
@@ -29,7 +29,7 @@ import static pl.polsl.opinion_backend.enums.role.RoleGroupEnum.ADMIN;
 @Table(name = "\"user\"")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends DateAuditable implements UserDetails {
+public class User extends BasicAuditing implements UserDetails {
 
     @Column(unique = true, nullable = false)
     @Email

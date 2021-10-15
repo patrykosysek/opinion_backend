@@ -7,12 +7,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.repositories.user.UserRepository;
-import pl.polsl.opinion_backend.services.basic.AbstractBaseService;
+import pl.polsl.opinion_backend.services.basic.BasicService;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -22,8 +21,7 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.USER_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service
-public class UserService extends AbstractBaseService<User, UserRepository> implements UserDetailsService {
-    private final PasswordEncoder passwordEncoder;
+public class UserService extends BasicService<User, UserRepository> implements UserDetailsService {
 
     @Transactional(readOnly = true)
     public Optional<User> findByEmail(String email) {

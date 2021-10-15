@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.polsl.opinion_backend.dtos.auth.AuthResponseDTO;
 import pl.polsl.opinion_backend.dtos.auth.RefreshTokenDTO;
 import pl.polsl.opinion_backend.dtos.auth.RefreshTokenResponseDTO;
-import pl.polsl.opinion_backend.dtos.auth.SignInDTO;
+import pl.polsl.opinion_backend.dtos.auth.LoginDTO;
 import pl.polsl.opinion_backend.services.auth.AuthService;
 
 import javax.validation.Valid;
@@ -24,7 +24,7 @@ public class AuthController {
     @ApiResponse(responseCode = "200", description = "User successfully signed in")
     @PostMapping
     @ResponseStatus(HttpStatus.OK)
-    public AuthResponseDTO signIn(@RequestBody @Valid SignInDTO input) {
+    public AuthResponseDTO signIn(@RequestBody @Valid LoginDTO input) {
         return authService.signIn(input);
     }
 

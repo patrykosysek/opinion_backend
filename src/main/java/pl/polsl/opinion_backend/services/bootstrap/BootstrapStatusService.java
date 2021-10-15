@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.bootstrap.BootstrapStatus;
 import pl.polsl.opinion_backend.repositories.bootstrap.BootstrapStatusRepository;
-import pl.polsl.opinion_backend.services.basic.AbstractBaseService;
+import pl.polsl.opinion_backend.services.basic.BasicService;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -13,7 +13,7 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class BootstrapStatusService extends AbstractBaseService<BootstrapStatus, BootstrapStatusRepository> {
+public class BootstrapStatusService extends BasicService<BootstrapStatus, BootstrapStatusRepository> {
 
     @Override
     public BootstrapStatus getById(UUID id) {

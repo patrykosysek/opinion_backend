@@ -59,12 +59,12 @@ public class BootstrapService {
 
     public void createDefaultUser() {
         User user = new User(
-                "user@onet.pl",
-                passwordEncoder.encode("PATIENT"),
+                "opinion_user@onet.pl",
+                passwordEncoder.encode("OPINION_USER"),
                 new HashSet<>(),
                 true
         );
-        user.getRoleGroups().add(roleGroupService.getByRoleName("PATIENT"));
+        user.getRoleGroups().add(roleGroupService.getByRoleName("OPINION_USER"));
         userService.save(user);
     }
 

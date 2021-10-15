@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.mappers.qualifires.JwtAccessTokenMapping;
 import pl.polsl.opinion_backend.mappers.qualifires.JwtRefreshTokenMapping;
-import pl.polsl.opinion_backend.tokenSigningKey.TokenSigningKeyProvider;
+import pl.polsl.opinion_backend.configuration.tokenSigningKey.TokenSigningKeyProvider;
 
 import java.time.OffsetDateTime;
 import java.util.Date;

@@ -4,7 +4,7 @@ package pl.polsl.opinion_backend.entities.role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import pl.polsl.opinion_backend.entities.base.AbstractBaseEntity;
+import pl.polsl.opinion_backend.entities.base.BasicEntity;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 
 import javax.persistence.Column;
@@ -14,7 +14,7 @@ import javax.persistence.Entity;
 @Data
 @Entity
 @NoArgsConstructor
-public class RoleGroup extends AbstractBaseEntity {
+public class RoleGroup extends BasicEntity {
 
     @Column(nullable = false, unique = true)
     private String name;

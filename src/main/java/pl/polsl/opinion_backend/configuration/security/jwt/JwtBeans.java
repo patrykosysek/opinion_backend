@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import pl.polsl.opinion_backend.tokenSigningKey.TokenSigningKeyProvider;
+import pl.polsl.opinion_backend.configuration.tokenSigningKey.TokenSigningKeyProvider;
 
 @Configuration
 public class JwtBeans {
