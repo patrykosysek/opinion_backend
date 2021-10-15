@@ -9,3 +9,7 @@ spring:
 server:
     servlet:
         contextPath: /api
+jwt:
+    tokenExpirationTime: 1440 # = 1 day in minutes
+    refreshTokenExpTime: 525600 # = 1 year in minutes
+    tokenIssuer: http://itsilesia.com

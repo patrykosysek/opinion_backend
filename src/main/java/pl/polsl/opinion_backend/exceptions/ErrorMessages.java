@@ -1,0 +1,55 @@
+package pl.polsl.opinion_backend.exceptions;
+
+public class ErrorMessages {
+    public static final String USER_NOT_ENABLED = "user.not_enabled";
+    public static final String USER_LOCKED = "user.locked";
+    public static final String SIGN_IN_INPUT_INVALID = "signInInput.invalid";
+    public static final String REFRESH_TOKEN_REQUIRED = "refreshToken.required";
+    public static final String EMAIL_REQUIRED = "email.required";
+    public static final String EMAIL_INVALID = "email.invalid";
+    public static final String EMAIL_TAKEN = "email.taken";
+    public static final String PASSWORD_REQUIRED = "password.required";
+    public static final String PASSWORD_INVALID = "password.invalid";
+    public static final String ROLE_GROUP_REQUIRED = "roleGroup.required";
+    public static final String USER_INVALID = "user.invalid";
+    public static final String USER_NOT_FOUND = "user.not_found";
+    public static final String USER_ID_REQUIRED = "userId.required";
+    public static final String USER_NOT_SPECIALIST = "user.not_specialist";
+    public static final String TOKEN_NOT_FOUND = "token.not_found";
+    public static final String BOOTSTRAP_PART_NOT_FOUND = "bootstrap_part.not_found";
+    public static final String ROLE_GROUP_NOT_FOUND = "roleGroup.not_found";
+    public static final String FACILITY_NOT_FOUND = "facility.not_found";
+    public static final String FACILITY_ID_REQUIRED = "facilityId.required";
+    public static final String FACILITY_SPECIALIST_NOT_FOUND = "facilitySpecialist.not_found";
+    public static final String NAME_INVALID = "name.invalid";
+    public static final String NAME_REQUIRED = "name.required";
+    public static final String ADDRESS_REQUIRED = "address.required";
+    public static final String ADDRESS_INVALID = "address.invalid";
+    public static final String ZIPCODE_REQUIRED = "zipcode.required";
+    public static final String ZIPCODE_INVALID = "zipcode.invalid";
+    public static final String CITY_REQUIRED = "city.required";
+    public static final String CITY_INVALID = "city.invalid";
+    public static final String WEBSITE_INVALID = "website.invalid";
+    public static final String DESCRIPTION_INVALID = "description.invalid";
+    public static final String FORBIDDEN = "FORBIDDEN";
+    public static final String OLD_PASSWORD_INVALID = "oldPassword.invalid";
+    public static final String OLD_PASSWORD_REQUIRED = "oldPassword.required";
+    public static final String NEW_PASSWORD_REQUIRED = "newPassword.required";
+    public static final String CONSENTS_REQUIRED = "consents.required";
+    public static final String REQUIRED_CONSENTS_NOT_ACCEPTED = "consents.required_not_accepted";
+    public static final String PHONE_INVALID = "phone.invalid";
+    public static final String NOT_BLANK = "cannot be blank";
+    public static final String USER_PROFILE_NOT_FOUND = "userProfile.not_found";
+    public static final String USER_PROFILE_REQUIRED = "userProfile.required";
+    public static final String SUITABLE_USER_PROFILE_REQUIRED = "userProfile.no_suitable";
+    public static final String SUITABLE_ROLE_GROUP_REQUIRED = "roleGroup.no_suitable";
+    public static final String GENDER_REQUIRED = "gender.required";
+    public static final String GENDER_INVALID = "gender.invalid";
+    public static final String SURNAME_REQUIRED = "surname.required";
+    public static final String SURNAME_INVALID = "surname.invalid";
+    public static final String TITLE_REQUIRED = "title.required";
+    public static final String TITLE_INVALID = "title.invalid";
+    public static final String JWT_INVALID = "JWT.invalid";
+    public static final String JWT_EXPIRED = "JWT.expired";
+
+}
