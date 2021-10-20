@@ -14,7 +14,6 @@ import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class User extends BasicAuditing implements UserDetails {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private Set<@NotNull RoleGroup> roleGroups = new HashSet<>();
+    private Set<RoleGroup> roleGroups = new HashSet<>();
 
     private boolean enabled = false;
 

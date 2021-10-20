@@ -1,0 +1,520 @@
+databaseChangeLog:
+- changeSet:
+    id: 1634735992904-1
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: animePK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            name: api_id
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: description
+            type: TEXT
+        - column:
+            name: image_url
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: release_date
+            type: date
+        - column:
+            name: title
+            type: VARCHAR(255)
+        tableName: anime
+- changeSet:
+    id: 1634735992904-2
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: anime_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: genres_id
+            type: UUID
+        tableName: anime_genres
+- changeSet:
+    id: 1634735992904-3
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: anime_manga_genrePK
+            name: id
+            type: UUID
+        - column:
+            name: api_id
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: anime_manga_genre
+- changeSet:
+    id: 1634735992904-4
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: bootstrap_statusPK
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: done
+            type: BOOLEAN
+        tableName: bootstrap_status
+- changeSet:
+    id: 1634735992904-5
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: mangaPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            name: api_id
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: description
+            type: TEXT
+        - column:
+            name: image_url
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: release_date
+            type: date
+        - column:
+            name: title
+            type: VARCHAR(255)
+        tableName: manga
+- changeSet:
+    id: 1634735992904-6
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: manga_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: genres_id
+            type: UUID
+        tableName: manga_genres
+- changeSet:
+    id: 1634735992904-7
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: moviePK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            name: api_id
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: description
+            type: TEXT
+        - column:
+            name: image_url
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: release_date
+            type: date
+        - column:
+            name: title
+            type: VARCHAR(255)
+        tableName: movie
+- changeSet:
+    id: 1634735992904-8
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: movie_genrePK
+            name: id
+            type: UUID
+        - column:
+            name: api_id
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: movie_genre
+- changeSet:
+    id: 1634735992904-9
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: movie_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: genres_id
+            type: UUID
+        tableName: movie_genres
+- changeSet:
+    id: 1634735992904-10
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: role_groupPK
+            name: id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: name
+            type: VARCHAR(255)
+        tableName: role_group
+- changeSet:
+    id: 1634735992904-11
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: userPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: email
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: enabled
+            type: BOOLEAN
+        - column:
+            constraints:
+              nullable: false
+            name: password
+            type: VARCHAR(255)
+        tableName: user
+- changeSet:
+    id: 1634735992904-12
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: user_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: role_groups_id
+            type: UUID
+        tableName: user_role_groups
+- changeSet:
+    id: 1634735992904-13
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ANIMEID_COL
+        tableName: anime
+- changeSet:
+    id: 1634735992904-14
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ANIME_MANGA_GENREID_COL
+        tableName: anime_manga_genre
+- changeSet:
+    id: 1634735992904-15
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: UC_ANIME_MANGA_GENRENAME_COL
+        tableName: anime_manga_genre
+- changeSet:
+    id: 1634735992904-16
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_BOOTSTRAP_STATUSID_COL
+        tableName: bootstrap_status
+- changeSet:
+    id: 1634735992904-17
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MANGAID_COL
+        tableName: manga
+- changeSet:
+    id: 1634735992904-18
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MOVIEID_COL
+        tableName: movie
+- changeSet:
+    id: 1634735992904-19
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MOVIE_GENREID_COL
+        tableName: movie_genre
+- changeSet:
+    id: 1634735992904-20
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: UC_MOVIE_GENRENAME_COL
+        tableName: movie_genre
+- changeSet:
+    id: 1634735992904-21
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ROLE_GROUPID_COL
+        tableName: role_group
+- changeSet:
+    id: 1634735992904-22
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: name
+        constraintName: UC_ROLE_GROUPNAME_COL
+        tableName: role_group
+- changeSet:
+    id: 1634735992904-23
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: email
+        constraintName: UC_USEREMAIL_COL
+        tableName: user
+- changeSet:
+    id: 1634735992904-24
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_USERID_COL
+        tableName: user
+- changeSet:
+    id: 1634735992904-25
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: user_role_groups
+        constraintName: FK148jdwc6t7xfn5nsmc6p530fk
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: user
+        validate: true
+- changeSet:
+    id: 1634735992904-26
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: role_groups_id
+        baseTableName: user_role_groups
+        constraintName: FK3eqbui9i5te70wb8gtikxo1fd
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: role_group
+        validate: true
+- changeSet:
+    id: 1634735992904-27
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: genres_id
+        baseTableName: anime_genres
+        constraintName: FK82u1kw0w2bv6tx5d7tcwoxhr
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie_genre
+        validate: true
+- changeSet:
+    id: 1634735992904-28
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: genres_id
+        baseTableName: movie_genres
+        constraintName: FKkq7md533y9jvvy3y42a5mrt1k
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime_manga_genre
+        validate: true
+- changeSet:
+    id: 1634735992904-29
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: genres_id
+        baseTableName: manga_genres
+        constraintName: FKmp9e0xnhktipxxb38qjmw9gqa
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime_manga_genre
+        validate: true
+- changeSet:
+    id: 1634735992904-30
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: anime_id
+        baseTableName: anime_genres
+        constraintName: FKorrk6ybv1u14qh4bd1tndm125
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime
+        validate: true
+- changeSet:
+    id: 1634735992904-31
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: manga_id
+        baseTableName: manga_genres
+        constraintName: FKp0wx9r1y4mrvih8ker9ouym3g
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga
+        validate: true
+- changeSet:
+    id: 1634735992904-32
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: movie_id
+        baseTableName: movie_genres
+        constraintName: FKs2xl3sirbon75mjcongwhrbi3
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie
+        validate: true
+
