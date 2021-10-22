@@ -1,0 +1,22 @@
+databaseChangeLog:
+- changeSet:
+    id: 1634905620243-1
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: genres_id
+        baseTableName: anime_genres
+        constraintName: FK1hjjoxj4ko020fafcuanw8jtu
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime_manga_genre
+        validate: true
+- changeSet:
+    id: 1634905620243-2
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: anime_genres
+        constraintName: FK76f1wsxoxlidwk073wm32n815
+

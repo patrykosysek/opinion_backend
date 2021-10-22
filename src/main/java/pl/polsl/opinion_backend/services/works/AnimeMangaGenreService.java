@@ -18,7 +18,6 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.USER_NOT_FOUND;
 public class AnimeMangaGenreService extends BasicService<AnimeMangaGenre, AnimeMangaGenreRepository> {
 
     @Override
-    @Transactional(readOnly = true)
     public AnimeMangaGenre getById(UUID id) {
         return findById(id).orElseThrow(() -> new NoSuchElementException(USER_NOT_FOUND));
     }

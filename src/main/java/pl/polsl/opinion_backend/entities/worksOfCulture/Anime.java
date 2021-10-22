@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
-import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
+import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -20,6 +20,6 @@ import java.util.Set;
 public class Anime extends WorkOfCulture {
 
     @ManyToMany
-    private Set<MovieTvSeriesGenre> genres = new HashSet<>();
+    private Set<AnimeMangaGenre> genres = new HashSet<>();
 
 }

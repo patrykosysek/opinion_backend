@@ -10,20 +10,26 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.entities.bootstrap.BootstrapStatus;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
 import pl.polsl.opinion_backend.entities.user.User;
+import pl.polsl.opinion_backend.entities.worksOfCulture.Anime;
 import pl.polsl.opinion_backend.enums.genre.AnimeMangaGenreEnum;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
+import pl.polsl.opinion_backend.helpers.EncodingUrl;
 import pl.polsl.opinion_backend.mappers.genre.GenreMapper;
 import pl.polsl.opinion_backend.services.role.RoleGroupService;
 import pl.polsl.opinion_backend.services.user.UserService;
 import pl.polsl.opinion_backend.services.works.AnimeMangaGenreService;
 import pl.polsl.opinion_backend.services.works.GenreService;
+import pl.polsl.opinion_backend.services.works.WorkOfCultureService;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.HashSet;
@@ -40,21 +46,21 @@ public class BootstrapService {
     private final GenreService genreService;
     private final GenreMapper genreMapper;
     private final AnimeMangaGenreService animeMangaGenreService;
-
+    private final WorkOfCultureService workOfCultureService;
 
     public void setup() {
-        if (!bootstrapStatusService.isDone()) {
+        if (bootstrapStatusService.isDone()) {
             log.info("Bootstrap already done");
         } else {
             try {
-                // createRoleGroups();
-                // createDefaultAdmin();
-                // createDefaultUser();
-                //getGenreTypes();
+                createRoleGroups();
+                createDefaultAdmin();
+                createDefaultUser();
+                getGenreTypes();
                 animeGenerating();
-                //booksGenerating();
-                // bootstrapStatusService.save(new BootstrapStatus(true));
+                bootstrapStatusService.save(new BootstrapStatus(true));
             } catch (Exception e) {
+                log.info(e.getMessage());
                 log.info("Bootstrap failed");
             }
 
@@ -174,6 +180,7 @@ public class BootstrapService {
             try {
                 createAnimeFromGenre(genre, client);
             } catch (IOException e) {
+                log.info(e.getMessage());
                 log.info("Anime creation failed");
             }
         });
@@ -182,8 +189,56 @@ public class BootstrapService {
     }
 
     public void createAnimeFromGenre(AnimeMangaGenre genre, OkHttpClient client) throws IOException {
+        int page;
 
-        String url = "https://jikan1.p.rapidapi.com/search/anime?page=2&genre=" + genre.getApiId();
+        for (page = 1; page < 10; page++) {
+            String url = "https://jikan1.p.rapidapi.com/search/anime?page=" + page + "&genre=" + genre.getApiId();
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .get()
+                    .addHeader("x-rapidapi-host", "jikan1.p.rapidapi.com")
+                    .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            String body = response.body().string();
+
+            JSONObject root = new JSONObject(body);
+            JSONArray result = root.getJSONArray("results");
+
+            for (int i = 0; i < result.length(); i++) {
+                JSONObject jsonAnime = result.getJSONObject(i);
+                Anime anime = new Anime();
+
+                String title = jsonAnime.getString("title");
+                String apiId = String.valueOf(jsonAnime.getInt("mal_id"));
+                String description = jsonAnime.getString("synopsis");
+                Object date = jsonAnime.get("start_date");
+                String stringDate = date.toString();
+
+                LocalDate releaseDate = stringDate.equals("null") ? null : OffsetDateTime.parse(stringDate).toLocalDate();
+                String imageUrl = jsonAnime.getString("image_url");
+
+                if (title != null && description != null && releaseDate != null && imageUrl != null) {
+                    anime.setTitle(title);
+                    anime.setApiId(apiId);
+                    anime.setDescription(description);
+                    anime.setReleaseDate(releaseDate);
+                    anime.setImageUrl(imageUrl);
+                    anime.getGenres().add(genre);
+
+                    workOfCultureService.save(anime);
+                }
+            }
+        }
+        log.info("Anime generated");
+    }
+
+
+    public Anime getAnimeWithMoreInformation(String title, OkHttpClient client) throws IOException {
+        String url = "https://jikan1.p.rapidapi.com/anime/" + EncodingUrl.getUrlPathFromString(title) + "/moreinfo";
+
 
         Request request = new Request.Builder()
                 .url(url)
@@ -192,12 +247,11 @@ public class BootstrapService {
                 .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
                 .build();
 
+
         Response response = client.newCall(request).execute();
         String body = response.body().string();
 
-        JSONObject root = new JSONObject(body);
-
-
+        return null;
     }
 
 
