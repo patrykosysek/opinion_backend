@@ -13,4 +13,5 @@ import javax.persistence.Entity;
 @Entity
 @AllArgsConstructor
 public class MovieTvSeriesGenre extends Genre {
+
 }

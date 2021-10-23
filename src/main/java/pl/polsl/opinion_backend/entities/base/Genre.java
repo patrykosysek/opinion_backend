@@ -2,7 +2,6 @@ package pl.polsl.opinion_backend.entities.base;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pl.polsl.opinion_backend.entities.base.BasicEntity;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
