@@ -2,11 +2,8 @@ package pl.polsl.opinion_backend.services.works;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import pl.polsl.opinion_backend.entities.base.Genre;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
-import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
-import pl.polsl.opinion_backend.repositories.works.GenreRepository;
+import pl.polsl.opinion_backend.repositories.works.GameGenreRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
 import java.util.NoSuchElementException;
@@ -16,11 +13,15 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.USER_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service
-public class GenreService extends BasicService<Genre, GenreRepository> {
+public class GameGenreService extends BasicService<GameGenre, GameGenreRepository> {
 
     @Override
-    public Genre getById(UUID id) {
+    public GameGenre getById(UUID id) {
         return findById(id).orElseThrow(() -> new NoSuchElementException(USER_NOT_FOUND));
+    }
+
+    public GameGenre getByName(String name) {
+        return repository.findByName(name).orElseThrow(() -> new NoSuchElementException(USER_NOT_FOUND));
     }
 
 }

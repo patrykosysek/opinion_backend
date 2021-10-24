@@ -15,20 +15,14 @@ import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
 import pl.polsl.opinion_backend.entities.user.User;
-import pl.polsl.opinion_backend.entities.worksOfCulture.Anime;
-import pl.polsl.opinion_backend.entities.worksOfCulture.Manga;
-import pl.polsl.opinion_backend.entities.worksOfCulture.Movie;
-import pl.polsl.opinion_backend.entities.worksOfCulture.TvSeries;
+import pl.polsl.opinion_backend.entities.worksOfCulture.*;
 import pl.polsl.opinion_backend.enums.genre.AnimeMangaGenreEnum;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 import pl.polsl.opinion_backend.helpers.EncodingUrl;
 import pl.polsl.opinion_backend.mappers.genre.GenreMapper;
 import pl.polsl.opinion_backend.services.role.RoleGroupService;
 import pl.polsl.opinion_backend.services.user.UserService;
-import pl.polsl.opinion_backend.services.works.AnimeMangaGenreService;
-import pl.polsl.opinion_backend.services.works.GenreService;
-import pl.polsl.opinion_backend.services.works.MovieTvSeriesGenreService;
-import pl.polsl.opinion_backend.services.works.WorkOfCultureService;
+import pl.polsl.opinion_backend.services.works.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -51,6 +45,7 @@ public class BootstrapService {
     private final AnimeMangaGenreService animeMangaGenreService;
     private final WorkOfCultureService workOfCultureService;
     private final MovieTvSeriesGenreService movieTvSeriesGenreService;
+    private final GameGenreService gameGenreService;
 
     public void setup() {
         if (!bootstrapStatusService.isDone()) {
@@ -64,7 +59,8 @@ public class BootstrapService {
 //                animeGenerating();
 //                mangaGenerating();
 //                movieGenerating();
-                tvSeriesGenerating();
+//                tvSeriesGenerating();
+                gameGenerating();
 //                bootstrapStatusService.save(new BootstrapStatus(true));
             } catch (Exception e) {
                 log.info(e.getMessage());
@@ -502,4 +498,85 @@ public class BootstrapService {
 
     }
 
+    public void gameGenerating() throws IOException {
+        OkHttpClient client = new OkHttpClient();
+
+        for (int i = 1; i < 21; i++) {
+            String url = "https://api.rawg.io/api/games?key=a63115890c184d4aaa49b2a5ec7fdbfc&page=" + i;
+            createGame(client, url);
+        }
+
+    }
+
+    public void createGame(OkHttpClient client, String url) throws IOException {
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .addHeader("User-Agent", "Opinion")
+                .build();
+
+
+        Response response = client.newCall(request).execute();
+        String body = response.body().string();
+        JSONObject root = new JSONObject(body);
+        JSONArray jsonGame = root.getJSONArray("results");
+
+        for (int i = 0; i < jsonGame.length(); i++) {
+            JSONObject game = jsonGame.getJSONObject(i);
+            int id = game.getInt("id");
+            createGameFromId(id, client);
+        }
+    }
+
+
+    public void createGameFromId(int id, OkHttpClient client) throws IOException {
+
+        String url = "https://api.rawg.io/api/games/" + id + "?key=a63115890c184d4aaa49b2a5ec7fdbfc";
+
+        Request request = new Request.Builder()
+                .url(url)
+                .get()
+                .addHeader("User-Agent", "Opinion")
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String body = response.body().string();
+
+        JSONObject jsonGame = new JSONObject(body);
+
+
+        String title = jsonGame.getString("name");
+        String description = jsonGame.getString("description");
+        String imageUrl = jsonGame.getString("background_image");
+        JSONArray generes = jsonGame.getJSONArray("genres");
+
+        Object release = jsonGame.get("released");
+        String stringDate = release.toString();
+
+        LocalDate releaseDate = stringDate.equals("null") ? null : LocalDate.parse(stringDate);
+
+
+        if (title != null && description != null && releaseDate != null && imageUrl != null) {
+
+            Game game = new Game();
+
+            game.setApiId(String.valueOf(id));
+            game.setDescription(description);
+            game.setTitle(title);
+            game.setImageUrl(imageUrl);
+            game.setReleaseDate(releaseDate);
+
+            for (int i = 0; i < generes.length(); i++) {
+                JSONObject jsonGenre = generes.getJSONObject(i);
+                String genreName = jsonGenre.getString("name");
+                GameGenre gameGenre = gameGenreService.getByName(genreName);
+                game.getGenres().add(gameGenre);
+            }
+            workOfCultureService.save(game);
+        }
+    }
+
 }
+
+
