@@ -1,10 +1,9 @@
-package pl.polsl.opinion_backend.services.works;
+package pl.polsl.opinion_backend.services.works.genre;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
-import pl.polsl.opinion_backend.repositories.works.AnimeMangaGenreRepository;
+import pl.polsl.opinion_backend.repositories.works.genre.AnimeMangaGenreRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
 import java.util.NoSuchElementException;

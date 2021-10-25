@@ -10,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.entities.bootstrap.BootstrapStatus;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
@@ -18,11 +19,14 @@ import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.entities.worksOfCulture.*;
 import pl.polsl.opinion_backend.enums.genre.AnimeMangaGenreEnum;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
-import pl.polsl.opinion_backend.helpers.EncodingUrl;
 import pl.polsl.opinion_backend.mappers.genre.GenreMapper;
 import pl.polsl.opinion_backend.services.role.RoleGroupService;
 import pl.polsl.opinion_backend.services.user.UserService;
 import pl.polsl.opinion_backend.services.works.*;
+import pl.polsl.opinion_backend.services.works.genre.AnimeMangaGenreService;
+import pl.polsl.opinion_backend.services.works.genre.GameGenreService;
+import pl.polsl.opinion_backend.services.works.genre.GenreService;
+import pl.polsl.opinion_backend.services.works.genre.MovieTvSeriesGenreService;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -36,32 +40,42 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class BootstrapService {
+
     private final PasswordEncoder passwordEncoder;
     private final RoleGroupService roleGroupService;
     private final UserService userService;
     private final BootstrapStatusService bootstrapStatusService;
+
+    // Genre
     private final GenreService genreService;
     private final GenreMapper genreMapper;
     private final AnimeMangaGenreService animeMangaGenreService;
-    private final WorkOfCultureService workOfCultureService;
     private final MovieTvSeriesGenreService movieTvSeriesGenreService;
     private final GameGenreService gameGenreService;
+    // Work of culture services
+
+    private final AnimeService animeService;
+    private final MangaService mangaService;
+    private final MovieService movieService;
+    private final TvSeriesService tvSeriesService;
+    private final WorkOfCultureService workOfCultureService;
+    private final GameService gameService;
 
     public void setup() {
-        if (!bootstrapStatusService.isDone()) {
+        if (bootstrapStatusService.isDone()) {
             log.info("Bootstrap already done");
         } else {
             try {
-//                createRoleGroups();
-//                createDefaultAdmin();
-//                createDefaultUser();
-//                getGenreTypes();
-//                animeGenerating();
-//                mangaGenerating();
-//                movieGenerating();
-//                tvSeriesGenerating();
+                createRoleGroups();
+                createDefaultAdmin();
+                createDefaultUser();
+                getGenreTypes();
+                animeGenerating();
+                mangaGenerating();
+                movieGenerating();
+                tvSeriesGenerating();
                 gameGenerating();
-//                bootstrapStatusService.save(new BootstrapStatus(true));
+                bootstrapStatusService.save(new BootstrapStatus(true));
             } catch (Exception e) {
                 log.info(e.getMessage());
                 log.info("Bootstrap failed");
@@ -69,6 +83,8 @@ public class BootstrapService {
 
         }
     }
+
+    // DEFAULT USERS
 
     public void createRoleGroups() {
         Arrays.stream(RoleGroupEnum.values()).forEach(roleGroupName -> {
@@ -98,6 +114,8 @@ public class BootstrapService {
         user.getRoleGroups().add(roleGroupService.getByRoleName("OPINION_USER"));
         userService.save(user);
     }
+
+    // DEFAULT GENRE TYPES
 
     public void getGenreTypes() throws IOException {
         generateMovieGeneres();
@@ -174,6 +192,8 @@ public class BootstrapService {
 
     }
 
+    // ANIME
+
     public void animeGenerating() {
         OkHttpClient client = new OkHttpClient();
 
@@ -182,6 +202,7 @@ public class BootstrapService {
         genres.forEach(genre -> {
             try {
                 createAnimeFromGenre(genre, client);
+                log.info("Anime generated for genre  " + genre.getName());
             } catch (IOException e) {
                 log.info(e.getMessage());
                 log.info("Anime creation failed");
@@ -204,56 +225,46 @@ public class BootstrapService {
                     .build();
 
             Response response = client.newCall(request).execute();
-            String body = response.body().string();
 
-            JSONObject root = new JSONObject(body);
-            JSONArray result = root.getJSONArray("results");
+            if (response.code() == 200) {
+                String body = response.body().string();
+                JSONObject root = new JSONObject(body);
+                JSONArray result = root.getJSONArray("results");
 
-            for (int i = 0; i < result.length(); i++) {
-                JSONObject jsonAnime = result.getJSONObject(i);
-                Anime anime = new Anime();
+                for (int i = 0; i < result.length(); i++) {
+                    JSONObject jsonAnime = result.getJSONObject(i);
+                    Anime anime = new Anime();
 
-                String title = jsonAnime.getString("title");
-                String apiId = String.valueOf(jsonAnime.getInt("mal_id"));
-                String description = jsonAnime.getString("synopsis");
-                Object date = jsonAnime.get("start_date");
-                String stringDate = date.toString();
+                    String title = jsonAnime.getString("title");
+                    String apiId = String.valueOf(jsonAnime.getInt("mal_id"));
+                    String description = jsonAnime.getString("synopsis");
+                    Object date = jsonAnime.get("start_date");
+                    String stringDate = date.toString();
 
-                LocalDate releaseDate = stringDate.equals("null") ? null : OffsetDateTime.parse(stringDate).toLocalDate();
-                String imageUrl = jsonAnime.getString("image_url");
+                    LocalDate releaseDate = stringDate.equals("null") ? null : OffsetDateTime.parse(stringDate).toLocalDate();
+                    String imageUrl = jsonAnime.getString("image_url");
 
-                if (title != null && description != null && releaseDate != null && imageUrl != null) {
-                    anime.setTitle(title);
-                    anime.setApiId(apiId);
-                    anime.setDescription(description);
-                    anime.setReleaseDate(releaseDate);
-                    anime.setImageUrl(imageUrl);
-                    anime.getGenres().add(genre);
+                    if (animeService.existsByApiId(apiId)) {
+                        Anime existingAnime = animeService.getByApiId(apiId);
+                        existingAnime.getGenres().add(genre);
+                        workOfCultureService.save(existingAnime);
 
-                    workOfCultureService.save(anime);
+                    } else if (title != null && description != null && description.isBlank() && releaseDate != null && imageUrl != null) {
+                        anime.setTitle(title);
+                        anime.setApiId(apiId);
+                        anime.setDescription(description);
+                        anime.setReleaseDate(releaseDate);
+                        anime.setImageUrl(imageUrl);
+                        anime.getGenres().add(genre);
+                        workOfCultureService.save(anime);
+
+                    }
                 }
             }
         }
-        log.info("Anime generated");
     }
 
-    public Anime getAnimeWithMoreInformation(String title, OkHttpClient client) throws IOException {
-        String url = "https://jikan1.p.rapidapi.com/anime/" + EncodingUrl.getUrlPathFromString(title) + "/moreinfo";
-
-
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .addHeader("x-rapidapi-host", "jikan1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
-                .build();
-
-
-        Response response = client.newCall(request).execute();
-        String body = response.body().string();
-
-        return null;
-    }
+    // MANGA
 
     public void mangaGenerating() {
         OkHttpClient client = new OkHttpClient();
@@ -263,6 +274,7 @@ public class BootstrapService {
         genres.forEach(genre -> {
             try {
                 createMangaFromGenre(genre, client);
+                log.info("Manga generated for genre " + genre.getName());
             } catch (IOException e) {
                 log.info(e.getMessage());
                 log.info("Manga creation failed");
@@ -274,7 +286,7 @@ public class BootstrapService {
     public void createMangaFromGenre(AnimeMangaGenre genre, OkHttpClient client) throws IOException {
 
 
-        for (int page = 1; page < 10; page++) {
+        for (int page = 1; page < 5; page++) {
             String url = "https://jikan1.p.rapidapi.com/search/manga?page=" + page + "&genre=" + genre.getApiId();
 
             Request request = new Request.Builder()
@@ -285,38 +297,46 @@ public class BootstrapService {
                     .build();
 
             Response response = client.newCall(request).execute();
-            String body = response.body().string();
+            if (response.code() == 200) {
+                String body = response.body().string();
 
-            JSONObject root = new JSONObject(body);
-            JSONArray result = root.getJSONArray("results");
+                JSONObject root = new JSONObject(body);
+                JSONArray result = root.getJSONArray("results");
 
-            for (int i = 0; i < result.length(); i++) {
-                JSONObject jsonAnime = result.getJSONObject(i);
-                Manga manga = new Manga();
+                for (int i = 0; i < result.length(); i++) {
+                    JSONObject jsonAnime = result.getJSONObject(i);
+                    Manga manga = new Manga();
 
-                String title = jsonAnime.getString("title");
-                String apiId = String.valueOf(jsonAnime.getInt("mal_id"));
-                String description = jsonAnime.getString("synopsis");
-                Object date = jsonAnime.get("start_date");
-                String stringDate = date.toString();
+                    String title = jsonAnime.getString("title");
+                    String apiId = String.valueOf(jsonAnime.getInt("mal_id"));
+                    String description = jsonAnime.getString("synopsis");
+                    Object date = jsonAnime.get("start_date");
+                    String stringDate = date.toString();
 
-                LocalDate releaseDate = stringDate.equals("null") ? null : OffsetDateTime.parse(stringDate).toLocalDate();
-                String imageUrl = jsonAnime.getString("image_url");
+                    LocalDate releaseDate = stringDate.equals("null") ? null : OffsetDateTime.parse(stringDate).toLocalDate();
+                    String imageUrl = jsonAnime.getString("image_url");
 
-                if (title != null && description != null && releaseDate != null && imageUrl != null) {
-                    manga.setTitle(title);
-                    manga.setApiId(apiId);
-                    manga.setDescription(description);
-                    manga.setReleaseDate(releaseDate);
-                    manga.setImageUrl(imageUrl);
-                    manga.getGenres().add(genre);
+                    if (mangaService.existsByApiId(apiId)) {
+                        Manga existingManga = mangaService.getByApiId(apiId);
+                        existingManga.getGenres().add(genre);
+                        workOfCultureService.save(existingManga);
 
-                    workOfCultureService.save(manga);
+                    } else if (title != null && description != null && !description.isBlank() && releaseDate != null && imageUrl != null) {
+                        manga.setTitle(title);
+                        manga.setApiId(apiId);
+                        manga.setDescription(description);
+                        manga.setReleaseDate(releaseDate);
+                        manga.setImageUrl(imageUrl);
+                        manga.getGenres().add(genre);
+
+                        workOfCultureService.save(manga);
+                    }
                 }
             }
         }
-        log.info("Anime generated");
     }
+
+    // MOVIE
 
     public void movieGenerating() {
 
@@ -327,6 +347,7 @@ public class BootstrapService {
         genres.forEach(genre -> {
             try {
                 createMovieFromGenre(genre, client);
+                log.info("Movie generated for genre " + genre.getName());
             } catch (IOException e) {
                 log.info(e.getMessage());
                 log.info("Movie creation failed");
@@ -346,19 +367,18 @@ public class BootstrapService {
                 .build();
 
         Response response = client.newCall(request).execute();
-        String body = response.body().string();
+        if (response.code() == 200) {
+            String body = response.body().string();
+            JSONObject root = new JSONObject(body);
+            JSONArray result = root.getJSONArray("results");
 
-        JSONObject root = new JSONObject(body);
-        JSONArray result = root.getJSONArray("results");
+            for (int i = 0; i < result.length(); i++) {
+                JSONObject jsonAnime = result.getJSONObject(i);
 
-        for (int i = 0; i < result.length(); i++) {
-            JSONObject jsonAnime = result.getJSONObject(i);
-
-            String imdbId = jsonAnime.getString("imdb_id");
-            createMovieFromImdbId(imdbId, client);
+                String imdbId = jsonAnime.getString("imdb_id");
+                createMovieFromImdbId(imdbId, client);
+            }
         }
-
-        log.info("Movie generated");
     }
 
     public void createMovieFromImdbId(String imdb, OkHttpClient client) throws IOException {
@@ -373,41 +393,42 @@ public class BootstrapService {
                 .build();
 
         Response response = client.newCall(request).execute();
-        String body = response.body().string();
+        if (response.code() == 200) {
+            String body = response.body().string();
+            JSONObject root = new JSONObject(body);
+            JSONObject jsonMovie = root.getJSONObject("results");
 
-        JSONObject root = new JSONObject(body);
-        JSONObject jsonMovie = root.getJSONObject("results");
+            String title = jsonMovie.getString("title");
+            String description = jsonMovie.getString("description");
+            String imageUrl = jsonMovie.getString("image_url");
+            JSONArray generes = jsonMovie.getJSONArray("gen");
 
-        String title = jsonMovie.getString("title");
-        String description = jsonMovie.getString("description");
-        String imageUrl = jsonMovie.getString("image_url");
-        JSONArray generes = jsonMovie.getJSONArray("gen");
+            Object release = jsonMovie.get("release");
+            String stringDate = release.toString();
 
-        Object release = jsonMovie.get("release");
-        String stringDate = release.toString();
+            LocalDate releaseDate = stringDate.equals("null") ? null : LocalDate.parse(stringDate);
 
-        LocalDate releaseDate = stringDate.equals("null") ? null : LocalDate.parse(stringDate);
+            Movie movie = new Movie();
 
-        Movie movie = new Movie();
+            if (title != null && description != null && !description.isBlank() && releaseDate != null && imageUrl != null && !movieService.existsByApiId(imdb)) {
+                movie.setTitle(title);
+                movie.setApiId(imdb);
+                movie.setDescription(description);
+                movie.setReleaseDate(releaseDate);
+                movie.setImageUrl(imageUrl);
 
-        if (title != null && description != null && releaseDate != null && imageUrl != null) {
-            movie.setTitle(title);
-            movie.setApiId(imdb);
-            movie.setDescription(description);
-            movie.setReleaseDate(releaseDate);
-            movie.setImageUrl(imageUrl);
-
-            for (int i = 0; i < generes.length(); i++) {
-                JSONObject jsonGenre = generes.getJSONObject(i);
-                String genreName = jsonGenre.getString("genre");
-                MovieTvSeriesGenre movieTvSeriesGenre = movieTvSeriesGenreService.getByName(genreName);
-                movie.getGenres().add(movieTvSeriesGenre);
+                for (int i = 0; i < generes.length(); i++) {
+                    JSONObject jsonGenre = generes.getJSONObject(i);
+                    String genreName = jsonGenre.getString("genre");
+                    MovieTvSeriesGenre movieTvSeriesGenre = movieTvSeriesGenreService.getByName(genreName);
+                    movie.getGenres().add(movieTvSeriesGenre);
+                }
+                workOfCultureService.save(movie);
             }
-            workOfCultureService.save(movie);
         }
-
     }
 
+    // TV SERIES
 
     public void tvSeriesGenerating() {
         OkHttpClient client = new OkHttpClient();
@@ -417,6 +438,7 @@ public class BootstrapService {
         genres.forEach(genre -> {
             try {
                 createTvSeriesFromGenre(genre, client);
+                log.info("Tv series generated for genre " + genre.getName());
             } catch (IOException e) {
                 log.info(e.getMessage());
                 log.info("Tv series creation failed");
@@ -436,19 +458,18 @@ public class BootstrapService {
                 .build();
 
         Response response = client.newCall(request).execute();
-        String body = response.body().string();
+        if (response.code() == 200) {
+            String body = response.body().string();
+            JSONObject root = new JSONObject(body);
+            JSONArray result = root.getJSONArray("results");
 
-        JSONObject root = new JSONObject(body);
-        JSONArray result = root.getJSONArray("results");
+            for (int i = 0; i < result.length(); i++) {
+                JSONObject jsonTvSeries = result.getJSONObject(i);
 
-        for (int i = 0; i < result.length(); i++) {
-            JSONObject jsonTvSeries = result.getJSONObject(i);
-
-            String imdbId = jsonTvSeries.getString("imdb_id");
-            createTvSeriesFromImdbId(imdbId, client);
+                String imdbId = jsonTvSeries.getString("imdb_id");
+                createTvSeriesFromImdbId(imdbId, client);
+            }
         }
-
-        log.info("Tv series generated");
     }
 
     public void createTvSeriesFromImdbId(String imdb, OkHttpClient client) throws IOException {
@@ -463,40 +484,43 @@ public class BootstrapService {
                 .build();
 
         Response response = client.newCall(request).execute();
-        String body = response.body().string();
 
-        JSONObject root = new JSONObject(body);
-        JSONObject jsonTvSeries = root.getJSONObject("results");
+        if (response.code() == 200) {
+            String body = response.body().string();
+            JSONObject root = new JSONObject(body);
+            JSONObject jsonTvSeries = root.getJSONObject("results");
 
-        String title = jsonTvSeries.getString("title");
-        String description = jsonTvSeries.getString("description");
-        String imageUrl = jsonTvSeries.getString("image_url");
-        JSONArray generes = jsonTvSeries.getJSONArray("gen");
+            String title = jsonTvSeries.getString("title");
+            String description = jsonTvSeries.getString("description");
+            String imageUrl = jsonTvSeries.getString("image_url");
+            JSONArray generes = jsonTvSeries.getJSONArray("gen");
 
-        Object release = jsonTvSeries.get("release");
-        String stringDate = release.toString();
+            Object release = jsonTvSeries.get("release");
+            String stringDate = release.toString();
 
-        LocalDate releaseDate = stringDate.equals("null") ? null : LocalDate.parse(stringDate);
+            LocalDate releaseDate = stringDate.equals("null") ? null : LocalDate.parse(stringDate);
 
-        TvSeries tvSeries = new TvSeries();
+            TvSeries tvSeries = new TvSeries();
 
-        if (title != null && description != null && releaseDate != null && imageUrl != null) {
-            tvSeries.setTitle(title);
-            tvSeries.setApiId(imdb);
-            tvSeries.setDescription(description);
-            tvSeries.setReleaseDate(releaseDate);
-            tvSeries.setImageUrl(imageUrl);
+            if (title != null && description != null && !description.isBlank() && releaseDate != null && imageUrl != null && !animeService.existsByTitle(title) && !tvSeriesService.existsByApiId(imdb)) {
+                tvSeries.setTitle(title);
+                tvSeries.setApiId(imdb);
+                tvSeries.setDescription(description);
+                tvSeries.setReleaseDate(releaseDate);
+                tvSeries.setImageUrl(imageUrl);
 
-            for (int i = 0; i < generes.length(); i++) {
-                JSONObject jsonGenre = generes.getJSONObject(i);
-                String genreName = jsonGenre.getString("genre");
-                MovieTvSeriesGenre movieTvSeriesGenre = movieTvSeriesGenreService.getByName(genreName);
-                tvSeries.getGenres().add(movieTvSeriesGenre);
+                for (int i = 0; i < generes.length(); i++) {
+                    JSONObject jsonGenre = generes.getJSONObject(i);
+                    String genreName = jsonGenre.getString("genre");
+                    MovieTvSeriesGenre movieTvSeriesGenre = movieTvSeriesGenreService.getByName(genreName);
+                    tvSeries.getGenres().add(movieTvSeriesGenre);
+                }
+                workOfCultureService.save(tvSeries);
             }
-            workOfCultureService.save(tvSeries);
         }
-
     }
+
+    // GAMES
 
     public void gameGenerating() throws IOException {
         OkHttpClient client = new OkHttpClient();
@@ -518,17 +542,18 @@ public class BootstrapService {
 
 
         Response response = client.newCall(request).execute();
-        String body = response.body().string();
-        JSONObject root = new JSONObject(body);
-        JSONArray jsonGame = root.getJSONArray("results");
+        if (response.code() == 200) {
+            String body = response.body().string();
+            JSONObject root = new JSONObject(body);
+            JSONArray jsonGame = root.getJSONArray("results");
 
-        for (int i = 0; i < jsonGame.length(); i++) {
-            JSONObject game = jsonGame.getJSONObject(i);
-            int id = game.getInt("id");
-            createGameFromId(id, client);
+            for (int i = 0; i < jsonGame.length(); i++) {
+                JSONObject game = jsonGame.getJSONObject(i);
+                int id = game.getInt("id");
+                createGameFromId(id, client);
+            }
         }
     }
-
 
     public void createGameFromId(int id, OkHttpClient client) throws IOException {
 
@@ -541,39 +566,41 @@ public class BootstrapService {
                 .build();
 
         Response response = client.newCall(request).execute();
-        String body = response.body().string();
 
-        JSONObject jsonGame = new JSONObject(body);
-
-
-        String title = jsonGame.getString("name");
-        String description = jsonGame.getString("description");
-        String imageUrl = jsonGame.getString("background_image");
-        JSONArray generes = jsonGame.getJSONArray("genres");
-
-        Object release = jsonGame.get("released");
-        String stringDate = release.toString();
-
-        LocalDate releaseDate = stringDate.equals("null") ? null : LocalDate.parse(stringDate);
+        if (response.code() == 200) {
+            String body = response.body().string();
+            JSONObject jsonGame = new JSONObject(body);
 
 
-        if (title != null && description != null && releaseDate != null && imageUrl != null) {
+            String title = jsonGame.getString("name");
+            String description = jsonGame.getString("description");
+            String imageUrl = jsonGame.getString("background_image");
+            JSONArray generes = jsonGame.getJSONArray("genres");
 
-            Game game = new Game();
+            Object release = jsonGame.get("released");
+            String stringDate = release.toString();
 
-            game.setApiId(String.valueOf(id));
-            game.setDescription(description);
-            game.setTitle(title);
-            game.setImageUrl(imageUrl);
-            game.setReleaseDate(releaseDate);
+            LocalDate releaseDate = stringDate.equals("null") ? null : LocalDate.parse(stringDate);
 
-            for (int i = 0; i < generes.length(); i++) {
-                JSONObject jsonGenre = generes.getJSONObject(i);
-                String genreName = jsonGenre.getString("name");
-                GameGenre gameGenre = gameGenreService.getByName(genreName);
-                game.getGenres().add(gameGenre);
+
+            if (title != null && description != null && !description.isBlank() && releaseDate != null && imageUrl != null && !gameService.existsByApiId(String.valueOf(id))) {
+
+                Game game = new Game();
+
+                game.setApiId(String.valueOf(id));
+                game.setDescription(description);
+                game.setTitle(title);
+                game.setImageUrl(imageUrl);
+                game.setReleaseDate(releaseDate);
+
+                for (int i = 0; i < generes.length(); i++) {
+                    JSONObject jsonGenre = generes.getJSONObject(i);
+                    String genreName = jsonGenre.getString("name");
+                    GameGenre gameGenre = gameGenreService.getByName(genreName);
+                    game.getGenres().add(gameGenre);
+                }
+                workOfCultureService.save(game);
             }
-            workOfCultureService.save(game);
         }
     }
 

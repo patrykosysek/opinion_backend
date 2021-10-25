@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @EqualsAndHashCode(callSuper = true)
 public abstract class WorkOfCulture extends BasicAuditing {
 
+    @Column(unique = true)
     private String apiId;
 
     private String title;

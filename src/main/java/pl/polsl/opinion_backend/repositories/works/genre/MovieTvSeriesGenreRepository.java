@@ -1,4 +1,4 @@
-package pl.polsl.opinion_backend.repositories.works;
+package pl.polsl.opinion_backend.repositories.works.genre;
 
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;

@@ -8,6 +8,7 @@ import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Anime extends WorkOfCulture {
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<AnimeMangaGenre> genres = new HashSet<>();
 
 }
