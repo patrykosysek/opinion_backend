@@ -1,0 +1,307 @@
+databaseChangeLog:
+- changeSet:
+    id: 1635175552177-1
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: anime_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: comments_id
+            type: UUID
+        tableName: anime_comments
+- changeSet:
+    id: 1635175552177-2
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: commentPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: comment
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: likes
+            type: INTEGER
+        tableName: comment
+- changeSet:
+    id: 1635175552177-3
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: game_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: comments_id
+            type: UUID
+        tableName: game_comments
+- changeSet:
+    id: 1635175552177-4
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: manga_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: comments_id
+            type: UUID
+        tableName: manga_comments
+- changeSet:
+    id: 1635175552177-5
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: movie_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: comments_id
+            type: UUID
+        tableName: movie_comments
+- changeSet:
+    id: 1635175552177-6
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: tv_series_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: comments_id
+            type: UUID
+        tableName: tv_series_comments
+- changeSet:
+    id: 1635175552177-7
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_COMMENTID_COL
+        tableName: comment
+- changeSet:
+    id: 1635175552177-8
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: comments_id
+        constraintName: UK_7gj1vv4hma2nawrwe1899egic
+        tableName: anime_comments
+- changeSet:
+    id: 1635175552177-9
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: comments_id
+        constraintName: UK_bcai6sw9st06lq4jting7a73j
+        tableName: manga_comments
+- changeSet:
+    id: 1635175552177-10
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: comments_id
+        constraintName: UK_ellsnv6v56r1dttovewqh83jo
+        tableName: game_comments
+- changeSet:
+    id: 1635175552177-11
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: comments_id
+        constraintName: UK_huplbyxorahf7xl5b0jit2xb
+        tableName: movie_comments
+- changeSet:
+    id: 1635175552177-12
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: comments_id
+        constraintName: UK_nr5v2dnxm9nqor6red47tbhp6
+        tableName: tv_series_comments
+- changeSet:
+    id: 1635175552177-13
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: game_id
+        baseTableName: game_comments
+        constraintName: FK1plug8ugcv8pfwlcyjqa4kl0k
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game
+        validate: true
+- changeSet:
+    id: 1635175552177-14
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: manga_id
+        baseTableName: manga_comments
+        constraintName: FK20e7smtb6rp8du7gb2ax1lfja
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga
+        validate: true
+- changeSet:
+    id: 1635175552177-15
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: comments_id
+        baseTableName: manga_comments
+        constraintName: FK5u4g8ff3ferod7n73mymrt07j
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: comment
+        validate: true
+- changeSet:
+    id: 1635175552177-16
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tv_series_id
+        baseTableName: tv_series_comments
+        constraintName: FK67ia6csbxo10vt79lkdu24o6c
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series
+        validate: true
+- changeSet:
+    id: 1635175552177-17
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: movie_id
+        baseTableName: movie_comments
+        constraintName: FK96sfs80ga99a5d3lv2krya48g
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie
+        validate: true
+- changeSet:
+    id: 1635175552177-18
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: comments_id
+        baseTableName: game_comments
+        constraintName: FKaqegi6vqgth5agxn8fd6kkrjl
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: comment
+        validate: true
+- changeSet:
+    id: 1635175552177-19
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: comments_id
+        baseTableName: tv_series_comments
+        constraintName: FKb3fx5tv2v506ghuajmufuwr1a
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: comment
+        validate: true
+- changeSet:
+    id: 1635175552177-20
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: anime_id
+        baseTableName: anime_comments
+        constraintName: FKdlgjsq5vk89oxp99084ljv4mu
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime
+        validate: true
+- changeSet:
+    id: 1635175552177-21
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: comments_id
+        baseTableName: movie_comments
+        constraintName: FKmo0tnsv3i3qus6vw9iuovb44q
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: comment
+        validate: true
+- changeSet:
+    id: 1635175552177-22
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: comments_id
+        baseTableName: anime_comments
+        constraintName: FKpgm1ilgyok3y66jw9daxmq5hb
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: comment
+        validate: true
+

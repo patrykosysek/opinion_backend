@@ -1,0 +1,1861 @@
+databaseChangeLog:
+- changeSet:
+    id: 1635263811613-21
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: anime_discussionPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: topic
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: anime_id
+            type: UUID
+        tableName: anime_discussion
+- changeSet:
+    id: 1635263811613-22
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: anime_discussion_answerPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: discussion_id
+            type: UUID
+        tableName: anime_discussion_answer
+- changeSet:
+    id: 1635263811613-23
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: anime_reviewPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: comment
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: likes
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: anime_id
+            type: UUID
+        tableName: anime_review
+- changeSet:
+    id: 1635263811613-24
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: game_discussionPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: topic
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: game_id
+            type: UUID
+        tableName: game_discussion
+- changeSet:
+    id: 1635263811613-25
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: game_discussion_answerPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: discussion_id
+            type: UUID
+        tableName: game_discussion_answer
+- changeSet:
+    id: 1635263811613-26
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: game_reviewPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: comment
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: likes
+            type: INTEGER
+        - column:
+            name: game_id
+            type: UUID
+        tableName: game_review
+- changeSet:
+    id: 1635263811613-27
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: manga_discussionPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: topic
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: manga_id
+            type: UUID
+        tableName: manga_discussion
+- changeSet:
+    id: 1635263811613-28
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: manga_discussion_answerPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: discussion_id
+            type: UUID
+        tableName: manga_discussion_answer
+- changeSet:
+    id: 1635263811613-29
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: manga_reviewPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: comment
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: likes
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: manga_id
+            type: UUID
+        tableName: manga_review
+- changeSet:
+    id: 1635263811613-30
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: movie_discussionPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: topic
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: movie_id
+            type: UUID
+        tableName: movie_discussion
+- changeSet:
+    id: 1635263811613-31
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: movie_discussion_answerPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: discussion_id
+            type: UUID
+        tableName: movie_discussion_answer
+- changeSet:
+    id: 1635263811613-32
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: movie_reviewPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: comment
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: likes
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: movie_id
+            type: UUID
+        tableName: movie_review
+- changeSet:
+    id: 1635263811613-33
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: tv_series_discussionPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: topic
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: tv_series_id
+            type: UUID
+        tableName: tv_series_discussion
+- changeSet:
+    id: 1635263811613-34
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: tv_series_discussion_answerPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: discussion_id
+            type: UUID
+        tableName: tv_series_discussion_answer
+- changeSet:
+    id: 1635263811613-35
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: tv_series_reviewPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: comment
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: likes
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: tv_series_id
+            type: UUID
+        tableName: tv_series_review
+- changeSet:
+    id: 1635263811613-36
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: seen_lists_id
+            type: uuid
+        tableName: seen_list_anime
+- changeSet:
+    id: 1635263811613-37
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: seen_lists_id
+            type: uuid
+        tableName: seen_list_games
+- changeSet:
+    id: 1635263811613-38
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: seen_lists_id
+            type: uuid
+        tableName: seen_list_manga
+- changeSet:
+    id: 1635263811613-39
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: seen_lists_id
+            type: uuid
+        tableName: seen_list_movies
+- changeSet:
+    id: 1635263811613-40
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: seen_lists_id
+            type: uuid
+        tableName: seen_list_tv_series
+- changeSet:
+    id: 1635263811613-41
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: user_id
+            type: uuid
+        tableName: preference
+- changeSet:
+    id: 1635263811613-42
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: watch_lists_id
+            type: uuid
+        tableName: watch_list_anime
+- changeSet:
+    id: 1635263811613-43
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: watch_lists_id
+            type: uuid
+        tableName: watch_list_games
+- changeSet:
+    id: 1635263811613-44
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: watch_lists_id
+            type: uuid
+        tableName: watch_list_manga
+- changeSet:
+    id: 1635263811613-45
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: watch_lists_id
+            type: uuid
+        tableName: watch_list_movies
+- changeSet:
+    id: 1635263811613-46
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: watch_lists_id
+            type: uuid
+        tableName: watch_list_tv_series
+- changeSet:
+    id: 1635263811613-47
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ANIME_DISCUSSIONID_COL
+        tableName: anime_discussion
+- changeSet:
+    id: 1635263811613-48
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ANIME_DISCUSSION_ANSWERID_COL
+        tableName: anime_discussion_answer
+- changeSet:
+    id: 1635263811613-49
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ANIME_REVIEWID_COL
+        tableName: anime_review
+- changeSet:
+    id: 1635263811613-50
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_GAME_DISCUSSIONID_COL
+        tableName: game_discussion
+- changeSet:
+    id: 1635263811613-51
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_GAME_DISCUSSION_ANSWERID_COL
+        tableName: game_discussion_answer
+- changeSet:
+    id: 1635263811613-52
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_GAME_REVIEWID_COL
+        tableName: game_review
+- changeSet:
+    id: 1635263811613-53
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MANGA_DISCUSSIONID_COL
+        tableName: manga_discussion
+- changeSet:
+    id: 1635263811613-54
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MANGA_DISCUSSION_ANSWERID_COL
+        tableName: manga_discussion_answer
+- changeSet:
+    id: 1635263811613-55
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MANGA_REVIEWID_COL
+        tableName: manga_review
+- changeSet:
+    id: 1635263811613-56
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MOVIE_DISCUSSIONID_COL
+        tableName: movie_discussion
+- changeSet:
+    id: 1635263811613-57
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MOVIE_DISCUSSION_ANSWERID_COL
+        tableName: movie_discussion_answer
+- changeSet:
+    id: 1635263811613-58
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MOVIE_REVIEWID_COL
+        tableName: movie_review
+- changeSet:
+    id: 1635263811613-59
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_TV_SERIES_DISCUSSIONID_COL
+        tableName: tv_series_discussion
+- changeSet:
+    id: 1635263811613-60
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_TV_SERIES_DISCUSSION_ANSWERID_COL
+        tableName: tv_series_discussion_answer
+- changeSet:
+    id: 1635263811613-61
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_TV_SERIES_REVIEWID_COL
+        tableName: tv_series_review
+- changeSet:
+    id: 1635263811613-62
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: seen_lists_id
+        - column:
+            name: anime_id
+        indexName: IX_null
+        tableName: seen_list_anime
+        unique: true
+- changeSet:
+    id: 1635263811613-63
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: seen_lists_id
+        - column:
+            name: games_id
+        indexName: IX_null
+        tableName: seen_list_games
+        unique: true
+- changeSet:
+    id: 1635263811613-64
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: seen_lists_id
+        - column:
+            name: manga_id
+        indexName: IX_null
+        tableName: seen_list_manga
+        unique: true
+- changeSet:
+    id: 1635263811613-65
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: seen_lists_id
+        - column:
+            name: movies_id
+        indexName: IX_null
+        tableName: seen_list_movies
+        unique: true
+- changeSet:
+    id: 1635263811613-66
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: seen_lists_id
+        - column:
+            name: tv_series_id
+        indexName: IX_null
+        tableName: seen_list_tv_series
+        unique: true
+- changeSet:
+    id: 1635263811613-67
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: watch_lists_id
+        - column:
+            name: anime_id
+        indexName: IX_null
+        tableName: watch_list_anime
+        unique: true
+- changeSet:
+    id: 1635263811613-68
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: watch_lists_id
+        - column:
+            name: games_id
+        indexName: IX_null
+        tableName: watch_list_games
+        unique: true
+- changeSet:
+    id: 1635263811613-69
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: watch_lists_id
+        - column:
+            name: manga_id
+        indexName: IX_null
+        tableName: watch_list_manga
+        unique: true
+- changeSet:
+    id: 1635263811613-70
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: watch_lists_id
+        - column:
+            name: movies_id
+        indexName: IX_null
+        tableName: watch_list_movies
+        unique: true
+- changeSet:
+    id: 1635263811613-71
+    author: patry (generated)
+    changes:
+    - createIndex:
+        columns:
+        - column:
+            name: watch_lists_id
+        - column:
+            name: tv_series_id
+        indexName: IX_null
+        tableName: watch_list_tv_series
+        unique: true
+- changeSet:
+    id: 1635263811613-72
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_lists_id
+        baseTableName: watch_list_anime
+        constraintName: FK2lbpb31q68sytl37tugsa7lfb
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635263811613-73
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussion_id
+        baseTableName: manga_discussion_answer
+        constraintName: FK36fkb7os60tq5nm2fhnerpgbf
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga_discussion
+        validate: true
+- changeSet:
+    id: 1635263811613-74
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_lists_id
+        baseTableName: seen_list_movies
+        constraintName: FK4hhjrnxn0x5u6dcnasgwyfbg7
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635263811613-75
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_lists_id
+        baseTableName: watch_list_games
+        constraintName: FK5h27n1d90ouryvxw5y61q0meu
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635263811613-76
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: movie_id
+        baseTableName: movie_review
+        constraintName: FK804h1vyhty9kpwrnhx2qmt50x
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie
+        validate: true
+- changeSet:
+    id: 1635263811613-77
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_lists_id
+        baseTableName: seen_list_tv_series
+        constraintName: FK8wqaq2v4ftfymfum8gk8wru1m
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635263811613-78
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: manga_id
+        baseTableName: manga_review
+        constraintName: FK9diyqhyc0w9vtaxdyf0cwq5rl
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga
+        validate: true
+- changeSet:
+    id: 1635263811613-79
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussion_id
+        baseTableName: anime_discussion_answer
+        constraintName: FKbt5n31c8wlsfea8qd0geu72ok
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime_discussion
+        validate: true
+- changeSet:
+    id: 1635263811613-80
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: preference
+        constraintName: FKe4fx9u0au2bvujys3re3d9kyr
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: user
+        validate: true
+- changeSet:
+    id: 1635263811613-81
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: game_id
+        baseTableName: game_discussion
+        constraintName: FKe8h6nur9iequ9usorb4dom54r
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game
+        validate: true
+- changeSet:
+    id: 1635263811613-82
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussion_id
+        baseTableName: tv_series_discussion_answer
+        constraintName: FKer73px2t7rbgv0518oxnkvqaa
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series_discussion
+        validate: true
+- changeSet:
+    id: 1635263811613-83
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: anime_id
+        baseTableName: anime_discussion
+        constraintName: FKflpspe35nno9b7ryekx5xkbdx
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime
+        validate: true
+- changeSet:
+    id: 1635263811613-84
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussion_id
+        baseTableName: movie_discussion_answer
+        constraintName: FKgygef5wwmaexf90xic9m4iwmj
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie_discussion
+        validate: true
+- changeSet:
+    id: 1635263811613-85
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_lists_id
+        baseTableName: seen_list_games
+        constraintName: FKjl0mxt1nu5hunj7t27hg1uqnn
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635263811613-86
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tv_series_id
+        baseTableName: tv_series_review
+        constraintName: FKkrrnw04s01tlh1du0xtk19ebx
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series
+        validate: true
+- changeSet:
+    id: 1635263811613-87
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_lists_id
+        baseTableName: seen_list_anime
+        constraintName: FKm3mh8ikf83g3o8uuv0x2wjxud
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635263811613-88
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tv_series_id
+        baseTableName: tv_series_discussion
+        constraintName: FKnbbbmyj8o579loeapnskdj5cy
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series
+        validate: true
+- changeSet:
+    id: 1635263811613-89
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_lists_id
+        baseTableName: watch_list_tv_series
+        constraintName: FKnjnbt2t11oodee74klqpm1h2d
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635263811613-90
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: game_id
+        baseTableName: game_review
+        constraintName: FKnq2qxq7kju3kj8qd9pnbi1u3e
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game
+        validate: true
+- changeSet:
+    id: 1635263811613-91
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_lists_id
+        baseTableName: watch_list_movies
+        constraintName: FKo6a2l02yxokhc34ec3od01dwk
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635263811613-92
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: movie_id
+        baseTableName: movie_discussion
+        constraintName: FKp8s4krfdyu66lbeos4a0t23ks
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie
+        validate: true
+- changeSet:
+    id: 1635263811613-93
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: manga_id
+        baseTableName: manga_discussion
+        constraintName: FKq8g8glyeli50xbcy1ey2dmqhn
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga
+        validate: true
+- changeSet:
+    id: 1635263811613-94
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussion_id
+        baseTableName: game_discussion_answer
+        constraintName: FKrctxwhaiyrn2ntrspni9gn26k
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game_discussion
+        validate: true
+- changeSet:
+    id: 1635263811613-95
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_lists_id
+        baseTableName: seen_list_manga
+        constraintName: FKrlomxv52w648x9yk9tx04ea79
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635263811613-96
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_lists_id
+        baseTableName: watch_list_manga
+        constraintName: FKrn74wiyw72if8tk5f5ck2qlhy
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635263811613-97
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: anime_id
+        baseTableName: anime_review
+        constraintName: FKs5tiey70169x4vyc6tu7q39dc
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime
+        validate: true
+- changeSet:
+    id: 1635263811613-98
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: manga_discussions
+        constraintName: FK12feml98rsfmp4pebs8bycw6s
+- changeSet:
+    id: 1635263811613-99
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: manga_discussions
+        constraintName: FK1n6ngkguqm5y9bcuxes8pqujr
+- changeSet:
+    id: 1635263811613-100
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: game_comments
+        constraintName: FK1plug8ugcv8pfwlcyjqa4kl0k
+- changeSet:
+    id: 1635263811613-101
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: manga_comments
+        constraintName: FK20e7smtb6rp8du7gb2ax1lfja
+- changeSet:
+    id: 1635263811613-102
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: anime_discussions
+        constraintName: FK49lqok2bko1j7dolftg1scjyn
+- changeSet:
+    id: 1635263811613-103
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: seen_list_movies
+        constraintName: FK49y6dxsbhfxdhf0ep3h42i18l
+- changeSet:
+    id: 1635263811613-104
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: watch_list_tv_series
+        constraintName: FK4c4cyvi1angb6fy939cjng0qg
+- changeSet:
+    id: 1635263811613-105
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: movie_discussions
+        constraintName: FK5jc0juy8p0pxc0gf0kaeegfy9
+- changeSet:
+    id: 1635263811613-106
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: answer
+        constraintName: FK5tsw21fx78bafykk376ea3ua7
+- changeSet:
+    id: 1635263811613-107
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: manga_comments
+        constraintName: FK5u4g8ff3ferod7n73mymrt07j
+- changeSet:
+    id: 1635263811613-108
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: tv_series_comments
+        constraintName: FK67ia6csbxo10vt79lkdu24o6c
+- changeSet:
+    id: 1635263811613-109
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: movie_discussions
+        constraintName: FK6fmtwwsf530clynt5sl70k5ht
+- changeSet:
+    id: 1635263811613-110
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: watch_list_manga
+        constraintName: FK8f3nlcyfpx0ao84rxgunnh3o9
+- changeSet:
+    id: 1635263811613-111
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: movie_comments
+        constraintName: FK96sfs80ga99a5d3lv2krya48g
+- changeSet:
+    id: 1635263811613-112
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: game_comments
+        constraintName: FKaqegi6vqgth5agxn8fd6kkrjl
+- changeSet:
+    id: 1635263811613-113
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: tv_series_comments
+        constraintName: FKb3fx5tv2v506ghuajmufuwr1a
+- changeSet:
+    id: 1635263811613-114
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: anime_discussions
+        constraintName: FKbydpfrvsp2r07gjk5hi17716i
+- changeSet:
+    id: 1635263811613-115
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: user_preferences
+        constraintName: FKdh2fprb2h6joroo783xjp9cyw
+- changeSet:
+    id: 1635263811613-116
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: anime_comments
+        constraintName: FKdlgjsq5vk89oxp99084ljv4mu
+- changeSet:
+    id: 1635263811613-117
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: user_preferences
+        constraintName: FKfp1ho5a27j05f30fynh6bne91
+- changeSet:
+    id: 1635263811613-118
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: seen_list_anime
+        constraintName: FKgpm6jk2cm6hduirgptb1e55e7
+- changeSet:
+    id: 1635263811613-119
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: watch_list_games
+        constraintName: FKh7miiqhgfckxon0k6o06fpx7l
+- changeSet:
+    id: 1635263811613-120
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: tv_series_discussions
+        constraintName: FKi3rig0atyblb85c7g6xyv9xig
+- changeSet:
+    id: 1635263811613-121
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: tv_series_discussions
+        constraintName: FKiuk9ev584v011lrfje7o6fdnb
+- changeSet:
+    id: 1635263811613-122
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: seen_list_tv_series
+        constraintName: FKj5mqxhp687cskiw2smi59vgm7
+- changeSet:
+    id: 1635263811613-123
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: seen_list_manga
+        constraintName: FKjc3v0isqss2syseu3d87dmsyy
+- changeSet:
+    id: 1635263811613-124
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: watch_list_movies
+        constraintName: FKkqs950iljvg263ut1s5k11h7q
+- changeSet:
+    id: 1635263811613-125
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: movie_comments
+        constraintName: FKmo0tnsv3i3qus6vw9iuovb44q
+- changeSet:
+    id: 1635263811613-126
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: watch_list_anime
+        constraintName: FKnnbk8m0nmonm74xfb8w20toj1
+- changeSet:
+    id: 1635263811613-127
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: game_discussions
+        constraintName: FKo3viilr92xjwatnapdv2nad8w
+- changeSet:
+    id: 1635263811613-128
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: seen_list_games
+        constraintName: FKpgm0tac7flx1c3slocr8yqwti
+- changeSet:
+    id: 1635263811613-129
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: anime_comments
+        constraintName: FKpgm1ilgyok3y66jw9daxmq5hb
+- changeSet:
+    id: 1635263811613-130
+    author: patry (generated)
+    changes:
+    - dropForeignKeyConstraint:
+        baseTableName: game_discussions
+        constraintName: FKq2qm4wpe32dioqqtx2d4boy7b
+- changeSet:
+    id: 1635263811613-131
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_4898d7etcvherrki8i5y3ihke
+        tableName: game_discussions
+- changeSet:
+    id: 1635263811613-132
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_7gj1vv4hma2nawrwe1899egic
+        tableName: anime_comments
+- changeSet:
+    id: 1635263811613-133
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_97qnqdes0bjeectw4glvx8bwn
+        tableName: manga_discussions
+- changeSet:
+    id: 1635263811613-134
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_bcai6sw9st06lq4jting7a73j
+        tableName: manga_comments
+- changeSet:
+    id: 1635263811613-135
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_ellsnv6v56r1dttovewqh83jo
+        tableName: game_comments
+- changeSet:
+    id: 1635263811613-136
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_huplbyxorahf7xl5b0jit2xb
+        tableName: movie_comments
+- changeSet:
+    id: 1635263811613-137
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_ivwkusl25abreecgh1d4e61pi
+        tableName: user_preferences
+- changeSet:
+    id: 1635263811613-138
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_j4da8u78dw48mqcnemji4tl83
+        tableName: tv_series_discussions
+- changeSet:
+    id: 1635263811613-139
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_lc0dhjq7ns4winovf5hr51s63
+        tableName: movie_discussions
+- changeSet:
+    id: 1635263811613-140
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_nr5v2dnxm9nqor6red47tbhp6
+        tableName: tv_series_comments
+- changeSet:
+    id: 1635263811613-141
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: UK_sampboi5hykl72hchbnc7wmx4
+        tableName: anime_discussions
+- changeSet:
+    id: 1635263811613-142
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: uc_answerid_col
+        tableName: answer
+- changeSet:
+    id: 1635263811613-143
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: uc_commentid_col
+        tableName: comment
+- changeSet:
+    id: 1635263811613-144
+    author: patry (generated)
+    changes:
+    - dropUniqueConstraint:
+        constraintName: uc_discussionid_col
+        tableName: discussion
+- changeSet:
+    id: 1635263811613-145
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: anime_comments
+- changeSet:
+    id: 1635263811613-146
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: anime_discussions
+- changeSet:
+    id: 1635263811613-147
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: answer
+- changeSet:
+    id: 1635263811613-148
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: comment
+- changeSet:
+    id: 1635263811613-149
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: discussion
+- changeSet:
+    id: 1635263811613-150
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: game_comments
+- changeSet:
+    id: 1635263811613-151
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: game_discussions
+- changeSet:
+    id: 1635263811613-152
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: manga_comments
+- changeSet:
+    id: 1635263811613-153
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: manga_discussions
+- changeSet:
+    id: 1635263811613-154
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: movie_comments
+- changeSet:
+    id: 1635263811613-155
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: movie_discussions
+- changeSet:
+    id: 1635263811613-156
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: tv_series_comments
+- changeSet:
+    id: 1635263811613-157
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: tv_series_discussions
+- changeSet:
+    id: 1635263811613-158
+    author: patry (generated)
+    changes:
+    - dropTable:
+        tableName: user_preferences
+- changeSet:
+    id: 1635263811613-159
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: seen_list_id
+        tableName: seen_list_anime
+- changeSet:
+    id: 1635263811613-160
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: seen_list_id
+        tableName: seen_list_games
+- changeSet:
+    id: 1635263811613-161
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: seen_list_id
+        tableName: seen_list_manga
+- changeSet:
+    id: 1635263811613-162
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: seen_list_id
+        tableName: seen_list_movies
+- changeSet:
+    id: 1635263811613-163
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: seen_list_id
+        tableName: seen_list_tv_series
+- changeSet:
+    id: 1635263811613-164
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: watch_list_id
+        tableName: watch_list_anime
+- changeSet:
+    id: 1635263811613-165
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: watch_list_id
+        tableName: watch_list_games
+- changeSet:
+    id: 1635263811613-166
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: watch_list_id
+        tableName: watch_list_manga
+- changeSet:
+    id: 1635263811613-167
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: watch_list_id
+        tableName: watch_list_movies
+- changeSet:
+    id: 1635263811613-168
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: watch_list_id
+        tableName: watch_list_tv_series
+- changeSet:
+    id: 1635263811613-1
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: seen_list_anime
+- changeSet:
+    id: 1635263811613-2
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: seen_lists_id, anime_id
+        tableName: seen_list_anime
+- changeSet:
+    id: 1635263811613-3
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: seen_list_games
+- changeSet:
+    id: 1635263811613-4
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: seen_lists_id, games_id
+        tableName: seen_list_games
+- changeSet:
+    id: 1635263811613-5
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: seen_list_manga
+- changeSet:
+    id: 1635263811613-6
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: seen_lists_id, manga_id
+        tableName: seen_list_manga
+- changeSet:
+    id: 1635263811613-7
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: seen_list_movies
+- changeSet:
+    id: 1635263811613-8
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: seen_lists_id, movies_id
+        tableName: seen_list_movies
+- changeSet:
+    id: 1635263811613-9
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: seen_list_tv_series
+- changeSet:
+    id: 1635263811613-10
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: seen_lists_id, tv_series_id
+        tableName: seen_list_tv_series
+- changeSet:
+    id: 1635263811613-11
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: watch_list_anime
+- changeSet:
+    id: 1635263811613-12
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: watch_lists_id, anime_id
+        tableName: watch_list_anime
+- changeSet:
+    id: 1635263811613-13
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: watch_list_games
+- changeSet:
+    id: 1635263811613-14
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: watch_lists_id, games_id
+        tableName: watch_list_games
+- changeSet:
+    id: 1635263811613-15
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: watch_list_manga
+- changeSet:
+    id: 1635263811613-16
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: watch_lists_id, manga_id
+        tableName: watch_list_manga
+- changeSet:
+    id: 1635263811613-17
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: watch_list_movies
+- changeSet:
+    id: 1635263811613-18
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: watch_lists_id, movies_id
+        tableName: watch_list_movies
+- changeSet:
+    id: 1635263811613-19
+    author: patry (generated)
+    changes:
+    - dropPrimaryKey:
+        tableName: watch_list_tv_series
+- changeSet:
+    id: 1635263811613-20
+    author: patry (generated)
+    changes:
+    - addPrimaryKey:
+        columnNames: watch_lists_id, tv_series_id
+        tableName: watch_list_tv_series
+

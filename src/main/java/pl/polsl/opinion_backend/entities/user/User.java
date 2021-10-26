@@ -35,13 +35,30 @@ public class User extends BasicAuditing implements UserDetails {
     private String email;
 
     @Column(nullable = false)
+    private String nickname;
+
+    @Column(nullable = false)
     @JsonIgnore
     private String password;
+
+    @Column(nullable = false)
+    private String favouriteGenre;
+
+    private int age;
+
+    private boolean enabled = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleGroup> roleGroups = new HashSet<>();
 
-    private boolean enabled = false;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<Preference> preferences = new HashSet<>();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private WatchList watchList = new WatchList();
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private SeenList seenList = new SeenList();
 
 
     public User(String username, String encodedPassword, RoleGroup roleGroups) {
@@ -50,6 +67,14 @@ public class User extends BasicAuditing implements UserDetails {
         this.roleGroups.add(roleGroups);
     }
 
+    public User(String username, String encodedPassword, boolean enabled, int age, String favouriteGenre, String nickname) {
+        this.email = username;
+        this.password = encodedPassword;
+        this.enabled = enabled;
+        this.age = age;
+        this.favouriteGenre = favouriteGenre;
+        this.nickname = nickname;
+    }
 
     @Override
     @JsonIgnore

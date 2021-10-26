@@ -12,5 +12,6 @@ public class ErrorMessages {
     public static final String ROLE_GROUP_NOT_FOUND = "roleGroup.not_found";
     public static final String JWT_INVALID = "JWT.invalid";
     public static final String JWT_EXPIRED = "JWT.expired";
+    public static final String WORK_OF_CULTURE_NOT_FOUND = "workOfCulture.notFound";
 
 }

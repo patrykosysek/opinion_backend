@@ -1,0 +1,558 @@
+databaseChangeLog:
+- changeSet:
+    id: 1635172996188-1
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: seen_listPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        tableName: seen_list
+- changeSet:
+    id: 1635172996188-2
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: seen_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: anime_id
+            type: UUID
+        tableName: seen_list_anime
+- changeSet:
+    id: 1635172996188-3
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: seen_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: games_id
+            type: UUID
+        tableName: seen_list_games
+- changeSet:
+    id: 1635172996188-4
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: seen_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: manga_id
+            type: UUID
+        tableName: seen_list_manga
+- changeSet:
+    id: 1635172996188-5
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: seen_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: movies_id
+            type: UUID
+        tableName: seen_list_movies
+- changeSet:
+    id: 1635172996188-6
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: seen_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: tv_series_id
+            type: UUID
+        tableName: seen_list_tv_series
+- changeSet:
+    id: 1635172996188-7
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: watch_listPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        tableName: watch_list
+- changeSet:
+    id: 1635172996188-8
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: watch_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: anime_id
+            type: UUID
+        tableName: watch_list_anime
+- changeSet:
+    id: 1635172996188-9
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: watch_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: games_id
+            type: UUID
+        tableName: watch_list_games
+- changeSet:
+    id: 1635172996188-10
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: watch_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: manga_id
+            type: UUID
+        tableName: watch_list_manga
+- changeSet:
+    id: 1635172996188-11
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: watch_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: movies_id
+            type: UUID
+        tableName: watch_list_movies
+- changeSet:
+    id: 1635172996188-12
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: watch_list_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: tv_series_id
+            type: UUID
+        tableName: watch_list_tv_series
+- changeSet:
+    id: 1635172996188-13
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: seen_list_id
+            type: uuid
+        tableName: user
+- changeSet:
+    id: 1635172996188-14
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: watch_list_id
+            type: uuid
+        tableName: user
+- changeSet:
+    id: 1635172996188-15
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_SEEN_LISTID_COL
+        tableName: seen_list
+- changeSet:
+    id: 1635172996188-16
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_WATCH_LISTID_COL
+        tableName: watch_list
+- changeSet:
+    id: 1635172996188-17
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: manga_id
+        baseTableName: seen_list_manga
+        constraintName: FK1ly49r9dyadvrd32fylo9gnij
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga
+        validate: true
+- changeSet:
+    id: 1635172996188-18
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_list_id
+        baseTableName: seen_list_movies
+        constraintName: FK49y6dxsbhfxdhf0ep3h42i18l
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635172996188-19
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_list_id
+        baseTableName: watch_list_tv_series
+        constraintName: FK4c4cyvi1angb6fy939cjng0qg
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635172996188-20
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_list_id
+        baseTableName: user
+        constraintName: FK6foc5y5s9vyp86o7xfpt77l0u
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635172996188-21
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_list_id
+        baseTableName: watch_list_manga
+        constraintName: FK8f3nlcyfpx0ao84rxgunnh3o9
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635172996188-22
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: games_id
+        baseTableName: watch_list_games
+        constraintName: FKa6ypnsegoyeril86o9fjk4xv7
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game
+        validate: true
+- changeSet:
+    id: 1635172996188-23
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: anime_id
+        baseTableName: seen_list_anime
+        constraintName: FKb07oog59p6tv112e9vte5gctb
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime
+        validate: true
+- changeSet:
+    id: 1635172996188-24
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tv_series_id
+        baseTableName: seen_list_tv_series
+        constraintName: FKcqlcoy89dwllvmrl6sxrsh7ni
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series
+        validate: true
+- changeSet:
+    id: 1635172996188-25
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_list_id
+        baseTableName: user
+        constraintName: FKe7sbqopdu2l2wfu6neadq4084
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635172996188-26
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: games_id
+        baseTableName: seen_list_games
+        constraintName: FKgem43yfs8jyby2000h7780x4s
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game
+        validate: true
+- changeSet:
+    id: 1635172996188-27
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_list_id
+        baseTableName: seen_list_anime
+        constraintName: FKgpm6jk2cm6hduirgptb1e55e7
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635172996188-28
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: anime_id
+        baseTableName: watch_list_anime
+        constraintName: FKgxvxlbyqpu1upyh1okxg8xqtu
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime
+        validate: true
+- changeSet:
+    id: 1635172996188-29
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_list_id
+        baseTableName: watch_list_games
+        constraintName: FKh7miiqhgfckxon0k6o06fpx7l
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635172996188-30
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_list_id
+        baseTableName: seen_list_tv_series
+        constraintName: FKj5mqxhp687cskiw2smi59vgm7
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635172996188-31
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_list_id
+        baseTableName: seen_list_manga
+        constraintName: FKjc3v0isqss2syseu3d87dmsyy
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+- changeSet:
+    id: 1635172996188-32
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: movies_id
+        baseTableName: seen_list_movies
+        constraintName: FKjwpv357nf2lli8795baxapnwr
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie
+        validate: true
+- changeSet:
+    id: 1635172996188-33
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_list_id
+        baseTableName: watch_list_movies
+        constraintName: FKkqs950iljvg263ut1s5k11h7q
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635172996188-34
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: manga_id
+        baseTableName: watch_list_manga
+        constraintName: FKmun7othwnvibpy20yiew6hmix
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga
+        validate: true
+- changeSet:
+    id: 1635172996188-35
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: movies_id
+        baseTableName: watch_list_movies
+        constraintName: FKnh0328opytqtwil08qvu3k8mv
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie
+        validate: true
+- changeSet:
+    id: 1635172996188-36
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: watch_list_id
+        baseTableName: watch_list_anime
+        constraintName: FKnnbk8m0nmonm74xfb8w20toj1
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: watch_list
+        validate: true
+- changeSet:
+    id: 1635172996188-37
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tv_series_id
+        baseTableName: watch_list_tv_series
+        constraintName: FKnyjbokimi96162544ck3mdkc2
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series
+        validate: true
+- changeSet:
+    id: 1635172996188-38
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: seen_list_id
+        baseTableName: seen_list_games
+        constraintName: FKpgm0tac7flx1c3slocr8yqwti
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: seen_list
+        validate: true
+

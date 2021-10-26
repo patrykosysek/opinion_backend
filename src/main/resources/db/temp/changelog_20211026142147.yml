@@ -1,0 +1,494 @@
+databaseChangeLog:
+- changeSet:
+    id: 1635258119846-1
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: anime_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: discussions_id
+            type: UUID
+        tableName: anime_discussions
+- changeSet:
+    id: 1635258119846-2
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: answerPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: discussion_id
+            type: UUID
+        tableName: answer
+- changeSet:
+    id: 1635258119846-3
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: discussionPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: text
+            type: TEXT
+        - column:
+            constraints:
+              nullable: false
+            name: topic
+            type: VARCHAR(255)
+        tableName: discussion
+- changeSet:
+    id: 1635258119846-4
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: game_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: discussions_id
+            type: UUID
+        tableName: game_discussions
+- changeSet:
+    id: 1635258119846-5
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: manga_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: discussions_id
+            type: UUID
+        tableName: manga_discussions
+- changeSet:
+    id: 1635258119846-6
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: movie_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: discussions_id
+            type: UUID
+        tableName: movie_discussions
+- changeSet:
+    id: 1635258119846-7
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: preferencePK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: favourite_genre
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: favourite_title
+            type: VARCHAR(255)
+        - column:
+            constraints:
+              nullable: false
+            name: work_of_culture_type
+            type: INTEGER
+        tableName: preference
+- changeSet:
+    id: 1635258119846-8
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: tv_series_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: discussions_id
+            type: UUID
+        tableName: tv_series_discussions
+- changeSet:
+    id: 1635258119846-9
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: user_id
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+            name: preferences_id
+            type: UUID
+        tableName: user_preferences
+- changeSet:
+    id: 1635258119846-10
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: age
+            type: int4
+        tableName: user
+- changeSet:
+    id: 1635258119846-11
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: favourite_genre
+            type: varchar(255)
+        tableName: user
+- changeSet:
+    id: 1635258119846-12
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: nickname
+            type: varchar(255)
+        tableName: user
+- changeSet:
+    id: 1635258119846-13
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ANSWERID_COL
+        tableName: answer
+- changeSet:
+    id: 1635258119846-14
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_DISCUSSIONID_COL
+        tableName: discussion
+- changeSet:
+    id: 1635258119846-15
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_PREFERENCEID_COL
+        tableName: preference
+- changeSet:
+    id: 1635258119846-16
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: discussions_id
+        constraintName: UK_4898d7etcvherrki8i5y3ihke
+        tableName: game_discussions
+- changeSet:
+    id: 1635258119846-17
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: discussions_id
+        constraintName: UK_97qnqdes0bjeectw4glvx8bwn
+        tableName: manga_discussions
+- changeSet:
+    id: 1635258119846-18
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: preferences_id
+        constraintName: UK_ivwkusl25abreecgh1d4e61pi
+        tableName: user_preferences
+- changeSet:
+    id: 1635258119846-19
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: discussions_id
+        constraintName: UK_j4da8u78dw48mqcnemji4tl83
+        tableName: tv_series_discussions
+- changeSet:
+    id: 1635258119846-20
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: discussions_id
+        constraintName: UK_lc0dhjq7ns4winovf5hr51s63
+        tableName: movie_discussions
+- changeSet:
+    id: 1635258119846-21
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: discussions_id
+        constraintName: UK_sampboi5hykl72hchbnc7wmx4
+        tableName: anime_discussions
+- changeSet:
+    id: 1635258119846-22
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussions_id
+        baseTableName: manga_discussions
+        constraintName: FK12feml98rsfmp4pebs8bycw6s
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: discussion
+        validate: true
+- changeSet:
+    id: 1635258119846-23
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: manga_id
+        baseTableName: manga_discussions
+        constraintName: FK1n6ngkguqm5y9bcuxes8pqujr
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga
+        validate: true
+- changeSet:
+    id: 1635258119846-24
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussions_id
+        baseTableName: anime_discussions
+        constraintName: FK49lqok2bko1j7dolftg1scjyn
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: discussion
+        validate: true
+- changeSet:
+    id: 1635258119846-25
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussions_id
+        baseTableName: movie_discussions
+        constraintName: FK5jc0juy8p0pxc0gf0kaeegfy9
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: discussion
+        validate: true
+- changeSet:
+    id: 1635258119846-26
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussion_id
+        baseTableName: answer
+        constraintName: FK5tsw21fx78bafykk376ea3ua7
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: discussion
+        validate: true
+- changeSet:
+    id: 1635258119846-27
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: movie_id
+        baseTableName: movie_discussions
+        constraintName: FK6fmtwwsf530clynt5sl70k5ht
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie
+        validate: true
+- changeSet:
+    id: 1635258119846-28
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: anime_id
+        baseTableName: anime_discussions
+        constraintName: FKbydpfrvsp2r07gjk5hi17716i
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime
+        validate: true
+- changeSet:
+    id: 1635258119846-29
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: user_id
+        baseTableName: user_preferences
+        constraintName: FKdh2fprb2h6joroo783xjp9cyw
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: user
+        validate: true
+- changeSet:
+    id: 1635258119846-30
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: preferences_id
+        baseTableName: user_preferences
+        constraintName: FKfp1ho5a27j05f30fynh6bne91
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: preference
+        validate: true
+- changeSet:
+    id: 1635258119846-31
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tv_series_id
+        baseTableName: tv_series_discussions
+        constraintName: FKi3rig0atyblb85c7g6xyv9xig
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series
+        validate: true
+- changeSet:
+    id: 1635258119846-32
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussions_id
+        baseTableName: tv_series_discussions
+        constraintName: FKiuk9ev584v011lrfje7o6fdnb
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: discussion
+        validate: true
+- changeSet:
+    id: 1635258119846-33
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: game_id
+        baseTableName: game_discussions
+        constraintName: FKo3viilr92xjwatnapdv2nad8w
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game
+        validate: true
+- changeSet:
+    id: 1635258119846-34
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: discussions_id
+        baseTableName: game_discussions
+        constraintName: FKq2qm4wpe32dioqqtx2d4boy7b
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: discussion
+        validate: true
+

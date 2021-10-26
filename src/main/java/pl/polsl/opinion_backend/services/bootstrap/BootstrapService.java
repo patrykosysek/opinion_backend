@@ -16,7 +16,11 @@ import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
 import pl.polsl.opinion_backend.entities.user.User;
-import pl.polsl.opinion_backend.entities.worksOfCulture.*;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
+import pl.polsl.opinion_backend.entities.worksOfCulture.games.Game;
+import pl.polsl.opinion_backend.entities.worksOfCulture.manga.Manga;
+import pl.polsl.opinion_backend.entities.worksOfCulture.movies.Movie;
+import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
 import pl.polsl.opinion_backend.enums.genre.AnimeMangaGenreEnum;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 import pl.polsl.opinion_backend.mappers.genre.GenreMapper;
@@ -33,7 +37,6 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -52,13 +55,12 @@ public class BootstrapService {
     private final AnimeMangaGenreService animeMangaGenreService;
     private final MovieTvSeriesGenreService movieTvSeriesGenreService;
     private final GameGenreService gameGenreService;
-    // Work of culture services
 
+    // Work of culture services
     private final AnimeService animeService;
     private final MangaService mangaService;
     private final MovieService movieService;
     private final TvSeriesService tvSeriesService;
-    private final WorkOfCultureService workOfCultureService;
     private final GameService gameService;
 
     public void setup() {
@@ -66,7 +68,7 @@ public class BootstrapService {
             log.info("Bootstrap already done");
         } else {
             try {
-                createRoleGroups();
+                //createRoleGroups();
                 createDefaultAdmin();
                 createDefaultUser();
                 getGenreTypes();
@@ -97,8 +99,10 @@ public class BootstrapService {
         User user = new User(
                 "admin@onet.pl",
                 passwordEncoder.encode("ADMIN"),
-                new HashSet<>(),
-                true
+                true,
+                40,
+                "Comedy",
+                "Adminos"
         );
         user.getRoleGroups().add(roleGroupService.getByRoleName("ADMIN"));
         userService.save(user);
@@ -108,8 +112,10 @@ public class BootstrapService {
         User user = new User(
                 "opinion_user@onet.pl",
                 passwordEncoder.encode("OPINION_USER"),
-                new HashSet<>(),
-                true
+                true,
+                22,
+                "Fantasy",
+                "Patros"
         );
         user.getRoleGroups().add(roleGroupService.getByRoleName("OPINION_USER"));
         userService.save(user);
@@ -247,7 +253,7 @@ public class BootstrapService {
                     if (animeService.existsByApiId(apiId)) {
                         Anime existingAnime = animeService.getByApiId(apiId);
                         existingAnime.getGenres().add(genre);
-                        workOfCultureService.save(existingAnime);
+                        animeService.save(existingAnime);
 
                     } else if (title != null && description != null && description.isBlank() && releaseDate != null && imageUrl != null) {
                         anime.setTitle(title);
@@ -256,7 +262,7 @@ public class BootstrapService {
                         anime.setReleaseDate(releaseDate);
                         anime.setImageUrl(imageUrl);
                         anime.getGenres().add(genre);
-                        workOfCultureService.save(anime);
+                        animeService.save(anime);
 
                     }
                 }
@@ -319,7 +325,7 @@ public class BootstrapService {
                     if (mangaService.existsByApiId(apiId)) {
                         Manga existingManga = mangaService.getByApiId(apiId);
                         existingManga.getGenres().add(genre);
-                        workOfCultureService.save(existingManga);
+                        mangaService.save(existingManga);
 
                     } else if (title != null && description != null && !description.isBlank() && releaseDate != null && imageUrl != null) {
                         manga.setTitle(title);
@@ -329,7 +335,7 @@ public class BootstrapService {
                         manga.setImageUrl(imageUrl);
                         manga.getGenres().add(genre);
 
-                        workOfCultureService.save(manga);
+                        mangaService.save(manga);
                     }
                 }
             }
@@ -423,7 +429,7 @@ public class BootstrapService {
                     MovieTvSeriesGenre movieTvSeriesGenre = movieTvSeriesGenreService.getByName(genreName);
                     movie.getGenres().add(movieTvSeriesGenre);
                 }
-                workOfCultureService.save(movie);
+                movieService.save(movie);
             }
         }
     }
@@ -515,7 +521,7 @@ public class BootstrapService {
                     MovieTvSeriesGenre movieTvSeriesGenre = movieTvSeriesGenreService.getByName(genreName);
                     tvSeries.getGenres().add(movieTvSeriesGenre);
                 }
-                workOfCultureService.save(tvSeries);
+                tvSeriesService.save(tvSeries);
             }
         }
     }
@@ -599,11 +605,9 @@ public class BootstrapService {
                     GameGenre gameGenre = gameGenreService.getByName(genreName);
                     game.getGenres().add(gameGenre);
                 }
-                workOfCultureService.save(game);
+                gameService.save(game);
             }
         }
     }
 
 }
-
-
