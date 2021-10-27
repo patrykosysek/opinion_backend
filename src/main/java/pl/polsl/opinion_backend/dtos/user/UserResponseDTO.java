@@ -10,5 +10,7 @@ import java.util.UUID;
 public class UserResponseDTO {
     private final UUID id;
     private final String email;
+    private final String nickname;
+    private final boolean enabled;
 
 }

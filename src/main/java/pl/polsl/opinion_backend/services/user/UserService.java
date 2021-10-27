@@ -9,7 +9,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.polsl.opinion_backend.dtos.user.UserCreateDTO;
+import pl.polsl.opinion_backend.dtos.user.UserUpdateDTO;
 import pl.polsl.opinion_backend.entities.user.User;
+import pl.polsl.opinion_backend.mappers.user.UserMapper;
 import pl.polsl.opinion_backend.repositories.user.UserRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
@@ -22,6 +25,7 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.USER_NOT_FOUND;
 @RequiredArgsConstructor
 @Service
 public class UserService extends BasicService<User, UserRepository> implements UserDetailsService {
+    private final UserMapper userMapper;
 
     @Transactional(readOnly = true)
     public Optional<User> findByEmail(String email) {
@@ -58,6 +62,22 @@ public class UserService extends BasicService<User, UserRepository> implements U
                 return (User) authentication.getPrincipal();
 
         throw new NoSuchElementException(USER_NOT_FOUND);
+    }
+
+    public User create(UserCreateDTO dto) {
+        User user = userMapper.toUser(dto);
+        return this.save(user);
+    }
+
+    public User changeLockStatus(UUID id) {
+        User user = getById(id);
+        user.setEnabled(!user.isEnabled());
+        return user;
+    }
+
+    public User update(UUID id, UserUpdateDTO dto) {
+        User user = this.getById(id);
+        return save(userMapper.updateUser(user, dto));
     }
 
 

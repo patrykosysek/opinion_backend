@@ -46,7 +46,7 @@ public class User extends BasicAuditing implements UserDetails {
 
     private int age;
 
-    private boolean enabled = false;
+    private boolean enabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleGroup> roleGroups = new HashSet<>();
