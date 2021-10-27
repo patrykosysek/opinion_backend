@@ -13,3 +13,5 @@ jwt:
     tokenExpirationTime: 1440 # = 1 day in minutes
     refreshTokenExpTime: 525600 # = 1 year in minutes
     tokenIssuer: http://itsilesia.com
+app:
+    url: http://localhost:8080/api/

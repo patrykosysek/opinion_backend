@@ -3,6 +3,7 @@ package pl.polsl.opinion_backend.dtos.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.validators.user.ProperAge;
 import pl.polsl.opinion_backend.validators.user.UniqueEmail;
 import pl.polsl.opinion_backend.validators.user.UniquePreference;
@@ -30,8 +31,8 @@ public class UserCreateDTO {
     @Size(min = 5, max = 10, message = PASSWORD_SIZE)
     private String password;
 
-    @NotBlank(message = FAVOURITE_GENRE_REQUIRED)
-    private String favouriteGenre;
+    @NotNull(message = FAVOURITE_GENRE_REQUIRED)
+    private GenreType favouriteGenre;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @NotNull(message = DATE_OF_BIRTH_REQUIRED)

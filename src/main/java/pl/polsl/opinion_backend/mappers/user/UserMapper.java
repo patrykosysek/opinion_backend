@@ -7,16 +7,18 @@ import pl.polsl.opinion_backend.dtos.user.UserResponseDTO;
 import pl.polsl.opinion_backend.dtos.user.UserUpdateDTO;
 import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.mappers.qualifires.AgeMapping;
+import pl.polsl.opinion_backend.mappers.qualifires.EncodedPasswordMapping;
 import pl.polsl.opinion_backend.mappers.qualifires.RoleGroupMapping;
 import pl.polsl.opinion_backend.services.role.RoleGroupService;
 
-@Mapper(uses = {JwtFactory.class, PreferenceMapper.class, AgeMapper.class, RoleGroupService.class}, componentModel = "spring")
+@Mapper(uses = {JwtFactory.class, PreferenceMapper.class, AgeMapper.class, RoleGroupService.class, PasswordEncoderMapper.class}, componentModel = "spring")
 public interface UserMapper {
 
     UserResponseDTO toUserResponseDTO(User user);
 
     @Mapping(target = "age", source = "dateOfBirth", qualifiedBy = AgeMapping.class)
     @Mapping(target = "roleGroups", source = "dateOfBirth", qualifiedBy = RoleGroupMapping.class)
+    @Mapping(target = "password", source = "password", qualifiedBy = EncodedPasswordMapping.class)
     User toUser(UserCreateDTO userCreateDTO);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

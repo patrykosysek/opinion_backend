@@ -10,6 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 
 import javax.persistence.*;
@@ -42,7 +43,8 @@ public class User extends BasicAuditing implements UserDetails {
     private String password;
 
     @Column(nullable = false)
-    private String favouriteGenre;
+    @Enumerated(value = EnumType.STRING)
+    private GenreType favouriteGenre;
 
     private int age;
 
@@ -67,7 +69,7 @@ public class User extends BasicAuditing implements UserDetails {
         this.roleGroups.add(roleGroups);
     }
 
-    public User(String username, String encodedPassword, boolean enabled, int age, String favouriteGenre, String nickname) {
+    public User(String username, String encodedPassword, boolean enabled, int age, GenreType favouriteGenre, String nickname) {
         this.email = username;
         this.password = encodedPassword;
         this.enabled = enabled;

@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.PREFERENCE_NOT_UNIQUE;
 
 @Documented
-@Constraint(validatedBy = UniqueEmailValidator.class)
+@Constraint(validatedBy = UniquePreferenceValidator.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UniquePreference {

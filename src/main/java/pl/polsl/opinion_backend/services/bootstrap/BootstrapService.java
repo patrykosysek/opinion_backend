@@ -22,6 +22,7 @@ import pl.polsl.opinion_backend.entities.worksOfCulture.manga.Manga;
 import pl.polsl.opinion_backend.entities.worksOfCulture.movies.Movie;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
 import pl.polsl.opinion_backend.enums.genre.AnimeMangaGenreEnum;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 import pl.polsl.opinion_backend.mappers.genre.GenreMapper;
 import pl.polsl.opinion_backend.services.role.RoleGroupService;
@@ -101,7 +102,7 @@ public class BootstrapService {
                 passwordEncoder.encode("ADMIN"),
                 true,
                 40,
-                "Comedy",
+                GenreType.COMEDY,
                 "Adminos"
         );
         user.getRoleGroups().add(roleGroupService.getByRoleName("ADMIN"));
@@ -114,7 +115,7 @@ public class BootstrapService {
                 passwordEncoder.encode("OPINION_USER"),
                 true,
                 22,
-                "Fantasy",
+                GenreType.FANTASY,
                 "Patros"
         );
         user.getRoleGroups().add(roleGroupService.getByRoleName("OPINION_USER"));

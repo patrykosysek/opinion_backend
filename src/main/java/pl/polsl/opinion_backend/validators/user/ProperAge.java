@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.AGE_NOT_PROPER;
 
 @Documented
-@Constraint(validatedBy = UniqueEmailValidator.class)
+@Constraint(validatedBy = ProperAgeValidator.class)
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ProperAge {

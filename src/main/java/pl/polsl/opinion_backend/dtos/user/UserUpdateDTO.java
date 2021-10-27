@@ -3,6 +3,7 @@ package pl.polsl.opinion_backend.dtos.user;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.validators.user.UniqueEmail;
 
 import javax.validation.constraints.Email;
@@ -25,6 +26,6 @@ public class UserUpdateDTO {
     @Size(min = 5, max = 10, message = PASSWORD_SIZE)
     private String password;
 
-    private String favouriteGenre;
+    private GenreType favouriteGenre;
 
 }

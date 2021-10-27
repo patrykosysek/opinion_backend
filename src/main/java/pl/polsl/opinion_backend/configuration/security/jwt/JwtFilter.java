@@ -13,16 +13,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static java.util.function.Predicate.not;
+import static pl.polsl.opinion_backend.configuration.security.jwt.JwtStatics.AUTHORIZATION_HEADER;
+import static pl.polsl.opinion_backend.configuration.security.jwt.JwtStatics.BEARER_PATTERN;
 
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
 
-    private static final String AUTHORIZATION_HEADER = "Authorization";
-    private static final Pattern BEARER_PATTERN = Pattern.compile("^Bearer (.+?)$");
+    //    private static final String AUTHORIZATION_HEADER = "Authorization";
+//    private static final Pattern BEARER_PATTERN = Pattern.compile("^Bearer (.+?)$");
     private final JwtUtils jwtUtils;
 
     @Override
