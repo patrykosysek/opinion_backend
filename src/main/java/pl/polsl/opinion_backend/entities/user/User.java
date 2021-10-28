@@ -56,10 +56,10 @@ public class User extends BasicAuditing implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Preference> preferences = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private WatchList watchList = new WatchList();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SeenList seenList = new SeenList();
 
 

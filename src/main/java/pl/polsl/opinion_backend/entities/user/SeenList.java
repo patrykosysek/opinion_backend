@@ -12,6 +12,7 @@ import pl.polsl.opinion_backend.entities.worksOfCulture.movies.Movie;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import java.util.HashSet;
@@ -27,18 +28,19 @@ public class SeenList extends BasicAuditing {
     @OneToOne(mappedBy = "seenList", optional = false)
     private User user;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Anime> anime = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Manga> manga = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Movie> movies = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<TvSeries> tvSeries = new HashSet<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Game> games = new HashSet<>();
+
 }

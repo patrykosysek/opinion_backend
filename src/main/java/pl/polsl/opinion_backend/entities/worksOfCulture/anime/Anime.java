@@ -1,9 +1,6 @@
 package pl.polsl.opinion_backend.entities.worksOfCulture.anime;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.user.SeenList;
@@ -24,15 +21,33 @@ public class Anime extends WorkOfCulture {
     private Set<AnimeMangaGenre> genres = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anime")
-    Set<AnimeDiscussion> discussions = new HashSet<>();
+    private Set<AnimeDiscussion> discussions = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anime")
-    Set<AnimeReview> reviews = new HashSet<>();
+    private Set<AnimeReview> reviews = new HashSet<>();
 
     @ManyToMany(mappedBy = "anime")
-    Set<WatchList> watchLists = new HashSet<>();
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<WatchList> watchLists = new HashSet<>();
 
     @ManyToMany(mappedBy = "anime")
-    Set<SeenList> seenLists = new HashSet<>();
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<SeenList> seenLists = new HashSet<>();
+
+    @PreRemove
+    public void preRemove() {
+        removeFromSeenList();
+        removeFromWatchList();
+    }
+
+    private void removeFromWatchList() {
+        watchLists.forEach(watchList -> watchList.getAnime().remove(this));
+    }
+
+    private void removeFromSeenList() {
+        seenLists.forEach(seenList -> seenList.getAnime().remove(this));
+    }
 
 }

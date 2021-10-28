@@ -1,9 +1,10 @@
-package pl.polsl.opinion_backend.services.works;
+package pl.polsl.opinion_backend.services.list;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
-import pl.polsl.opinion_backend.repositories.works.TvSeriesRepository;
+import pl.polsl.opinion_backend.entities.user.SeenList;
+import pl.polsl.opinion_backend.repositories.list.SeenListRepository;
+import pl.polsl.opinion_backend.services.basic.BasicService;
 
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -12,10 +13,10 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_
 
 @RequiredArgsConstructor
 @Service
-public class TvSeriesService extends WorkOfCultureService<TvSeries, TvSeriesRepository> {
+public class SeenListService extends BasicService<SeenList, SeenListRepository> {
 
     @Override
-    public TvSeries getById(UUID id) {
+    public SeenList getById(UUID id) {
         return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
     }
 

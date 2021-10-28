@@ -1,9 +1,6 @@
 package pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.user.SeenList;
@@ -30,9 +27,27 @@ public class TvSeries extends WorkOfCulture {
     Set<TvSeriesReview> reviews = new HashSet<>();
 
     @ManyToMany(mappedBy = "tvSeries")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<WatchList> watchLists = new HashSet<>();
 
     @ManyToMany(mappedBy = "tvSeries")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<SeenList> seenLists = new HashSet<>();
+
+    @PreRemove
+    public void preRemove() {
+        removeFromSeenList();
+        removeFromWatchList();
+    }
+
+    private void removeFromWatchList() {
+        watchLists.forEach(watchList -> watchList.getTvSeries().remove(this));
+    }
+
+    private void removeFromSeenList() {
+        seenLists.forEach(seenList -> seenList.getTvSeries().remove(this));
+    }
 
 }

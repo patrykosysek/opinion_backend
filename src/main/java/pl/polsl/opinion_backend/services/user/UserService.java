@@ -69,6 +69,7 @@ public class UserService extends BasicService<User, UserRepository> implements U
         return this.save(user);
     }
 
+    @Transactional
     public User changeLockStatus(UUID id) {
         User user = getById(id);
         user.setEnabled(!user.isEnabled());

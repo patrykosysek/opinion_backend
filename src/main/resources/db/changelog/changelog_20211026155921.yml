@@ -781,7 +781,7 @@ databaseChangeLog:
             constraints:
               nullable: false
             name: work_of_culture_type
-            type: INTEGER
+            type: VARCHAR(255)
         - column:
             name: user_id
             type: UUID

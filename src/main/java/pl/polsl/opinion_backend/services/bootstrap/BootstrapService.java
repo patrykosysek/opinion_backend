@@ -69,15 +69,15 @@ public class BootstrapService {
             log.info("Bootstrap already done");
         } else {
             try {
-                //createRoleGroups();
+                createRoleGroups();
                 createDefaultAdmin();
                 createDefaultUser();
                 getGenreTypes();
                 animeGenerating();
-                mangaGenerating();
-                movieGenerating();
-                tvSeriesGenerating();
-                gameGenerating();
+//                mangaGenerating();
+//                movieGenerating();
+//                tvSeriesGenerating();
+                //gameGenerating();
                 bootstrapStatusService.save(new BootstrapStatus(true));
             } catch (Exception e) {
                 log.info(e.getMessage());

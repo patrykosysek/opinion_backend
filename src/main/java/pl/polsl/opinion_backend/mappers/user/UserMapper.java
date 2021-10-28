@@ -22,6 +22,7 @@ public interface UserMapper {
     User toUser(UserCreateDTO userCreateDTO);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "password", source = "password", qualifiedBy = EncodedPasswordMapping.class)
     User updateUser(@MappingTarget User user, UserUpdateDTO dto);
 
     @AfterMapping
