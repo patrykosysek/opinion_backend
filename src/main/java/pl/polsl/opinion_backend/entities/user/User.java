@@ -62,6 +62,9 @@ public class User extends BasicAuditing implements UserDetails {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SeenList seenList = new SeenList();
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private ReviewList reviewList = new ReviewList();
+
 
     public User(String username, String encodedPassword, RoleGroup roleGroups) {
         this.email = username;

@@ -3,8 +3,8 @@ package pl.polsl.opinion_backend.entities.worksOfCulture.manga;
 import lombok.*;
 import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
-import pl.polsl.opinion_backend.entities.user.SeenList;
-import pl.polsl.opinion_backend.entities.user.WatchList;
+import pl.polsl.opinion_backend.entities.list.manga.MangaSeenList;
+import pl.polsl.opinion_backend.entities.list.manga.MangaWatchList;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -27,29 +27,14 @@ public class Manga extends WorkOfCulture {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manga")
     Set<MangaReview> reviews = new HashSet<>();
 
-    @ManyToMany(mappedBy = "manga")
+    @OneToMany(orphanRemoval = true, mappedBy = "manga")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    Set<WatchList> watchLists = new HashSet<>();
+    Set<MangaWatchList> mangaWatchLists = new HashSet<>();
 
-    @ManyToMany(mappedBy = "manga")
+    @OneToMany(orphanRemoval = true, mappedBy = "manga")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    Set<SeenList> seenLists = new HashSet<>();
-
-    @PreRemove
-    public void preRemove() {
-        removeFromSeenList();
-        removeFromWatchList();
-    }
-
-    private void removeFromWatchList() {
-        watchLists.forEach(watchList -> watchList.getManga().remove(this));
-    }
-
-    private void removeFromSeenList() {
-        seenLists.forEach(seenList -> seenList.getManga().remove(this));
-    }
-
+    Set<MangaSeenList> mangaSeenLists = new HashSet<>();
 
 }

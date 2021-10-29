@@ -25,4 +25,6 @@ public class ErrorMessages {
     public static final String PREFERENCE_SIZE = "preference.size";
     public static final String PREFERENCE_NOT_UNIQUE = "preference.notUnique";
     public static final String AGE_NOT_PROPER = "age.notProper";
+    public static final String REVIEW_REQUIRED = "review.required";
+    public static final String REVIEW_SIZE = "review.size";
 }

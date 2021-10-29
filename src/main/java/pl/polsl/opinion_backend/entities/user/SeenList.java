@@ -1,19 +1,15 @@
 package pl.polsl.opinion_backend.entities.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
-import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
-import pl.polsl.opinion_backend.entities.worksOfCulture.games.Game;
-import pl.polsl.opinion_backend.entities.worksOfCulture.manga.Manga;
-import pl.polsl.opinion_backend.entities.worksOfCulture.movies.Movie;
-import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
+import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
+import pl.polsl.opinion_backend.entities.list.game.GameSeenList;
+import pl.polsl.opinion_backend.entities.list.manga.MangaSeenList;
+import pl.polsl.opinion_backend.entities.list.movie.MovieSeenList;
+import pl.polsl.opinion_backend.entities.list.tvSeries.TvSeriesSeenList;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,21 +22,33 @@ import java.util.Set;
 public class SeenList extends BasicAuditing {
 
     @OneToOne(mappedBy = "seenList", optional = false)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Anime> anime = new HashSet<>();
+    @OneToMany(orphanRemoval = true, mappedBy = "seenList")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<AnimeSeenList> animeSeenLists = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Manga> manga = new HashSet<>();
+    @OneToMany(orphanRemoval = true, mappedBy = "seenList")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<MangaSeenList> mangaSeenLists = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Movie> movies = new HashSet<>();
+    @OneToMany(orphanRemoval = true, mappedBy = "seenList")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<MovieSeenList> movieSeenLists = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<TvSeries> tvSeries = new HashSet<>();
+    @OneToMany(orphanRemoval = true, mappedBy = "seenList")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<TvSeriesSeenList> tvSeriesSeenLists = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Game> games = new HashSet<>();
+    @OneToMany(orphanRemoval = true, mappedBy = "seenList")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<GameSeenList> gameSeenLists = new HashSet<>();
 
 }

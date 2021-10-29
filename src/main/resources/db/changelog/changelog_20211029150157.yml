@@ -1,0 +1,180 @@
+databaseChangeLog:
+- changeSet:
+    id: 1635519730642-1
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: review_listPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        tableName: review_list
+- changeSet:
+    id: 1635519730642-2
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: review_list_id
+            type: uuid
+        tableName: anime_review
+- changeSet:
+    id: 1635519730642-3
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: review_list_id
+            type: uuid
+        tableName: game_review
+- changeSet:
+    id: 1635519730642-4
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: review_list_id
+            type: uuid
+        tableName: manga_review
+- changeSet:
+    id: 1635519730642-5
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: review_list_id
+            type: uuid
+        tableName: movie_review
+- changeSet:
+    id: 1635519730642-6
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+            name: review_list_id
+            type: uuid
+        tableName: tv_series_review
+- changeSet:
+    id: 1635519730642-7
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: review_list_id
+            type: uuid
+        tableName: user
+- changeSet:
+    id: 1635519730642-8
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_REVIEW_LISTID_COL
+        tableName: review_list
+- changeSet:
+    id: 1635519730642-9
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: review_list_id
+        baseTableName: movie_review
+        constraintName: FK8qyb54ta6pg2y5xt6pfcp7tdj
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: review_list
+        validate: true
+- changeSet:
+    id: 1635519730642-10
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: review_list_id
+        baseTableName: game_review
+        constraintName: FK8sbrywvudc0emi0u8scm5vfkv
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: review_list
+        validate: true
+- changeSet:
+    id: 1635519730642-11
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: review_list_id
+        baseTableName: manga_review
+        constraintName: FKb7bg6bxe0rgvdkbaqyig8345q
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: review_list
+        validate: true
+- changeSet:
+    id: 1635519730642-12
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: review_list_id
+        baseTableName: user
+        constraintName: FKnj05kte92hn3xy2ct4q9dfqsv
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: review_list
+        validate: true
+- changeSet:
+    id: 1635519730642-13
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: review_list_id
+        baseTableName: tv_series_review
+        constraintName: FKqqlshrhfcoixqxfbp6gl3ssr
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: review_list
+        validate: true
+- changeSet:
+    id: 1635519730642-14
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: review_list_id
+        baseTableName: anime_review
+        constraintName: FKrdpo042avert9ylhxu7a4wryj
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: review_list
+        validate: true
+

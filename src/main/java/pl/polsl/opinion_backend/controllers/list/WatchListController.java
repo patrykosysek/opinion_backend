@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.opinion_backend.configuration.security.jwt.JwtStatics;
 import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
+import pl.polsl.opinion_backend.services.list.ListManagingService;
 import pl.polsl.opinion_backend.services.list.WatchListService;
 
 import java.util.UUID;
@@ -23,6 +24,7 @@ import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_ALL;
 @SecurityRequirement(name = JwtStatics.SECURITY_SCHEME_NAME)
 public class WatchListController {
     private final WatchListService watchListService;
+    private final ListManagingService listManagingService;
 
     @Secured(ROLE_ALL)
     @Operation(summary = "Add work of culture to current user watch list ")
@@ -30,17 +32,16 @@ public class WatchListController {
     @PostMapping("/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
-        watchListService.addWorkOfCulture(workOfCultureType, workOfCultureId);
+        listManagingService.addWorkOfCultureToWatchList(workOfCultureType, workOfCultureId);
     }
 
     @Secured(ROLE_ALL)
     @Operation(summary = "Remove work of culture from current user watch list")
     @ApiResponse(responseCode = "200", description = "Work of culture successfully removed")
-    @PatchMapping(value = "/{workOfCultureType}/{workOfCultureId}")
+    @DeleteMapping(value = "/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.OK)
     public void remove(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
-        watchListService.removeWorkOfCulture(workOfCultureType,workOfCultureId);
+        listManagingService.removeWorkOfCulture(workOfCultureType, workOfCultureId);
     }
-
 
 }

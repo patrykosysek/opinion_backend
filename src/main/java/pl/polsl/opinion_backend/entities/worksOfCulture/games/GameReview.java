@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
-import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
+import pl.polsl.opinion_backend.entities.user.ReviewList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +18,9 @@ import javax.persistence.ManyToOne;
 @AllArgsConstructor
 public class GameReview extends BasicAuditing {
 
+    @ManyToOne(optional = false)
+    private ReviewList reviewList;
+
     @ManyToOne
     private Game game;
 
@@ -25,5 +28,15 @@ public class GameReview extends BasicAuditing {
     private String comment;
 
     private int likes = 0;
+
+    public void addGame(Game game) {
+        this.game = game;
+        game.getReviews().add(this);
+    }
+
+    public void addReviewList(ReviewList reviewList) {
+        this.reviewList = reviewList;
+        reviewList.getGameReviews().add(this);
+    }
 
 }

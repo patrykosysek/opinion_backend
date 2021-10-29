@@ -2,11 +2,20 @@ package pl.polsl.opinion_backend.services.list;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
+import pl.polsl.opinion_backend.entities.list.game.GameWatchList;
+import pl.polsl.opinion_backend.entities.list.manga.MangaWatchList;
+import pl.polsl.opinion_backend.entities.list.movie.MovieWatchList;
+import pl.polsl.opinion_backend.entities.list.tvSeries.TvSeriesWatchList;
 import pl.polsl.opinion_backend.entities.user.WatchList;
-import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
+import pl.polsl.opinion_backend.entities.worksOfCulture.games.Game;
+import pl.polsl.opinion_backend.entities.worksOfCulture.manga.Manga;
+import pl.polsl.opinion_backend.entities.worksOfCulture.movies.Movie;
+import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
 import pl.polsl.opinion_backend.repositories.list.WatchListRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
-import pl.polsl.opinion_backend.services.user.UserService;
+import pl.polsl.opinion_backend.services.list.watch.*;
 import pl.polsl.opinion_backend.services.works.*;
 
 import java.util.NoSuchElementException;
@@ -17,126 +26,105 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_
 @RequiredArgsConstructor
 @Service
 public class WatchListService extends BasicService<WatchList, WatchListRepository> {
-    private final UserService userService;
     private final AnimeService animeService;
     private final MangaService mangaService;
     private final MovieService movieService;
     private final TvSeriesService tvSeriesService;
     private final GameService gameService;
+    private final AnimeWatchListService animeWatchListService;
+    private final MangaWatchListService mangaWatchListService;
+    private final MovieWatchListService movieWatchListService;
+    private final TvSeriesWatchListService tvSeriesWatchListService;
+    private final GameWatchListService gameWatchListService;
 
     @Override
     public WatchList getById(UUID id) {
         return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
     }
 
-    public WatchList getCurrentUserWatchList() {
-        return userService.getCurrentUser().getWatchList();
-    }
 
-    public void addWorkOfCulture(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
-        WatchList watchList = getCurrentUserWatchList();
-
-        switch (workOfCultureType) {
-            case ANIME:
-                addAnime(workOfCultureId, watchList);
-                break;
-            case MANGA:
-                addManga(workOfCultureId, watchList);
-                break;
-            case MOVIE:
-                addMovie(workOfCultureId, watchList);
-                break;
-            case TVSERIES:
-                addTvSeries(workOfCultureId, watchList);
-                break;
-            case GAME:
-                addGame(workOfCultureId, watchList);
-                break;
-            default:
-                throw new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND);
-
-
-        }
-    }
-
-    public void removeWorkOfCulture(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
-        WatchList watchList = getCurrentUserWatchList();
-
-        switch (workOfCultureType) {
-            case ANIME:
-                removeAnime(workOfCultureId, watchList);
-                break;
-            case MANGA:
-                removeManga(workOfCultureId, watchList);
-                break;
-            case MOVIE:
-                removeMovie(workOfCultureId, watchList);
-                break;
-            case TVSERIES:
-                removeTvSeries(workOfCultureId, watchList);
-                break;
-            case GAME:
-                removeGame(workOfCultureId, watchList);
-                break;
-            default:
-                throw new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND);
-
-
-        }
-    }
-
-
-    // ADD
+    /////////////////////////////////////////////////////////////////////// ADD
     public void addAnime(UUID workOfCultureId, WatchList watchList) {
-        watchList.getAnime().add(animeService.getById(workOfCultureId));
-        save(watchList);
+        Anime anime = animeService.getById(workOfCultureId);
+
+        if (animeWatchListService.existsByWatchListAndAnime(watchList, anime)) {
+            throw new IllegalArgumentException("ANIME IS ALREADY IN WATCH LIST");
+        }
+        AnimeWatchList animeWatchList = new AnimeWatchList();
+        animeWatchList.addAnime(anime);
+        animeWatchList.addWatchList(watchList);
+        animeWatchListService.save(animeWatchList);
     }
 
     public void addManga(UUID workOfCultureId, WatchList watchList) {
-        watchList.getManga().add(mangaService.getById(workOfCultureId));
-        save(watchList);
+        Manga manga = mangaService.getById(workOfCultureId);
+
+        if (mangaWatchListService.existsByWatchListAndManga(watchList, manga)) {
+            throw new IllegalArgumentException("MANGA IS ALREADY IN WATCH LIST");
+        }
+        MangaWatchList mangaWatchList = new MangaWatchList();
+        mangaWatchList.addManga(manga);
+        mangaWatchList.addWatchList(watchList);
+        mangaWatchListService.save(mangaWatchList);
     }
 
     public void addMovie(UUID workOfCultureId, WatchList watchList) {
-        watchList.getMovies().add(movieService.getById(workOfCultureId));
-        save(watchList);
+        Movie movie = movieService.getById(workOfCultureId);
+
+        if (movieWatchListService.existsByWatchListAndMovie(watchList, movie)) {
+            throw new IllegalArgumentException("MOVIE IS ALREADY IN WATCH LIST");
+        }
+        MovieWatchList movieWatchList = new MovieWatchList();
+        movieWatchList.addMovie(movie);
+        movieWatchList.addWatchList(watchList);
+        movieWatchListService.save(movieWatchList);
     }
 
     public void addTvSeries(UUID workOfCultureId, WatchList watchList) {
-        watchList.getTvSeries().add(tvSeriesService.getById(workOfCultureId));
-        save(watchList);
+        TvSeries tvSeries = tvSeriesService.getById(workOfCultureId);
+
+        if (tvSeriesWatchListService.existsByWatchListAndTvSeries(watchList, tvSeries)) {
+            throw new IllegalArgumentException("TVSERIES IS ALREADY IN WATCH LIST");
+        }
+        TvSeriesWatchList tvSeriesWatchList = new TvSeriesWatchList();
+        tvSeriesWatchList.addTvSeries(tvSeries);
+        tvSeriesWatchList.addWatchList(watchList);
+        tvSeriesWatchListService.save(tvSeriesWatchList);
     }
 
     public void addGame(UUID workOfCultureId, WatchList watchList) {
-        watchList.getGames().add(gameService.getById(workOfCultureId));
-        save(watchList);
+        Game game = gameService.getById(workOfCultureId);
+
+        if (gameWatchListService.existsByWatchListAndGame(watchList, game)) {
+            throw new IllegalArgumentException("GAME  IS ALREADY IN WATCH LIST");
+        }
+
+        GameWatchList gameWatchList = new GameWatchList();
+        gameWatchList.addGame(game);
+        gameWatchList.addWatchList(watchList);
+        gameWatchListService.save(gameWatchList);
     }
 
-    //REMOVE
+    /////////////////////////////////////////////////////////////////////////// REMOVE
 
     public void removeAnime(UUID workOfCultureId, WatchList watchList) {
-        watchList.getAnime().remove(animeService.getById(workOfCultureId));
-        save(watchList);
+        animeWatchListService.delete(animeWatchListService.findByAnimeIdAndWatchList(workOfCultureId, watchList).getId());
     }
 
     public void removeManga(UUID workOfCultureId, WatchList watchList) {
-        watchList.getManga().remove(mangaService.getById(workOfCultureId));
-        save(watchList);
+        mangaWatchListService.delete(mangaWatchListService.findByMangaIdAndWatchList(workOfCultureId, watchList).getId());
     }
 
     public void removeMovie(UUID workOfCultureId, WatchList watchList) {
-        watchList.getMovies().remove(movieService.getById(workOfCultureId));
-        save(watchList);
+        movieWatchListService.delete(movieWatchListService.findByMovieIdAndWatchList(workOfCultureId, watchList).getId());
     }
 
     public void removeTvSeries(UUID workOfCultureId, WatchList watchList) {
-        watchList.getTvSeries().remove(tvSeriesService.getById(workOfCultureId));
-        save(watchList);
+        tvSeriesWatchListService.delete(tvSeriesWatchListService.findByTvSeriesIdAndWatchList(workOfCultureId, watchList).getId());
     }
 
     public void removeGame(UUID workOfCultureId, WatchList watchList) {
-        watchList.getGames().remove(gameService.getById(workOfCultureId));
-        save(watchList);
+        gameWatchListService.delete(gameWatchListService.findByGameIdAndWatchList(workOfCultureId, watchList).getId());
     }
 
 }

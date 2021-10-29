@@ -3,8 +3,8 @@ package pl.polsl.opinion_backend.entities.worksOfCulture.movies;
 import lombok.*;
 import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
-import pl.polsl.opinion_backend.entities.user.SeenList;
-import pl.polsl.opinion_backend.entities.user.WatchList;
+import pl.polsl.opinion_backend.entities.list.movie.MovieSeenList;
+import pl.polsl.opinion_backend.entities.list.movie.MovieWatchList;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -26,28 +26,14 @@ public class Movie extends WorkOfCulture {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
     Set<MovieReview> reviews = new HashSet<>();
 
-    @ManyToMany(mappedBy = "movies")
+    @OneToMany(orphanRemoval = true, mappedBy = "movie")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    Set<WatchList> watchLists = new HashSet<>();
+    Set<MovieWatchList> movieWatchLists = new HashSet<>();
 
-    @ManyToMany(mappedBy = "movies")
+    @OneToMany(orphanRemoval = true, mappedBy = "movie")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    Set<SeenList> seenLists = new HashSet<>();
-
-    @PreRemove
-    public void preRemove() {
-        removeFromSeenList();
-        removeFromWatchList();
-    }
-
-    private void removeFromWatchList() {
-        watchLists.forEach(watchList -> watchList.getMovies().remove(this));
-    }
-
-    private void removeFromSeenList() {
-        seenLists.forEach(seenList -> seenList.getMovies().remove(this));
-    }
+    Set<MovieSeenList> movieSeenLists = new HashSet<>();
 
 }
