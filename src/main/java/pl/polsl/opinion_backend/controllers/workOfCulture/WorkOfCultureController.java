@@ -15,7 +15,7 @@ import pl.polsl.opinion_backend.services.works.WorkOfCultureManagingService;
 
 import java.util.UUID;
 
-import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_ALL;
+import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_WORK_OF_CULTURE_ALL;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,13 +25,13 @@ import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_ALL;
 public class WorkOfCultureController {
     private final WorkOfCultureManagingService workOfCultureManagingService;
 
-    @Secured(ROLE_ALL)
+    @Secured(ROLE_WORK_OF_CULTURE_ALL)
     @Operation(summary = "Delete work of culture")
     @ApiResponse(responseCode = "204", description = "Work of culture successfully deleted")
     @DeleteMapping(value = "/{workOfCultureType}/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID id) {
-        workOfCultureManagingService.delete(workOfCultureType,id);
+        workOfCultureManagingService.delete(workOfCultureType, id);
     }
 
 

@@ -21,7 +21,7 @@ import pl.polsl.opinion_backend.services.works.*;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.*;
 
 @RequiredArgsConstructor
 @Service
@@ -49,7 +49,7 @@ public class SeenListService extends BasicService<SeenList, SeenListRepository> 
         Anime anime = animeService.getById(workOfCultureId);
 
         if (animeSeenListService.existsBySeenListAndAnime(seenList, anime)) {
-            throw new IllegalArgumentException("ANIME IS ALREADY IN SEEN LIST");
+            throw new IllegalArgumentException(ANIME_ALREADY_IN_SEEN_LIST);
         }
         AnimeSeenList animeSeenList = new AnimeSeenList();
         animeSeenList.addAnime(anime);
@@ -61,7 +61,7 @@ public class SeenListService extends BasicService<SeenList, SeenListRepository> 
         Manga manga = mangaService.getById(workOfCultureId);
 
         if (mangaSeenListService.existsBySeenListAndManga(seenList, manga)) {
-            throw new IllegalArgumentException("MANGA IS ALREADY IN SEEN LIST");
+            throw new IllegalArgumentException(MANGA_ALREADY_IN_SEEN_LIST);
         }
         MangaSeenList mangaSeenList = new MangaSeenList();
         mangaSeenList.addManga(manga);
@@ -73,7 +73,7 @@ public class SeenListService extends BasicService<SeenList, SeenListRepository> 
         Movie movie = movieService.getById(workOfCultureId);
 
         if (movieSeenListService.existsBySeenListAndMovie(seenList, movie)) {
-            throw new IllegalArgumentException("MOVIE IS ALREADY IN SEEN LIST");
+            throw new IllegalArgumentException(MOVIE_ALREADY_IN_SEEN_LIST);
         }
         MovieSeenList movieSeenList = new MovieSeenList();
         movieSeenList.addMovie(movie);
@@ -85,7 +85,7 @@ public class SeenListService extends BasicService<SeenList, SeenListRepository> 
         TvSeries tvSeries = tvSeriesService.getById(workOfCultureId);
 
         if (tvSeriesSeenListService.existsBySeenListAndTvSeries(seenList, tvSeries)) {
-            throw new IllegalArgumentException("TVSERIES IS ALREADY IN SEEN LIST");
+            throw new IllegalArgumentException(TV_SERIES_ALREADY_IN_SEEN_LIST);
         }
         TvSeriesSeenList tvSeriesSeenList = new TvSeriesSeenList();
         tvSeriesSeenList.addTvSeries(tvSeries);
@@ -97,7 +97,7 @@ public class SeenListService extends BasicService<SeenList, SeenListRepository> 
         Game game = gameService.getById(workOfCultureId);
 
         if (gameSeenListService.existsBySeenListAndGame(seenList, game)) {
-            throw new IllegalArgumentException("GAME IS ALREADY IN SEEN LIST");
+            throw new IllegalArgumentException(GAME_ALREADY_IN_SEEN_LIST);
         }
         GameSeenList gameSeenList = new GameSeenList();
         gameSeenList.addGame(game);

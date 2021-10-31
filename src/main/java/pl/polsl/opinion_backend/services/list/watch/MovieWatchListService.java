@@ -11,6 +11,7 @@ import pl.polsl.opinion_backend.services.basic.BasicService;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.MOVIE_WATCH_LIST_NOT_FOUND;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class MovieWatchListService extends BasicService<MovieWatchList, MovieWat
 
     @Override
     public MovieWatchList getById(UUID id) {
-        return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
+        return findById(id).orElseThrow(() -> new NoSuchElementException(MOVIE_WATCH_LIST_NOT_FOUND));
     }
 
     public boolean existsByWatchListAndMovie(WatchList watchList, Movie movie) {
@@ -32,7 +33,7 @@ public class MovieWatchListService extends BasicService<MovieWatchList, MovieWat
     }
 
     public MovieWatchList findByMovieIdAndWatchList(UUID movieId, WatchList watchList) {
-        return repository.findByMovie_IdAndWatchList(movieId, watchList).orElseThrow(() -> new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND));
+        return repository.findByMovie_IdAndWatchList(movieId, watchList).orElseThrow(() -> new IllegalArgumentException(MOVIE_WATCH_LIST_NOT_FOUND));
     }
 
 }

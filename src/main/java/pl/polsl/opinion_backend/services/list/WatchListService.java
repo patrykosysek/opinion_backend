@@ -21,7 +21,7 @@ import pl.polsl.opinion_backend.services.works.*;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.*;
 
 @RequiredArgsConstructor
 @Service
@@ -48,7 +48,7 @@ public class WatchListService extends BasicService<WatchList, WatchListRepositor
         Anime anime = animeService.getById(workOfCultureId);
 
         if (animeWatchListService.existsByWatchListAndAnime(watchList, anime)) {
-            throw new IllegalArgumentException("ANIME IS ALREADY IN WATCH LIST");
+            throw new IllegalArgumentException(ANIME_ALREADY_IN_WATCH_LIST);
         }
         AnimeWatchList animeWatchList = new AnimeWatchList();
         animeWatchList.addAnime(anime);
@@ -60,7 +60,7 @@ public class WatchListService extends BasicService<WatchList, WatchListRepositor
         Manga manga = mangaService.getById(workOfCultureId);
 
         if (mangaWatchListService.existsByWatchListAndManga(watchList, manga)) {
-            throw new IllegalArgumentException("MANGA IS ALREADY IN WATCH LIST");
+            throw new IllegalArgumentException(MANGA_WATCH_LIST_NOT_FOUND);
         }
         MangaWatchList mangaWatchList = new MangaWatchList();
         mangaWatchList.addManga(manga);
@@ -72,7 +72,7 @@ public class WatchListService extends BasicService<WatchList, WatchListRepositor
         Movie movie = movieService.getById(workOfCultureId);
 
         if (movieWatchListService.existsByWatchListAndMovie(watchList, movie)) {
-            throw new IllegalArgumentException("MOVIE IS ALREADY IN WATCH LIST");
+            throw new IllegalArgumentException(MOVIE_ALREADY_IN_WATCH_LIST);
         }
         MovieWatchList movieWatchList = new MovieWatchList();
         movieWatchList.addMovie(movie);
@@ -84,7 +84,7 @@ public class WatchListService extends BasicService<WatchList, WatchListRepositor
         TvSeries tvSeries = tvSeriesService.getById(workOfCultureId);
 
         if (tvSeriesWatchListService.existsByWatchListAndTvSeries(watchList, tvSeries)) {
-            throw new IllegalArgumentException("TVSERIES IS ALREADY IN WATCH LIST");
+            throw new IllegalArgumentException(TV_SERIES_ALREADY_IN_WATCH_LIST);
         }
         TvSeriesWatchList tvSeriesWatchList = new TvSeriesWatchList();
         tvSeriesWatchList.addTvSeries(tvSeries);
@@ -96,7 +96,7 @@ public class WatchListService extends BasicService<WatchList, WatchListRepositor
         Game game = gameService.getById(workOfCultureId);
 
         if (gameWatchListService.existsByWatchListAndGame(watchList, game)) {
-            throw new IllegalArgumentException("GAME  IS ALREADY IN WATCH LIST");
+            throw new IllegalArgumentException(GAME_ALREADY_IN_WATCH_LIST);
         }
 
         GameWatchList gameWatchList = new GameWatchList();

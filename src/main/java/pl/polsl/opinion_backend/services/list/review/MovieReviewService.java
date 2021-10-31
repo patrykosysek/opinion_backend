@@ -10,6 +10,7 @@ import pl.polsl.opinion_backend.services.basic.BasicService;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.MOVIE_REVIEW_NOT_FOUND;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class MovieReviewService extends BasicService<MovieReview, MovieReviewRep
 
     @Override
     public MovieReview getById(UUID id) {
-        return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
+        return findById(id).orElseThrow(() -> new NoSuchElementException(MOVIE_REVIEW_NOT_FOUND));
     }
 
     public boolean existsByReviewListAndMovieId(ReviewList reviewList, UUID movieId) {
@@ -26,7 +27,7 @@ public class MovieReviewService extends BasicService<MovieReview, MovieReviewRep
     }
 
     public MovieReview findByMovieIdAndReviewList(UUID movieId, ReviewList reviewList) {
-        return repository.findByMovie_IdAndReviewList(movieId, reviewList).orElseThrow(() -> new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND));
+        return repository.findByMovie_IdAndReviewList(movieId, reviewList).orElseThrow(() -> new IllegalArgumentException(MOVIE_REVIEW_NOT_FOUND));
     }
 
 }

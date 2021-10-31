@@ -10,6 +10,7 @@ import pl.polsl.opinion_backend.services.basic.BasicService;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.ANIME_REVIEW_NOT_FOUND;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class AnimeReviewService extends BasicService<AnimeReview, AnimeReviewRep
 
     @Override
     public AnimeReview getById(UUID id) {
-        return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
+        return findById(id).orElseThrow(() -> new NoSuchElementException(ANIME_REVIEW_NOT_FOUND));
     }
 
     public boolean existsByReviewListAndAnimeId(ReviewList reviewList, UUID animeId) {
@@ -26,7 +27,7 @@ public class AnimeReviewService extends BasicService<AnimeReview, AnimeReviewRep
     }
 
     public AnimeReview findByAnimeIdAndReviewList(UUID animeId, ReviewList reviewList) {
-        return repository.findByAnime_IdAndReviewList(animeId, reviewList).orElseThrow(() -> new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND));
+        return repository.findByAnime_IdAndReviewList(animeId, reviewList).orElseThrow(() -> new IllegalArgumentException(ANIME_REVIEW_NOT_FOUND));
     }
 
 }

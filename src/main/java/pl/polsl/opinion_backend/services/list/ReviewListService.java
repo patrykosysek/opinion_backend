@@ -22,7 +22,7 @@ import pl.polsl.opinion_backend.services.works.*;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.*;
 
 @RequiredArgsConstructor
 @Service
@@ -50,7 +50,7 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         Anime anime = animeService.getById(workOfCultureId);
 
         if (animeReviewService.existsByReviewListAndAnimeId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("ANIME IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(ANIME_ALREADY_IN_REVIEW_LIST);
         }
         AnimeReview animeReview = new AnimeReview();
         animeReview.setComment(reviewCreateDTO.getReview());
@@ -63,7 +63,7 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         Manga manga = mangaService.getById(workOfCultureId);
 
         if (mangaReviewService.existsByReviewListAndMangaId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("MANGA IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(MANGA_ALREADY_IN_REVIEW_LIST);
         }
         MangaReview mangaReview = new MangaReview();
         mangaReview.setComment(reviewCreateDTO.getReview());
@@ -76,7 +76,7 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         Movie movie = movieService.getById(workOfCultureId);
 
         if (movieReviewService.existsByReviewListAndMovieId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("MOVIE IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(MOVIE_ALREADY_IN_REVIEW_LIST);
         }
         MovieReview movieReview = new MovieReview();
         movieReview.setComment(reviewCreateDTO.getReview());
@@ -89,7 +89,7 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         TvSeries tvSeries = tvSeriesService.getById(workOfCultureId);
 
         if (tvSeriesReviewService.existsByReviewListAndTvSeriesId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("TVSERIES IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(TV_SERIES_ALREADY_IN_REVIEW_LIST);
         }
         TvSeriesReview tvSeriesReview = new TvSeriesReview();
         tvSeriesReview.setComment(reviewCreateDTO.getReview());
@@ -102,7 +102,7 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         Game game = gameService.getById(workOfCultureId);
 
         if (gameReviewService.existsByReviewListAndGameId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("TVSERIES IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(GAME_ALREADY_IN_REVIEW_LIST);
         }
         GameReview gameReview = new GameReview();
         gameReview.setComment(reviewCreateDTO.getReview());

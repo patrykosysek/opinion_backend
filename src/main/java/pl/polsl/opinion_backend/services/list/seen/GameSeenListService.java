@@ -11,6 +11,7 @@ import pl.polsl.opinion_backend.services.basic.BasicService;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.GAME_SEEN_LIST_NOT_FOUND;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class GameSeenListService extends BasicService<GameSeenList, GameSeenList
 
     @Override
     public GameSeenList getById(UUID id) {
-        return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
+        return findById(id).orElseThrow(() -> new NoSuchElementException(GAME_SEEN_LIST_NOT_FOUND));
     }
 
     public boolean existsBySeenListAndGame(SeenList seenList, Game game) {
@@ -27,7 +28,7 @@ public class GameSeenListService extends BasicService<GameSeenList, GameSeenList
     }
 
     public GameSeenList findByGameIdAndSeenList(UUID gameId, SeenList seenList) {
-        return repository.findByGame_IdAndSeenList(gameId, seenList).orElseThrow(() -> new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND));
+        return repository.findByGame_IdAndSeenList(gameId, seenList).orElseThrow(() -> new IllegalArgumentException(GAME_SEEN_LIST_NOT_FOUND));
     }
 
 }

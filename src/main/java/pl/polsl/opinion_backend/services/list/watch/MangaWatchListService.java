@@ -11,6 +11,7 @@ import pl.polsl.opinion_backend.services.basic.BasicService;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.MANGA_WATCH_LIST_NOT_FOUND;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class MangaWatchListService extends BasicService<MangaWatchList, MangaWat
 
     @Override
     public MangaWatchList getById(UUID id) {
-        return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
+        return findById(id).orElseThrow(() -> new NoSuchElementException(MANGA_WATCH_LIST_NOT_FOUND));
     }
 
     public boolean existsByWatchListAndManga(WatchList watchList, Manga manga) {
@@ -31,7 +32,7 @@ public class MangaWatchListService extends BasicService<MangaWatchList, MangaWat
     }
 
     public MangaWatchList findByMangaIdAndWatchList(UUID mangaId, WatchList watchList) {
-        return repository.findByManga_IdAndWatchList(mangaId, watchList).orElseThrow(() -> new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND));
+        return repository.findByManga_IdAndWatchList(mangaId, watchList).orElseThrow(() -> new IllegalArgumentException(MANGA_WATCH_LIST_NOT_FOUND));
     }
 
 }

@@ -5,16 +5,21 @@ import pl.polsl.opinion_backend.entities.role.RoleGroup;
 
 import java.util.Set;
 
-import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_ALL;
+import static pl.polsl.opinion_backend.enums.role.Roles.*;
 
 
 @AllArgsConstructor
 public enum RoleGroupEnum {
     ADMIN(Set.of(
-            ROLE_ALL
+            ROLE_ALL,
+            ROLE_SEEN_LIST,
+            ROLE_WATCH_LIST,
+            ROLE_USER_ALL,
+            ROLE_WORK_OF_CULTURE_ALL
     )),
     OPINION_USER(Set.of(
-
+            ROLE_SEEN_LIST,
+            ROLE_WATCH_LIST
     ));
 
 

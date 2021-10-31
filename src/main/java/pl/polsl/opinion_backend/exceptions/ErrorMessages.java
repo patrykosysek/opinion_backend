@@ -27,4 +27,38 @@ public class ErrorMessages {
     public static final String AGE_NOT_PROPER = "age.notProper";
     public static final String REVIEW_REQUIRED = "review.required";
     public static final String REVIEW_SIZE = "review.size";
+    public static final String ANIME_REVIEW_NOT_FOUND = "animeReview.notFound";
+    public static final String MANGA_REVIEW_NOT_FOUND = "mangaReview.notFound";
+    public static final String GAME_REVIEW_NOT_FOUND = "gameReview.notFound";
+    public static final String MOVIE_REVIEW_NOT_FOUND = "movieReview.notFound";
+    public static final String TV_SERIES_REVIEW_NOT_FOUND = "tvSeriesReview.notFound";
+    public static final String ANIME_SEEN_LIST_NOT_FOUND = "animeSeenList.notFound";
+    public static final String GAME_SEEN_LIST_NOT_FOUND = "gameSeenList.notFound";
+    public static final String MOVIE_SEEN_LIST_NOT_FOUND = "movieSeenList.notFound";
+    public static final String TV_SERIES_SEEN_LIST_NOT_FOUND = "tvSeriesSeenList.notFound";
+    public static final String MANGA_SEEN_LIST_NOT_FOUND = "mangaSeenList.notFound";
+    public static final String ANIME_WATCH_LIST_NOT_FOUND = "animeWatchList.notFound";
+    public static final String MANGA_WATCH_LIST_NOT_FOUND = "mangaWatchList.notFound";
+    public static final String GAME_WATCH_LIST_NOT_FOUND = "gameWatchList.notFound";
+    public static final String MOVIE_WATCH_LIST_NOT_FOUND = "movieWatchList.notFound";
+    public static final String TV_SERIES_WATCH_LIST_NOT_FOUND = "tvSeriesWatchList.notFound";
+
+    public static final String ANIME_ALREADY_IN_REVIEW_LIST = "anime.AlreadyInReviewList";
+    public static final String MANGA_ALREADY_IN_REVIEW_LIST = "manga.AlreadyInReviewList";
+    public static final String MOVIE_ALREADY_IN_REVIEW_LIST = "movie.AlreadyInReviewList";
+    public static final String TV_SERIES_ALREADY_IN_REVIEW_LIST = "tvSeries.AlreadyInReviewList";
+    public static final String GAME_ALREADY_IN_REVIEW_LIST = "game.AlreadyInReviewList";
+
+    public static final String ANIME_ALREADY_IN_SEEN_LIST = "anime.AlreadyInSeenList";
+    public static final String MANGA_ALREADY_IN_SEEN_LIST = "manga.AlreadyInSeenList";
+    public static final String MOVIE_ALREADY_IN_SEEN_LIST = "movie.AlreadyInSeenList";
+    public static final String TV_SERIES_ALREADY_IN_SEEN_LIST = "tvSeries.AlreadyInSeenList";
+    public static final String GAME_ALREADY_IN_SEEN_LIST = "game.AlreadyInSeenList";
+
+    public static final String ANIME_ALREADY_IN_WATCH_LIST = "anime.AlreadyInWatchList";
+    public static final String MANGA_ALREADY_IN_WATCH_LIST = "manga.AlreadyInWatchList";
+    public static final String MOVIE_ALREADY_IN_WATCH_LIST = "movie.AlreadyInWatchList";
+    public static final String TV_SERIES_ALREADY_IN_WATCH_LIST = "tvSeries.AlreadyInWatchList";
+    public static final String GAME_ALREADY_IN_WATCH_LIST = "game.AlreadyInWatchList";
+
 }

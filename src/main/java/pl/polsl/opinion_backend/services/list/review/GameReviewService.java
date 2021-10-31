@@ -10,6 +10,7 @@ import pl.polsl.opinion_backend.services.basic.BasicService;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.GAME_REVIEW_NOT_FOUND;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class GameReviewService extends BasicService<GameReview, GameReviewReposi
 
     @Override
     public GameReview getById(UUID id) {
-        return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
+        return findById(id).orElseThrow(() -> new NoSuchElementException(GAME_REVIEW_NOT_FOUND));
     }
 
     public boolean existsByReviewListAndGameId(ReviewList reviewList, UUID gameId) {
@@ -26,7 +27,7 @@ public class GameReviewService extends BasicService<GameReview, GameReviewReposi
     }
 
     public GameReview existsByReviewListAndGameId(UUID gameId, ReviewList reviewList) {
-        return repository.findByGame_IdAndReviewList(gameId, reviewList).orElseThrow(() -> new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND));
+        return repository.findByGame_IdAndReviewList(gameId, reviewList).orElseThrow(() -> new IllegalArgumentException(GAME_REVIEW_NOT_FOUND));
     }
 
 }

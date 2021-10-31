@@ -15,7 +15,7 @@ import pl.polsl.opinion_backend.services.list.ListManagingService;
 
 import java.util.UUID;
 
-import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_ALL;
+import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_SEEN_LIST;
 
 @RequiredArgsConstructor
 @RestController
@@ -25,7 +25,7 @@ import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_ALL;
 public class SeenListController {
     private final ListManagingService listManagingService;
 
-    @Secured(ROLE_ALL)
+    @Secured(ROLE_SEEN_LIST)
     @Operation(summary = "Add work of culture to current user seen list without review ")
     @ApiResponse(responseCode = "201", description = "Work of culture successfully added")
     @PostMapping("/{workOfCultureType}/{workOfCultureId}")
@@ -34,7 +34,7 @@ public class SeenListController {
         listManagingService.addWorkOfCultureToSeenListWithoutReview(workOfCultureType, workOfCultureId);
     }
 
-    @Secured(ROLE_ALL)
+    @Secured(ROLE_SEEN_LIST)
     @Operation(summary = "Add work of culture to current user seen list with review ")
     @ApiResponse(responseCode = "201", description = "Work of culture successfully added")
     @PostMapping("/{workOfCultureType}/{workOfCultureId}/with-review")

@@ -10,6 +10,7 @@ import pl.polsl.opinion_backend.services.basic.BasicService;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.MANGA_REVIEW_NOT_FOUND;
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
 
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class MangaReviewService extends BasicService<MangaReview, MangaReviewRep
 
     @Override
     public MangaReview getById(UUID id) {
-        return findById(id).orElseThrow(() -> new NoSuchElementException(WORK_OF_CULTURE_NOT_FOUND));
+        return findById(id).orElseThrow(() -> new NoSuchElementException(MANGA_REVIEW_NOT_FOUND));
     }
 
     public boolean existsByReviewListAndMangaId(ReviewList reviewList, UUID mangaId) {
@@ -26,7 +27,7 @@ public class MangaReviewService extends BasicService<MangaReview, MangaReviewRep
     }
 
     public MangaReview findByMangaIdAndReviewList(UUID mangaId, ReviewList reviewList) {
-        return repository.findByManga_IdAndReviewList(mangaId, reviewList).orElseThrow(() -> new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND));
+        return repository.findByManga_IdAndReviewList(mangaId, reviewList).orElseThrow(() -> new IllegalArgumentException(MANGA_REVIEW_NOT_FOUND));
     }
 
 }
