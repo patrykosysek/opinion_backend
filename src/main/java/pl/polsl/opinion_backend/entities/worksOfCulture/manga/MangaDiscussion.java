@@ -1,9 +1,6 @@
 package pl.polsl.opinion_backend.entities.worksOfCulture.manga;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 
 import javax.persistence.*;
@@ -27,6 +24,18 @@ public class MangaDiscussion extends BasicAuditing {
     private String text;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discussion")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<MangaDiscussionAnswer> answers = new HashSet<>();
+
+    public void addManga(Manga manga) {
+        this.manga = manga;
+        manga.getDiscussions().add(this);
+    }
+
+    public void addAnswer(MangaDiscussionAnswer mangaDiscussionAnswer) {
+        this.answers.add(mangaDiscussionAnswer);
+        mangaDiscussionAnswer.setDiscussion(this);
+    }
 
 }

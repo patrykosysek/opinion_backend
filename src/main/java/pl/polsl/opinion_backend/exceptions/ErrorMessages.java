@@ -61,4 +61,27 @@ public class ErrorMessages {
     public static final String TV_SERIES_ALREADY_IN_WATCH_LIST = "tvSeries.AlreadyInWatchList";
     public static final String GAME_ALREADY_IN_WATCH_LIST = "game.AlreadyInWatchList";
 
+    public static final String ANIME_NOT_FOUND = "anime.notFound";
+    public static final String MANGA_NOT_FOUND = "manga.notFound";
+    public static final String MOVIE_NOT_FOUND = "movie.notFound";
+    public static final String TV_SERIES_NOT_FOUND = "tvSeries.notFound";
+    public static final String GAME_NOT_FOUND = "game.notFound";
+
+    public static final String ANIME_DISCUSSION_NOT_FOUND = "animeDiscussion.notFound";
+    public static final String MANGA_DISCUSSION_NOT_FOUND = "mangaDiscussion.notFound";
+    public static final String MOVIE_DISCUSSION_NOT_FOUND = "movieDiscussion.notFound";
+    public static final String TV_SERIES_DISCUSSION_NOT_FOUND = "tvSeriesDiscussion.notFound";
+    public static final String GAME_DISCUSSION_NOT_FOUND = "gameDiscussion.notFound";
+
+    public static final String TOPIC_REQUIRED = "topic.required";
+    public static final String TOPIC_SIZE = "topic.size";
+    public static final String TEXT_REQUIRED = "text.required";
+    public static final String TEXT_SIZE = "text.size";
+
+    public static final String ANIME_DISCUSSION_ANSWER_NOT_FOUND = "animeDiscussion.notFound";
+    public static final String MANGA_DISCUSSION_ANSWER_NOT_FOUND = "mangaDiscussion.notFound";
+    public static final String MOVIE_DISCUSSION_ANSWER_NOT_FOUND = "movieDiscussion.notFound";
+    public static final String TV_SERIES_DISCUSSION_ANSWER_NOT_FOUND = "tvSeriesDiscussion.notFound";
+    public static final String GAME_DISCUSSION_ANSWER_NOT_FOUND = "gameDiscussion.notFound";
+
 }

@@ -1,7 +1,8 @@
-package pl.polsl.opinion_backend.repositories.works;
+package pl.polsl.opinion_backend.repositories.works.anime;
 
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
+import pl.polsl.opinion_backend.repositories.works.WorkOfCultureRepository;
 
 import java.util.Optional;
 import java.util.UUID;

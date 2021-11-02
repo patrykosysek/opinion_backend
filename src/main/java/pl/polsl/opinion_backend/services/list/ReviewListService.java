@@ -17,7 +17,11 @@ import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesReview;
 import pl.polsl.opinion_backend.repositories.list.ReviewListRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 import pl.polsl.opinion_backend.services.list.review.*;
-import pl.polsl.opinion_backend.services.works.*;
+import pl.polsl.opinion_backend.services.works.anime.AnimeService;
+import pl.polsl.opinion_backend.services.works.game.GameService;
+import pl.polsl.opinion_backend.services.works.manga.MangaService;
+import pl.polsl.opinion_backend.services.works.movie.MovieService;
+import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesService;
 
 import java.util.NoSuchElementException;
 import java.util.UUID;

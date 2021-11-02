@@ -21,6 +21,8 @@ public class Anime extends WorkOfCulture {
     private Set<AnimeMangaGenre> genres = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anime")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<AnimeDiscussion> discussions = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anime")

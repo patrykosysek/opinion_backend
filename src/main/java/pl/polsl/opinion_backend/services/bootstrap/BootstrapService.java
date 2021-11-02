@@ -27,11 +27,15 @@ import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 import pl.polsl.opinion_backend.mappers.genre.GenreMapper;
 import pl.polsl.opinion_backend.services.role.RoleGroupService;
 import pl.polsl.opinion_backend.services.user.UserService;
-import pl.polsl.opinion_backend.services.works.*;
+import pl.polsl.opinion_backend.services.works.anime.AnimeService;
+import pl.polsl.opinion_backend.services.works.game.GameService;
 import pl.polsl.opinion_backend.services.works.genre.AnimeMangaGenreService;
 import pl.polsl.opinion_backend.services.works.genre.GameGenreService;
 import pl.polsl.opinion_backend.services.works.genre.GenreService;
 import pl.polsl.opinion_backend.services.works.genre.MovieTvSeriesGenreService;
+import pl.polsl.opinion_backend.services.works.manga.MangaService;
+import pl.polsl.opinion_backend.services.works.movie.MovieService;
+import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesService;
 
 import java.io.IOException;
 import java.time.LocalDate;

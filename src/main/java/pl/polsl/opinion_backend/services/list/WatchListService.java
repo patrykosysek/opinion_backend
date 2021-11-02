@@ -16,7 +16,11 @@ import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
 import pl.polsl.opinion_backend.repositories.list.WatchListRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 import pl.polsl.opinion_backend.services.list.watch.*;
-import pl.polsl.opinion_backend.services.works.*;
+import pl.polsl.opinion_backend.services.works.anime.AnimeService;
+import pl.polsl.opinion_backend.services.works.game.GameService;
+import pl.polsl.opinion_backend.services.works.manga.MangaService;
+import pl.polsl.opinion_backend.services.works.movie.MovieService;
+import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesService;
 
 import java.util.NoSuchElementException;
 import java.util.UUID;
@@ -60,7 +64,7 @@ public class WatchListService extends BasicService<WatchList, WatchListRepositor
         Manga manga = mangaService.getById(workOfCultureId);
 
         if (mangaWatchListService.existsByWatchListAndManga(watchList, manga)) {
-            throw new IllegalArgumentException(MANGA_WATCH_LIST_NOT_FOUND);
+            throw new IllegalArgumentException(MANGA_ALREADY_IN_WATCH_LIST);
         }
         MangaWatchList mangaWatchList = new MangaWatchList();
         mangaWatchList.addManga(manga);

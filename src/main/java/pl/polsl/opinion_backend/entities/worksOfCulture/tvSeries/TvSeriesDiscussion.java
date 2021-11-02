@@ -1,9 +1,6 @@
 package pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 
 import javax.persistence.*;
@@ -27,6 +24,18 @@ public class TvSeriesDiscussion extends BasicAuditing {
     private String text;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discussion")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<TvSeriesDiscussionAnswer> answers = new HashSet<>();
+
+    public void addTvSeries(TvSeries tvSeries) {
+        this.tvSeries = tvSeries;
+        tvSeries.getDiscussions().add(this);
+    }
+
+    public void addAnswer(TvSeriesDiscussionAnswer tvSeriesDiscussionAnswer) {
+        this.answers.add(tvSeriesDiscussionAnswer);
+        tvSeriesDiscussionAnswer.setDiscussion(this);
+    }
 
 }

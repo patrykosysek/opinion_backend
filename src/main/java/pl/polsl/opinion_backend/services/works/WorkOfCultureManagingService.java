@@ -3,6 +3,11 @@ package pl.polsl.opinion_backend.services.works;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
+import pl.polsl.opinion_backend.services.works.anime.AnimeService;
+import pl.polsl.opinion_backend.services.works.game.GameService;
+import pl.polsl.opinion_backend.services.works.manga.MangaService;
+import pl.polsl.opinion_backend.services.works.movie.MovieService;
+import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesService;
 
 import java.util.UUID;
 

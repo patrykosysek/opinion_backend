@@ -1,9 +1,6 @@
 package pl.polsl.opinion_backend.entities.worksOfCulture.movies;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 
 import javax.persistence.*;
@@ -27,6 +24,18 @@ public class MovieDiscussion extends BasicAuditing {
     private String text;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discussion")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<MovieDiscussionAnswer> answers = new HashSet<>();
+
+    public void addMovie(Movie movie) {
+        this.movie = movie;
+        movie.getDiscussions().add(this);
+    }
+
+    public void addAnswer(MovieDiscussionAnswer movieDiscussionAnswer) {
+        this.answers.add(movieDiscussionAnswer);
+        movieDiscussionAnswer.setDiscussion(this);
+    }
 
 }

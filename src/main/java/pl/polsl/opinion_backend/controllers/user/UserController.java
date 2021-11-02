@@ -17,6 +17,7 @@ import pl.polsl.opinion_backend.dtos.user.UserResponseDTO;
 import pl.polsl.opinion_backend.dtos.user.UserUpdateDTO;
 import pl.polsl.opinion_backend.mappers.user.UserMapper;
 import pl.polsl.opinion_backend.services.user.UserService;
+import pl.polsl.opinion_backend.services.works.WorkOfCultureDiscussionManagingService;
 
 import javax.validation.Valid;
 import java.util.UUID;
@@ -31,6 +32,7 @@ import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_USER_ALL;
 public class UserController {
     private final UserMapper userMapper;
     private final UserService userService;
+    private final WorkOfCultureDiscussionManagingService workOfCultureDiscussionManagingService;
 
     @Secured(ROLE_USER_ALL)
     @Operation(summary = "Create user")
@@ -56,6 +58,7 @@ public class UserController {
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable UUID id) {
+        workOfCultureDiscussionManagingService.deleteAllDiscussionsAndAnswersByCreateBy(id);
         userService.delete(id);
     }
 
