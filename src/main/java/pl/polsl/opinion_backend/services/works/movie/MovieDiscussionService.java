@@ -31,7 +31,8 @@ public class MovieDiscussionService extends BasicService<MovieDiscussion, MovieD
         movieDiscussion.addMovie(movie);
         movieDiscussion.setText(dto.getText());
         movieDiscussion.setTopic(dto.getTopic());
-        save(movieDiscussion);
+        movie.getStatistic().setCurrentDiscussion(movie.getStatistic().getCurrentDiscussion() + 1);
+        movieService.save(movie);
     }
 
     public void addAnswer(UUID discussionId, AnswerCreateDTO dto) {
@@ -39,7 +40,9 @@ public class MovieDiscussionService extends BasicService<MovieDiscussion, MovieD
         MovieDiscussionAnswer movieDiscussionAnswer = new MovieDiscussionAnswer();
         movieDiscussionAnswer.setText(dto.getText());
         movieDiscussion.addAnswer(movieDiscussionAnswer);
-        save(movieDiscussion);
+        Movie movie = movieDiscussion.getMovie();
+        movie.getStatistic().setCurrentDiscussion(movie.getStatistic().getCurrentDiscussion() + 1);
+        movieService.save(movie);
     }
 
     public void deleteAllByCreateBy(UUID createBy) {

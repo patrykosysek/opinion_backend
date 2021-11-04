@@ -6,6 +6,7 @@ import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
 import java.io.Serializable;
 import java.util.Optional;
+import java.util.Set;
 
 @NoRepositoryBean
 public interface WorkOfCultureRepository<T extends WorkOfCulture, ID extends Serializable> extends BasicRepository<T, ID> {
@@ -15,5 +16,9 @@ public interface WorkOfCultureRepository<T extends WorkOfCulture, ID extends Ser
     boolean existsByApiId(String id);
 
     Optional<T> findByApiId(String id);
+
+    Set<T> findAllByGenres_Name(String name);
+
+    Set<T> findAll();
 
 }

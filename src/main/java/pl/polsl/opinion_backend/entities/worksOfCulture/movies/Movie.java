@@ -17,6 +17,9 @@ import java.util.Set;
 @AllArgsConstructor
 public class Movie extends WorkOfCulture {
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private MovieStatistic statistic;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<MovieTvSeriesGenre> genres = new HashSet<>();
 
@@ -35,5 +38,10 @@ public class Movie extends WorkOfCulture {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     Set<MovieSeenList> movieSeenLists = new HashSet<>();
+
+    public void addStatistic(MovieStatistic movieStatistic) {
+        this.statistic = movieStatistic;
+        movieStatistic.setMovie(this);
+    }
 
 }

@@ -31,7 +31,8 @@ public class MangaDiscussionService extends BasicService<MangaDiscussion, MangaD
         mangaDiscussion.addManga(manga);
         mangaDiscussion.setText(dto.getText());
         mangaDiscussion.setTopic(dto.getTopic());
-        save(mangaDiscussion);
+        manga.getStatistic().setCurrentDiscussion(manga.getStatistic().getCurrentDiscussion() + 1);
+        mangaService.save(manga);
     }
 
     public void addAnswer(UUID discussionId, AnswerCreateDTO dto) {
@@ -39,7 +40,9 @@ public class MangaDiscussionService extends BasicService<MangaDiscussion, MangaD
         MangaDiscussionAnswer mangaDiscussionAnswer = new MangaDiscussionAnswer();
         mangaDiscussionAnswer.setText(dto.getText());
         mangaDiscussion.addAnswer(mangaDiscussionAnswer);
-        save(mangaDiscussion);
+        Manga manga = mangaDiscussion.getManga();
+        manga.getStatistic().setCurrentDiscussion(manga.getStatistic().getCurrentDiscussion() + 1);
+        mangaService.save(manga);
     }
 
     public void deleteAllByCreateBy(UUID createBy) {

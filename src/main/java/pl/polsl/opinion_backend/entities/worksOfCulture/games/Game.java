@@ -17,6 +17,9 @@ import java.util.Set;
 @AllArgsConstructor
 public class Game extends WorkOfCulture {
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private GameStatistic statistic;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<GameGenre> genres = new HashSet<>();
 
@@ -36,5 +39,9 @@ public class Game extends WorkOfCulture {
     @ToString.Exclude
     Set<GameSeenList> gameSeenLists = new HashSet<>();
 
+    public void addStatistic(GameStatistic gameStatistic) {
+        this.statistic = gameStatistic;
+        gameStatistic.setGame(this);
+    }
 
 }

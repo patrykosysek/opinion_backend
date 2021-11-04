@@ -31,7 +31,8 @@ public class TvSeriesDiscussionService extends BasicService<TvSeriesDiscussion, 
         tvSeriesDiscussion.addTvSeries(tvSeries);
         tvSeriesDiscussion.setText(dto.getText());
         tvSeriesDiscussion.setTopic(dto.getTopic());
-        save(tvSeriesDiscussion);
+        tvSeries.getStatistic().setCurrentDiscussion(tvSeries.getStatistic().getCurrentDiscussion() + 1);
+        tvSeriesService.save(tvSeries);
     }
 
     public void addAnswer(UUID discussionId, AnswerCreateDTO dto) {
@@ -39,7 +40,9 @@ public class TvSeriesDiscussionService extends BasicService<TvSeriesDiscussion, 
         TvSeriesDiscussionAnswer tvSeriesDiscussionAnswer = new TvSeriesDiscussionAnswer();
         tvSeriesDiscussionAnswer.setText(dto.getText());
         tvSeriesDiscussion.addAnswer(tvSeriesDiscussionAnswer);
-        save(tvSeriesDiscussion);
+        TvSeries tvSeries = tvSeriesDiscussion.getTvSeries();
+        tvSeries.getStatistic().setCurrentDiscussion(tvSeries.getStatistic().getCurrentDiscussion() + 1);
+        tvSeriesService.save(tvSeries);
     }
 
     public void deleteAllByCreateBy(UUID createBy) {

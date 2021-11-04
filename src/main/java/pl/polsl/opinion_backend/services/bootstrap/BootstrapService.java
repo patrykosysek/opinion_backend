@@ -17,10 +17,15 @@ import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
 import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeStatistic;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.Game;
+import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameStatistic;
 import pl.polsl.opinion_backend.entities.worksOfCulture.manga.Manga;
+import pl.polsl.opinion_backend.entities.worksOfCulture.manga.MangaStatistic;
 import pl.polsl.opinion_backend.entities.worksOfCulture.movies.Movie;
+import pl.polsl.opinion_backend.entities.worksOfCulture.movies.MovieStatistic;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
+import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesStatistic;
 import pl.polsl.opinion_backend.enums.genre.AnimeMangaGenreEnum;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
@@ -267,6 +272,8 @@ public class BootstrapService {
                         anime.setReleaseDate(releaseDate);
                         anime.setImageUrl(imageUrl);
                         anime.getGenres().add(genre);
+                        AnimeStatistic animeStatistic = new AnimeStatistic();
+                        anime.addStatistic(animeStatistic);
                         animeService.save(anime);
 
                     }
@@ -339,7 +346,8 @@ public class BootstrapService {
                         manga.setReleaseDate(releaseDate);
                         manga.setImageUrl(imageUrl);
                         manga.getGenres().add(genre);
-
+                        MangaStatistic mangaStatistic = new MangaStatistic();
+                        manga.addStatistic(mangaStatistic);
                         mangaService.save(manga);
                     }
                 }
@@ -427,6 +435,8 @@ public class BootstrapService {
                 movie.setDescription(description);
                 movie.setReleaseDate(releaseDate);
                 movie.setImageUrl(imageUrl);
+                MovieStatistic movieStatistic = new MovieStatistic();
+                movie.addStatistic(movieStatistic);
 
                 for (int i = 0; i < generes.length(); i++) {
                     JSONObject jsonGenre = generes.getJSONObject(i);
@@ -519,6 +529,8 @@ public class BootstrapService {
                 tvSeries.setDescription(description);
                 tvSeries.setReleaseDate(releaseDate);
                 tvSeries.setImageUrl(imageUrl);
+                TvSeriesStatistic tvSeriesStatistic = new TvSeriesStatistic();
+                tvSeries.addStatistic(tvSeriesStatistic);
 
                 for (int i = 0; i < generes.length(); i++) {
                     JSONObject jsonGenre = generes.getJSONObject(i);
@@ -603,6 +615,8 @@ public class BootstrapService {
                 game.setTitle(title);
                 game.setImageUrl(imageUrl);
                 game.setReleaseDate(releaseDate);
+                GameStatistic gameStatistic = new GameStatistic();
+                game.addStatistic(gameStatistic);
 
                 for (int i = 0; i < generes.length(); i++) {
                     JSONObject jsonGenre = generes.getJSONObject(i);

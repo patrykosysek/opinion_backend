@@ -1,0 +1,417 @@
+databaseChangeLog:
+- changeSet:
+    id: 1636030041863-1
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: anime_statisticPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: current_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: current_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_review
+            type: INTEGER
+        tableName: anime_statistic
+- changeSet:
+    id: 1636030041863-2
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: game_statisticPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: current_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: current_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_review
+            type: INTEGER
+        tableName: game_statistic
+- changeSet:
+    id: 1636030041863-3
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: manga_statisticPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: current_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: current_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_review
+            type: INTEGER
+        tableName: manga_statistic
+- changeSet:
+    id: 1636030041863-4
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: movie_statisticPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: current_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: current_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_review
+            type: INTEGER
+        tableName: movie_statistic
+- changeSet:
+    id: 1636030041863-5
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: tv_series_statisticPK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: current_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: current_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: month_review
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_discussion
+            type: INTEGER
+        - column:
+            constraints:
+              nullable: false
+            name: week_review
+            type: INTEGER
+        tableName: tv_series_statistic
+- changeSet:
+    id: 1636030041863-6
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: statistic_id
+            type: uuid
+        tableName: anime
+- changeSet:
+    id: 1636030041863-7
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: statistic_id
+            type: uuid
+        tableName: game
+- changeSet:
+    id: 1636030041863-8
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: statistic_id
+            type: uuid
+        tableName: manga
+- changeSet:
+    id: 1636030041863-9
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: statistic_id
+            type: uuid
+        tableName: movie
+- changeSet:
+    id: 1636030041863-10
+    author: patry (generated)
+    changes:
+    - addColumn:
+        columns:
+        - column:
+            name: statistic_id
+            type: uuid
+        tableName: tv_series
+- changeSet:
+    id: 1636030041863-11
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ANIME_STATISTICID_COL
+        tableName: anime_statistic
+- changeSet:
+    id: 1636030041863-12
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_GAME_STATISTICID_COL
+        tableName: game_statistic
+- changeSet:
+    id: 1636030041863-13
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MANGA_STATISTICID_COL
+        tableName: manga_statistic
+- changeSet:
+    id: 1636030041863-14
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MOVIE_STATISTICID_COL
+        tableName: movie_statistic
+- changeSet:
+    id: 1636030041863-15
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_TV_SERIES_STATISTICID_COL
+        tableName: tv_series_statistic
+- changeSet:
+    id: 1636030041863-16
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: statistic_id
+        baseTableName: movie
+        constraintName: FK1ejmy3fqocwdb0yulaqbbfo30
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie_statistic
+        validate: true
+- changeSet:
+    id: 1636030041863-17
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: statistic_id
+        baseTableName: tv_series
+        constraintName: FK5lykixduapwktaq0sbclu4uc2
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series_statistic
+        validate: true
+- changeSet:
+    id: 1636030041863-18
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: statistic_id
+        baseTableName: anime
+        constraintName: FK5qiaghp4rs26ltb4xp5moc9ro
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime_statistic
+        validate: true
+- changeSet:
+    id: 1636030041863-19
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: statistic_id
+        baseTableName: game
+        constraintName: FK969nbanncutak737cgt51nrid
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game_statistic
+        validate: true
+- changeSet:
+    id: 1636030041863-20
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: statistic_id
+        baseTableName: manga
+        constraintName: FKokean1og4d0yyckbtx5s1yru9
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga_statistic
+        validate: true
+

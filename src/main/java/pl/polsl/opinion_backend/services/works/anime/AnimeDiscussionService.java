@@ -20,6 +20,7 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.ANIME_DISCUSSION
 public class AnimeDiscussionService extends BasicService<AnimeDiscussion, AnimeDiscussionRepository> {
     private final AnimeService animeService;
 
+
     @Override
     public AnimeDiscussion getById(UUID id) {
         return findById(id).orElseThrow(() -> new NoSuchElementException(ANIME_DISCUSSION_NOT_FOUND));
@@ -31,7 +32,9 @@ public class AnimeDiscussionService extends BasicService<AnimeDiscussion, AnimeD
         animeDiscussion.addAnime(anime);
         animeDiscussion.setText(dto.getText());
         animeDiscussion.setTopic(dto.getTopic());
-        save(animeDiscussion);
+        //save(animeDiscussion);
+        anime.getStatistic().setCurrentDiscussion(anime.getStatistic().getCurrentDiscussion() + 1);
+        animeService.save(anime);
     }
 
     public void addAnswer(UUID discussionId, AnswerCreateDTO dto) {
@@ -39,7 +42,10 @@ public class AnimeDiscussionService extends BasicService<AnimeDiscussion, AnimeD
         AnimeDiscussionAnswer animeDiscussionAnswer = new AnimeDiscussionAnswer();
         animeDiscussionAnswer.setText(dto.getText());
         animeDiscussion.addAnswer(animeDiscussionAnswer);
-        save(animeDiscussion);
+        Anime anime = animeDiscussion.getAnime();
+        anime.getStatistic().setCurrentDiscussion(anime.getStatistic().getCurrentDiscussion() + 1);
+        //save(animeDiscussion);
+        animeService.save(anime);
     }
 
     public void deleteAllByCreateBy(UUID createBy) {

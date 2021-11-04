@@ -60,7 +60,9 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         animeReview.setComment(reviewCreateDTO.getReview());
         animeReview.addAnime(anime);
         animeReview.addReviewList(reviewList);
-        animeReviewService.save(animeReview);
+        anime.getStatistic().setCurrentReview(anime.getStatistic().getCurrentReview() + 1);
+        animeService.save(anime);
+        //animeReviewService.save(animeReview);
     }
 
     public void addManga(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
@@ -73,7 +75,8 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         mangaReview.setComment(reviewCreateDTO.getReview());
         mangaReview.addManga(manga);
         mangaReview.addReviewList(reviewList);
-        mangaReviewService.save(mangaReview);
+        manga.getStatistic().setCurrentReview(manga.getStatistic().getCurrentReview() + 1);
+        mangaService.save(manga);
     }
 
     public void addMovie(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
@@ -85,8 +88,8 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         MovieReview movieReview = new MovieReview();
         movieReview.setComment(reviewCreateDTO.getReview());
         movieReview.addMovie(movie);
-        movieReview.addReviewList(reviewList);
-        movieReviewService.save(movieReview);
+        movie.getStatistic().setCurrentReview(movie.getStatistic().getCurrentReview() + 1);
+        movieService.save(movie);
     }
 
     public void addTvSeries(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
@@ -99,7 +102,8 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         tvSeriesReview.setComment(reviewCreateDTO.getReview());
         tvSeriesReview.addTvSeries(tvSeries);
         tvSeriesReview.addReviewList(reviewList);
-        tvSeriesReviewService.save(tvSeriesReview);
+        tvSeries.getStatistic().setCurrentReview(tvSeries.getStatistic().getCurrentReview() + 1);
+        tvSeriesService.save(tvSeries);
     }
 
     public void addGame(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
@@ -112,7 +116,8 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
         gameReview.setComment(reviewCreateDTO.getReview());
         gameReview.addGame(game);
         gameReview.addReviewList(reviewList);
-        gameReviewService.save(gameReview);
+        game.getStatistic().setCurrentReview(game.getStatistic().getCurrentReview() + 1);
+        gameService.save(game);
     }
 
 

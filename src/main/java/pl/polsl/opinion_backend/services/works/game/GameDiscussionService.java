@@ -31,7 +31,8 @@ public class GameDiscussionService extends BasicService<GameDiscussion, GameDisc
         gameDiscussion.addGame(game);
         gameDiscussion.setText(dto.getText());
         gameDiscussion.setTopic(dto.getTopic());
-        save(gameDiscussion);
+        game.getStatistic().setCurrentDiscussion(game.getStatistic().getCurrentDiscussion() + 1);
+        gameService.save(game);
     }
 
     public void addAnswer(UUID discussionId, AnswerCreateDTO dto) {
@@ -39,7 +40,9 @@ public class GameDiscussionService extends BasicService<GameDiscussion, GameDisc
         GameDiscussionAnswer gameDiscussionAnswer = new GameDiscussionAnswer();
         gameDiscussionAnswer.setText(dto.getText());
         gameDiscussion.addAnswer(gameDiscussionAnswer);
-        save(gameDiscussion);
+        Game game = gameDiscussion.getGame();
+        game.getStatistic().setCurrentDiscussion(game.getStatistic().getCurrentDiscussion() + 1);
+        gameService.save(game);
     }
 
     public void deleteAllByCreateBy(UUID createBy) {

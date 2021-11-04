@@ -18,6 +18,9 @@ import java.util.Set;
 @AllArgsConstructor
 public class Manga extends WorkOfCulture {
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private MangaStatistic statistic;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AnimeMangaGenre> genres = new HashSet<>();
 
@@ -36,5 +39,10 @@ public class Manga extends WorkOfCulture {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     Set<MangaSeenList> mangaSeenLists = new HashSet<>();
+
+    public void addStatistic(MangaStatistic mangaStatistic) {
+        this.statistic = mangaStatistic;
+        mangaStatistic.setManga(this);
+    }
 
 }

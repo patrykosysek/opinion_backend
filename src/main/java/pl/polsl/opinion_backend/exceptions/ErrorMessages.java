@@ -84,4 +84,11 @@ public class ErrorMessages {
     public static final String TV_SERIES_DISCUSSION_ANSWER_NOT_FOUND = "tvSeriesDiscussion.notFound";
     public static final String GAME_DISCUSSION_ANSWER_NOT_FOUND = "gameDiscussion.notFound";
 
+    public static final String ANIME_STATISTIC_NOT_FOUND = "animeStatistic.notFound";
+    public static final String GAME_STATISTIC_NOT_FOUND = "gameStatistic.notFound";
+    public static final String MOVIE_STATISTIC_NOT_FOUND = "movieStatistic.notFound";
+    public static final String MANGA_STATISTIC_NOT_FOUND = "mangaStatistic.notFound";
+    public static final String TV_SERIES_STATISTIC_NOT_FOUND = "tvSeriesStatistic.notFound";
+
+
 }
