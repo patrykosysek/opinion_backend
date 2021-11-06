@@ -7,5 +7,6 @@ public class Roles {
     public static final String ROLE_USER_ALL = "ROLE_USER_ALL";
     public static final String ROLE_WORK_OF_CULTURE_ALL = "ROLE_WORK_OF_CULTURE_ALL";
     public static final String ROLE_DISCUSSION = "ROLE_DISCUSSION";
+    public static final String ROLE_WORK_OF_CULTURE_RECOMMENDATION_PREFERENCE = "ROLE_WORK_OF_CULTURE_RECOMMENDATION_PREFERENCE";
 
 }

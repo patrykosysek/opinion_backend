@@ -15,6 +15,7 @@ import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
+import pl.polsl.opinion_backend.entities.user.Preference;
 import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeStatistic;
@@ -29,6 +30,7 @@ import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesStatist
 import pl.polsl.opinion_backend.enums.genre.AnimeMangaGenreEnum;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
+import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.mappers.genre.GenreMapper;
 import pl.polsl.opinion_backend.services.role.RoleGroupService;
 import pl.polsl.opinion_backend.services.user.UserService;
@@ -114,6 +116,12 @@ public class BootstrapService {
                 GenreType.COMEDY,
                 "Adminos"
         );
+
+        Preference preference = new Preference();
+        preference.setFavouriteGenre(GenreType.ACTION);
+        preference.setWorkOfCultureType(WorkOfCultureType.ANIME);
+        preference.setFavouriteTitle("Bansoukousaten");
+        user.addPreference(preference);
         user.getRoleGroups().add(roleGroupService.getByRoleName("ADMIN"));
         userService.save(user);
     }

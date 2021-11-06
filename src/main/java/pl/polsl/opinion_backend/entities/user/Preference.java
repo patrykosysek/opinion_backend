@@ -17,7 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Preference extends BasicAuditing {
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
 
     @Column(nullable = false)

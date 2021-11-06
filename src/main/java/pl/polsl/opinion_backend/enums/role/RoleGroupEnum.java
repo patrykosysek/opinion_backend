@@ -16,12 +16,14 @@ public enum RoleGroupEnum {
             ROLE_WATCH_LIST,
             ROLE_USER_ALL,
             ROLE_WORK_OF_CULTURE_ALL,
-            ROLE_DISCUSSION
+            ROLE_DISCUSSION,
+            ROLE_WORK_OF_CULTURE_RECOMMENDATION_PREFERENCE
     )),
     OPINION_USER(Set.of(
             ROLE_SEEN_LIST,
             ROLE_WATCH_LIST,
-            ROLE_DISCUSSION
+            ROLE_DISCUSSION,
+            ROLE_WORK_OF_CULTURE_RECOMMENDATION_PREFERENCE
     ));
 
 

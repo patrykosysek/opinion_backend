@@ -90,5 +90,8 @@ public class ErrorMessages {
     public static final String MANGA_STATISTIC_NOT_FOUND = "mangaStatistic.notFound";
     public static final String TV_SERIES_STATISTIC_NOT_FOUND = "tvSeriesStatistic.notFound";
 
+    public static final String WRONG_PREFERENCE = "preference.wrong";
+    public static final String GENRE_NOT_FOUND = "genre.notFound";
+
 
 }

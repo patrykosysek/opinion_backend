@@ -1,5 +1,7 @@
 package pl.polsl.opinion_backend.services.works;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.repositories.works.WorkOfCultureRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
@@ -31,6 +33,10 @@ public abstract class WorkOfCultureService<T extends WorkOfCulture, R extends Wo
 
     public Set<T> getAll() {
         return repository.findAll();
+    }
+
+    public Page<T> getAllFilteredByTitle(String title, Pageable pageable) {
+        return repository.findAllByTitleStartingWithIgnoreCase(title, pageable);
     }
 
 }
