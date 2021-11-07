@@ -2,6 +2,8 @@ package pl.polsl.opinion_backend.services.works;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import pl.polsl.opinion_backend.dtos.workOfCulture.TimeDurationDTO;
+import pl.polsl.opinion_backend.dtos.workOfCulture.WorkOfCultureStatisticResponseDTO;
 import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.repositories.works.WorkOfCultureRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;

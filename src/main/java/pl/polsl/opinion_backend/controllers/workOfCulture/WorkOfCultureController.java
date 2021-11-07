@@ -13,18 +13,17 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.opinion_backend.configuration.security.jwt.JwtStatics;
-import pl.polsl.opinion_backend.dtos.workOfCulture.WorkGenreResponseDTO;
-import pl.polsl.opinion_backend.dtos.workOfCulture.WorkOfCultureResponseDTO;
+import pl.polsl.opinion_backend.dtos.workOfCulture.*;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.services.works.WorkOfCultureManagingService;
 
+import javax.validation.Valid;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_WORK_OF_CULTURE_ALL;
-import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_WORK_OF_CULTURE_RECOMMENDATION_PREFERENCE;
+import static pl.polsl.opinion_backend.enums.role.Roles.*;
 
 @RequiredArgsConstructor
 @RestController
@@ -88,6 +87,47 @@ public class WorkOfCultureController {
                                                                           @PageableDefault
                                                                                   Pageable pageable) {
         return workOfCultureManagingService.getWorkOfCultureFilteredByTitle(title, workOfCultureType, pageable);
+    }
+
+    @Secured(ROLE_WORK_OF_CULTURE_READ)
+    @Operation(summary = "Get all work of culture")
+    @ApiResponse(responseCode = "200", description = "Work of culture successfully returned")
+    @GetMapping(value = "/{workOfCultureType}/all")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<WorkOfCultureResponseDTO> getAllWorkOfCulture(@PathVariable
+                                                                      WorkOfCultureType workOfCultureType,
+                                                              @PageableDefault
+                                                                      Pageable pageable) {
+        return workOfCultureManagingService.getAllWorkOfCulture(workOfCultureType, pageable);
+    }
+
+    @Secured(ROLE_WORK_OF_CULTURE_STATISTIC)
+    @Operation(summary = "Get pointed work of culture statistic")
+    @ApiResponse(responseCode = "200", description = "Statistic successfully returned")
+    @GetMapping(value = "/{workOfCultureType}/{id}}/statistic")
+    @ResponseStatus(HttpStatus.OK)
+    public WorkOfCultureStatisticResponseDTO getWorkOfCultureStatistic(@PathVariable
+                                                                               WorkOfCultureType workOfCultureType,
+                                                                       @PathVariable
+                                                                               UUID id
+    ) {
+        return workOfCultureManagingService.getWorkOfCultureStatistic(workOfCultureType, id);
+    }
+
+    @Secured(ROLE_WORK_OF_CULTURE_STATISTIC)
+    @Operation(summary = "Get pointed work of culture statistic")
+    @ApiResponse(responseCode = "200", description = "Statistic successfully returned")
+    @PostMapping(value = "/{workOfCultureType}/{id}/time-statistic")
+    @ResponseStatus(HttpStatus.OK)
+    public WorkOfCultureTimeStatisticResponseDTO getWorkOfCultureStatisticFromSpecificDate(@PathVariable
+                                                                                                   WorkOfCultureType workOfCultureType,
+                                                                                           @PathVariable
+                                                                                                   UUID id,
+                                                                                           @RequestBody
+                                                                                           @Valid
+                                                                                                   TimeDurationDTO timeDurationDTO
+    ) {
+        return workOfCultureManagingService.getWorkOfCultureTimeStatistic(workOfCultureType, id, timeDurationDTO);
     }
 
 }

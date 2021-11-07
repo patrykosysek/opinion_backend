@@ -2,8 +2,11 @@ package pl.polsl.opinion_backend.services.works.anime;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.dtos.workOfCulture.WorkOfCultureStatisticResponseDTO;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
+import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.repositories.works.anime.AnimeRepository;
 import pl.polsl.opinion_backend.services.works.WorkOfCultureService;
 
@@ -24,6 +27,28 @@ public class AnimeService extends WorkOfCultureService<Anime, AnimeRepository> {
 
     public Set<Anime> getAllByGenres(AnimeMangaGenre genre) {
         return repository.findAllByGenres(genre);
+    }
+
+    public WorkOfCultureStatisticResponseDTO getStatistic(UUID id) {
+        Anime anime = getById(id);
+        WorkOfCultureStatisticResponseDTO workOfCultureStatisticResponseDTO = new WorkOfCultureStatisticResponseDTO();
+        workOfCultureStatisticResponseDTO.setDiscussionCount(anime.getDiscussions().size());
+        workOfCultureStatisticResponseDTO.setReviewCount(anime.getReviews().size());
+        workOfCultureStatisticResponseDTO.setSeenListCount(anime.getAnimeSeenLists().size());
+        workOfCultureStatisticResponseDTO.setWatchListCount(anime.getAnimeWatchLists().size());
+
+        workOfCultureStatisticResponseDTO.setId(id);
+        workOfCultureStatisticResponseDTO.setImageUrl(anime.getImageUrl());
+        workOfCultureStatisticResponseDTO.setWorkOfCultureType(WorkOfCultureType.ANIME);
+        workOfCultureStatisticResponseDTO.setTitle(anime.getTitle());
+
+        anime.getGenres().forEach(genre -> {
+            for (GenreType genreType : GenreType.values()) {
+                if (genre.getName().equals(genreType.getName()))
+                    workOfCultureStatisticResponseDTO.getGenres().add(genreType);
+            }
+        });
+        return workOfCultureStatisticResponseDTO;
     }
 
 }

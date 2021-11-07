@@ -5,11 +5,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import pl.polsl.opinion_backend.dtos.workOfCulture.WorkGenreResponseDTO;
-import pl.polsl.opinion_backend.dtos.workOfCulture.WorkOfCultureResponseDTO;
+import pl.polsl.opinion_backend.dtos.workOfCulture.*;
 import pl.polsl.opinion_backend.entities.user.Preference;
 import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussion;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.Game;
 import pl.polsl.opinion_backend.entities.worksOfCulture.manga.Manga;
 import pl.polsl.opinion_backend.entities.worksOfCulture.movies.Movie;
@@ -17,16 +18,25 @@ import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.mappers.workOfCultureMapper.*;
+import pl.polsl.opinion_backend.services.list.review.*;
 import pl.polsl.opinion_backend.services.user.UserService;
+import pl.polsl.opinion_backend.services.works.anime.AnimeDiscussionService;
 import pl.polsl.opinion_backend.services.works.anime.AnimeService;
+import pl.polsl.opinion_backend.services.works.game.GameDiscussionService;
 import pl.polsl.opinion_backend.services.works.game.GameService;
 import pl.polsl.opinion_backend.services.works.genre.AnimeMangaGenreService;
 import pl.polsl.opinion_backend.services.works.genre.GameGenreService;
 import pl.polsl.opinion_backend.services.works.genre.MovieTvSeriesGenreService;
+import pl.polsl.opinion_backend.services.works.manga.MangaDiscussionService;
 import pl.polsl.opinion_backend.services.works.manga.MangaService;
+import pl.polsl.opinion_backend.services.works.movie.MovieDiscussionService;
 import pl.polsl.opinion_backend.services.works.movie.MovieService;
+import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesDiscussionService;
 import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesService;
 
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -41,6 +51,18 @@ public class WorkOfCultureManagingService {
     private final GameService gameService;
     private final TvSeriesService tvSeriesService;
     private final MovieService movieService;
+
+    private final AnimeReviewService animeReviewService;
+    private final MangaReviewService mangaReviewService;
+    private final MovieReviewService movieReviewService;
+    private final TvSeriesReviewService tvSeriesReviewService;
+    private final GameReviewService gameReviewService;
+
+    private final AnimeDiscussionService animeDiscussionService;
+    private final MangaDiscussionService mangaDiscussionService;
+    private final MovieDiscussionService movieDiscussionService;
+    private final TvSeriesDiscussionService tvSeriesDiscussionService;
+    private final GameDiscussionService gameDiscussionService;
 
     private final AnimeMapper animeMapper;
     private final MangaMapper mangaMapper;
@@ -194,4 +216,56 @@ public class WorkOfCultureManagingService {
             case GAME -> gameService.getAllFilteredByTitle(title, pageable).map(gameMapper::toWorkOfCultureResponseDTO);
         };
     }
+
+    public Page<WorkOfCultureResponseDTO> getAllWorkOfCulture(WorkOfCultureType workOfCultureType, Pageable pageable) {
+        return switch (workOfCultureType) {
+            case ANIME -> animeService.findAll(pageable).map(animeMapper::toWorkOfCultureResponseDTO);
+            case MANGA -> mangaService.findAll(pageable).map(mangaMapper::toWorkOfCultureResponseDTO);
+            case MOVIE -> movieService.findAll(pageable).map(movieMapper::toWorkOfCultureResponseDTO);
+            case TVSERIES -> tvSeriesService.findAll(pageable).map(tvSeriesMapper::toWorkOfCultureResponseDTO);
+            case GAME -> gameService.findAll(pageable).map(gameMapper::toWorkOfCultureResponseDTO);
+        };
+    }
+
+    public WorkOfCultureStatisticResponseDTO getWorkOfCultureStatistic(WorkOfCultureType workOfCultureType, UUID id) {
+        return switch (workOfCultureType) {
+            case ANIME -> animeService.getStatistic(id);
+            case MANGA -> mangaService.getStatistic(id);
+            case MOVIE -> movieService.getStatistic(id);
+            case TVSERIES -> tvSeriesService.getStatistic(id);
+            case GAME -> gameService.getStatistic(id);
+        };
+    }
+
+    public WorkOfCultureTimeStatisticResponseDTO getWorkOfCultureTimeStatistic(WorkOfCultureType workOfCultureType, UUID id, TimeDurationDTO timeDurationDTO) {
+//        return switch (workOfCultureType) {
+//            case ANIME -> getAnimeTimeStatistic(id, timeDurationDTO);
+//            case MANGA -> mangaService.getStatistic(id);
+//            case MOVIE -> movieService.getStatistic(id);
+//            case TVSERIES -> tvSeriesService.getStatistic(id);
+//            case GAME -> gameService.getStatistic(id);
+//        };
+        return getAnimeTimeStatistic(id, timeDurationDTO);
+    }
+
+
+    public WorkOfCultureTimeStatisticResponseDTO getAnimeTimeStatistic(UUID id, TimeDurationDTO timeDurationDTO) {
+
+        Set<AnimeReview> animeReviewsBetween = animeReviewService.findAllByAnimeIdAndCreateDateIsAfterAndCreateDateIsBefore(id, OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.NOON, ZoneOffset.UTC), OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.NOON, ZoneOffset.UTC));
+        Set<AnimeReview> animeReviewsBefore = animeReviewService.findAllByAnimeIdAndCreateDateIsBefore(id, OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.NOON, ZoneOffset.UTC));
+
+        Set<AnimeDiscussion> animeDiscussionsBetween = animeDiscussionService.findAllByAnimeIdAndCreateDateIsAfterAndCreateDateIsBefore(id, OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.NOON, ZoneOffset.UTC), OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.NOON, ZoneOffset.UTC));
+        Set<AnimeDiscussion> animeDiscussionsBefore = animeDiscussionService.findAllByAnimeIdAndCreateDateIsBefore(id, OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.NOON, ZoneOffset.UTC));
+
+        WorkOfCultureTimeStatisticResponseDTO workOfCultureTimeStatisticResponseDTO = new WorkOfCultureTimeStatisticResponseDTO();
+        workOfCultureTimeStatisticResponseDTO.setReviewCountBefore(animeReviewsBefore.size());
+        workOfCultureTimeStatisticResponseDTO.setReviewCountGain(animeReviewsBetween.size());
+
+        workOfCultureTimeStatisticResponseDTO.setDiscussionCountBefore(animeDiscussionsBefore.size());
+        workOfCultureTimeStatisticResponseDTO.setDiscussionCountGain(animeDiscussionsBetween.size());
+
+        return workOfCultureTimeStatisticResponseDTO;
+    }
+
+
 }

@@ -4,13 +4,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.dtos.discussion.AnswerCreateDTO;
 import pl.polsl.opinion_backend.dtos.discussion.DiscussionCreateDTO;
+import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussionAnswer;
 import pl.polsl.opinion_backend.repositories.works.anime.AnimeDiscussionRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
+import java.time.OffsetDateTime;
 import java.util.NoSuchElementException;
+import java.util.Set;
 import java.util.UUID;
 
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.ANIME_DISCUSSION_NOT_FOUND;
@@ -51,5 +54,22 @@ public class AnimeDiscussionService extends BasicService<AnimeDiscussion, AnimeD
     public void deleteAllByCreateBy(UUID createBy) {
         repository.deleteAllByCreateBy(createBy);
     }
+
+    public Set<AnimeDiscussion> findAllByAnimeIdAndCreateDateIsAfterAndCreateDateIsBefore(UUID id, OffsetDateTime startDate, OffsetDateTime endDate) {
+        return repository.findAllByAnime_IdAndCreateDateIsAfterAndCreateDateIsBefore(id, startDate, endDate);
+    }
+
+    public  Set<AnimeDiscussion> findAllByAnimeIdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
+        return repository.findAllByAnime_IdAndCreateDateIsBefore(id, date);
+    }
+
+    public Set<AnimeDiscussion> findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
+        return repository.findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(animeMangaGenre, startDate, endDate);
+    }
+
+    public  Set<AnimeDiscussion> findAllByAnimeGenresAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime date) {
+        return repository.findAllByAnimeGenresAndCreateDateIsBefore(animeMangaGenre, date);
+    }
+
 
 }

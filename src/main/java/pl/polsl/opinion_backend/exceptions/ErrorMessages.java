@@ -93,5 +93,8 @@ public class ErrorMessages {
     public static final String WRONG_PREFERENCE = "preference.wrong";
     public static final String GENRE_NOT_FOUND = "genre.notFound";
 
+    public static final String START_DATE_REQUIRED = "startDate.required";
+    public static final String END_DATE_REQUIRED = "endDate.required";
+
 
 }
