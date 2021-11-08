@@ -13,7 +13,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class WorkOfCultureStatisticResponseDTO {
+public class WorkOfCultureStatisticTimeResponseDTO {
 
     private UUID id;
     private String title;
@@ -21,6 +21,6 @@ public class WorkOfCultureStatisticResponseDTO {
     private WorkOfCultureType workOfCultureType;
     private Set<GenreType> genres = new HashSet<>();
 
-    private StatisticResponseDTO statisticResponseDTO;
+    private StatisticTimeResponseDTO statisticTimeResponseDTO;
 
 }

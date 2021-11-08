@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.dtos.discussion.AnswerCreateDTO;
 import pl.polsl.opinion_backend.dtos.discussion.DiscussionCreateDTO;
-import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
+import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussionAnswer;
@@ -59,17 +59,20 @@ public class AnimeDiscussionService extends BasicService<AnimeDiscussion, AnimeD
         return repository.findAllByAnime_IdAndCreateDateIsAfterAndCreateDateIsBefore(id, startDate, endDate);
     }
 
-    public  Set<AnimeDiscussion> findAllByAnimeIdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
+    public Set<AnimeDiscussion> findAllByAnimeIdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
         return repository.findAllByAnime_IdAndCreateDateIsBefore(id, date);
     }
 
-    public Set<AnimeDiscussion> findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
-        return repository.findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(animeMangaGenre, startDate, endDate);
+    public Set<AnimeDiscussion> findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(String animeMangaGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
+        return repository.findAllByAnimeGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(animeMangaGenre, startDate, endDate);
     }
 
-    public  Set<AnimeDiscussion> findAllByAnimeGenresAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime date) {
-        return repository.findAllByAnimeGenresAndCreateDateIsBefore(animeMangaGenre, date);
+    public Set<AnimeDiscussion> findAllByAnimeGenresAndCreateDateIsBefore(String animeMangaGenre, OffsetDateTime date) {
+        return repository.findAllByAnimeGenresNameAndCreateDateIsBefore(animeMangaGenre, date);
     }
 
+    public Set<AnimeDiscussion> findAllByGenresName(String genre) {
+        return repository.findAllByAnimeGenresName(genre);
+    }
 
 }

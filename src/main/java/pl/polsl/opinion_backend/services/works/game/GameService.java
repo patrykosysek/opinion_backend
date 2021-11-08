@@ -2,6 +2,7 @@ package pl.polsl.opinion_backend.services.works.game;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.dtos.workOfCulture.StatisticResponseDTO;
 import pl.polsl.opinion_backend.dtos.workOfCulture.WorkOfCultureStatisticResponseDTO;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.Game;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
@@ -26,10 +27,11 @@ public class GameService extends WorkOfCultureService<Game, GameRepository> {
     public WorkOfCultureStatisticResponseDTO getStatistic(UUID id) {
         Game game = getById(id);
         WorkOfCultureStatisticResponseDTO workOfCultureStatisticResponseDTO = new WorkOfCultureStatisticResponseDTO();
-        workOfCultureStatisticResponseDTO.setDiscussionCount(game.getDiscussions().size());
-        workOfCultureStatisticResponseDTO.setReviewCount(game.getReviews().size());
-        workOfCultureStatisticResponseDTO.setSeenListCount(game.getGameSeenLists().size());
-        workOfCultureStatisticResponseDTO.setWatchListCount(game.getGameWatchLists().size());
+        workOfCultureStatisticResponseDTO.setStatisticResponseDTO(new StatisticResponseDTO());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setDiscussionCount(game.getDiscussions().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setReviewCount(game.getReviews().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setSeenListCount(game.getGameSeenLists().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setWatchListCount(game.getGameWatchLists().size());
 
         workOfCultureStatisticResponseDTO.setId(id);
         workOfCultureStatisticResponseDTO.setImageUrl(game.getImageUrl());

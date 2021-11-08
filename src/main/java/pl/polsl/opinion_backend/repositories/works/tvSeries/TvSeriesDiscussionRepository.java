@@ -1,7 +1,6 @@
 package pl.polsl.opinion_backend.repositories.works.tvSeries;
 
 import org.springframework.stereotype.Repository;
-import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesDiscussion;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
@@ -18,8 +17,10 @@ public interface TvSeriesDiscussionRepository extends BasicRepository<TvSeriesDi
 
     Set<TvSeriesDiscussion> findAllByTvSeries_IdAndCreateDateIsBefore(UUID id, OffsetDateTime date);
 
-    Set<TvSeriesDiscussion> findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate);
+    Set<TvSeriesDiscussion> findAllByTvSeriesGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate);
 
-    Set<TvSeriesDiscussion> findAllByTvSeriesGenresAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime date);
+    Set<TvSeriesDiscussion> findAllByTvSeriesGenresNameAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime date);
+
+    Set<TvSeriesDiscussion> findAllByTvSeriesGenresName(String name);
 
 }

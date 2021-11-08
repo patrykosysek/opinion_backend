@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.dtos.discussion.AnswerCreateDTO;
 import pl.polsl.opinion_backend.dtos.discussion.DiscussionCreateDTO;
-import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesDiscussionAnswer;
@@ -52,20 +51,24 @@ public class TvSeriesDiscussionService extends BasicService<TvSeriesDiscussion, 
         repository.deleteAllByCreateBy(createBy);
     }
 
-    public  Set<TvSeriesDiscussion> findAllByTvSeriesIdAndCreateDateIsAfterAndCreateDateIsBefore(UUID id, OffsetDateTime startDate, OffsetDateTime endDate) {
+    public Set<TvSeriesDiscussion> findAllByTvSeriesIdAndCreateDateIsAfterAndCreateDateIsBefore(UUID id, OffsetDateTime startDate, OffsetDateTime endDate) {
         return repository.findAllByTvSeries_IdAndCreateDateIsAfterAndCreateDateIsBefore(id, startDate, endDate);
     }
 
-    public  Set<TvSeriesDiscussion> findAllByTvSeriesIdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
+    public Set<TvSeriesDiscussion> findAllByTvSeriesIdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
         return repository.findAllByTvSeries_IdAndCreateDateIsBefore(id, date);
     }
 
-    public  Set<TvSeriesDiscussion> findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
-        return repository.findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(movieTvSeriesGenre, startDate, endDate);
+    public Set<TvSeriesDiscussion> findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
+        return repository.findAllByTvSeriesGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(movieTvSeriesGenre, startDate, endDate);
     }
 
-    public Set<TvSeriesDiscussion> findAllByTvSeriesGenresAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime date) {
-        return repository.findAllByTvSeriesGenresAndCreateDateIsBefore(movieTvSeriesGenre, date);
+    public Set<TvSeriesDiscussion> findAllByTvSeriesGenresAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime date) {
+        return repository.findAllByTvSeriesGenresNameAndCreateDateIsBefore(movieTvSeriesGenre, date);
+    }
+
+    public Set<TvSeriesDiscussion> findAllByGenresName(String genre) {
+        return repository.findAllByTvSeriesGenresName(genre);
     }
 
 }

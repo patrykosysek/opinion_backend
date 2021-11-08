@@ -1,7 +1,6 @@
 package pl.polsl.opinion_backend.repositories.list.review;
 
 import org.springframework.stereotype.Repository;
-import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
@@ -22,8 +21,10 @@ public interface AnimeReviewRepository extends BasicRepository<AnimeReview, UUID
 
     Set<AnimeReview> findAllByAnime_IdAndCreateDateIsBefore(UUID id, OffsetDateTime date);
 
-    Set<AnimeReview> findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime startDate, OffsetDateTime endDate);
+    Set<AnimeReview> findAllByAnimeGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(String name, OffsetDateTime startDate, OffsetDateTime endDate);
 
-    Set<AnimeReview> findAllByAnimeGenresAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime date);
+    Set<AnimeReview> findAllByAnimeGenresNameAndCreateDateIsBefore(String name, OffsetDateTime date);
+
+    Set<AnimeReview> findAllByAnimeGenresName(String name);
 
 }

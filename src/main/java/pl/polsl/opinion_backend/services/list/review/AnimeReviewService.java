@@ -2,7 +2,6 @@ package pl.polsl.opinion_backend.services.list.review;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.repositories.list.review.AnimeReviewRepository;
@@ -40,13 +39,16 @@ public class AnimeReviewService extends BasicService<AnimeReview, AnimeReviewRep
         return repository.findAllByAnime_IdAndCreateDateIsBefore(id, date);
     }
 
-    public Set<AnimeReview> findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
-        return repository.findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(animeMangaGenre, startDate, endDate);
+    public Set<AnimeReview> findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(String animeMangaGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
+        return repository.findAllByAnimeGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(animeMangaGenre, startDate, endDate);
     }
 
-    public Set<AnimeReview> findAllByAnimeGenresAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime date) {
-        return repository.findAllByAnimeGenresAndCreateDateIsBefore(animeMangaGenre, date);
+    public Set<AnimeReview> findAllByAnimeGenresAndCreateDateIsBefore(String animeMangaGenre, OffsetDateTime date) {
+        return repository.findAllByAnimeGenresNameAndCreateDateIsBefore(animeMangaGenre, date);
     }
 
+    public Set<AnimeReview> findAllByGenresName(String genre) {
+        return repository.findAllByAnimeGenresName(genre);
+    }
 
 }

@@ -2,6 +2,7 @@ package pl.polsl.opinion_backend.repositories.works.anime;
 
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
+import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussion;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
@@ -18,8 +19,10 @@ public interface AnimeDiscussionRepository extends BasicRepository<AnimeDiscussi
 
     Set<AnimeDiscussion> findAllByAnime_IdAndCreateDateIsBefore(UUID id, OffsetDateTime date);
 
-    Set<AnimeDiscussion> findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime startDate, OffsetDateTime endDate);
+    Set<AnimeDiscussion> findAllByAnimeGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(String animeMangaGenre, OffsetDateTime startDate, OffsetDateTime endDate);
 
-    Set<AnimeDiscussion> findAllByAnimeGenresAndCreateDateIsBefore(AnimeMangaGenre animeMangaGenre, OffsetDateTime date);
+    Set<AnimeDiscussion> findAllByAnimeGenresNameAndCreateDateIsBefore(String animeMangaGenre, OffsetDateTime date);
+
+    Set<AnimeDiscussion> findAllByAnimeGenresName(String name);
 
 }

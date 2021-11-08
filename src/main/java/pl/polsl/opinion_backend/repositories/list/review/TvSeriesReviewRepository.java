@@ -3,6 +3,7 @@ package pl.polsl.opinion_backend.repositories.list.review;
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesReview;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
@@ -22,8 +23,10 @@ public interface TvSeriesReviewRepository extends BasicRepository<TvSeriesReview
 
     Set<TvSeriesReview> findAllByTvSeries_IdAndCreateDateIsBefore(UUID id, OffsetDateTime date);
 
-    Set<TvSeriesReview> findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate);
+    Set<TvSeriesReview> findAllByTvSeriesGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate);
 
-    Set<TvSeriesReview> findAllByTvSeriesGenresAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime date);
+    Set<TvSeriesReview> findAllByTvSeriesGenresNameAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime date);
+
+    Set<TvSeriesReview> findAllByTvSeriesGenresName(String name);
 
 }

@@ -2,6 +2,7 @@ package pl.polsl.opinion_backend.repositories.works.movie;
 
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.movies.MovieDiscussion;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
@@ -18,8 +19,10 @@ public interface MovieDiscussionRepository extends BasicRepository<MovieDiscussi
 
     Set<MovieDiscussion> findAllByMovie_IdAndCreateDateIsBefore(UUID id, OffsetDateTime date);
 
-    Set<MovieDiscussion> findAllByMovieGenresAndCreateDateIsAfterAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate);
+    Set<MovieDiscussion> findAllByMovieGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate);
 
-    Set<MovieDiscussion> findAllByMovieGenresAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime date);
+    Set<MovieDiscussion> findAllByMovieGenresNameAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime date);
+
+    Set<MovieDiscussion> findAllByMovieGenresName(String name);
 
 }

@@ -2,6 +2,7 @@ package pl.polsl.opinion_backend.services.works.manga;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.dtos.workOfCulture.StatisticResponseDTO;
 import pl.polsl.opinion_backend.dtos.workOfCulture.WorkOfCultureStatisticResponseDTO;
 import pl.polsl.opinion_backend.entities.worksOfCulture.manga.Manga;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
@@ -26,10 +27,11 @@ public class MangaService extends WorkOfCultureService<Manga, MangaRepository> {
     public WorkOfCultureStatisticResponseDTO getStatistic(UUID id) {
         Manga manga = getById(id);
         WorkOfCultureStatisticResponseDTO workOfCultureStatisticResponseDTO = new WorkOfCultureStatisticResponseDTO();
-        workOfCultureStatisticResponseDTO.setDiscussionCount(manga.getDiscussions().size());
-        workOfCultureStatisticResponseDTO.setReviewCount(manga.getReviews().size());
-        workOfCultureStatisticResponseDTO.setSeenListCount(manga.getMangaSeenLists().size());
-        workOfCultureStatisticResponseDTO.setWatchListCount(manga.getMangaWatchLists().size());
+        workOfCultureStatisticResponseDTO.setStatisticResponseDTO(new StatisticResponseDTO());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setDiscussionCount(manga.getDiscussions().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setReviewCount(manga.getReviews().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setSeenListCount(manga.getMangaSeenLists().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setWatchListCount(manga.getMangaWatchLists().size());
 
         workOfCultureStatisticResponseDTO.setId(id);
         workOfCultureStatisticResponseDTO.setImageUrl(manga.getImageUrl());

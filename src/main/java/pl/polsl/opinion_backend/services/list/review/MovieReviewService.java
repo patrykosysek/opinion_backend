@@ -2,7 +2,6 @@ package pl.polsl.opinion_backend.services.list.review;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.movies.MovieReview;
 import pl.polsl.opinion_backend.repositories.list.review.MovieReviewRepository;
@@ -32,20 +31,24 @@ public class MovieReviewService extends BasicService<MovieReview, MovieReviewRep
         return repository.findByMovie_IdAndReviewList(movieId, reviewList).orElseThrow(() -> new IllegalArgumentException(MOVIE_REVIEW_NOT_FOUND));
     }
 
-    public Set<MovieReview> findAllByMovie_IdAndCreateDateIsAfterAndCreateDateIsBefore(UUID id, OffsetDateTime startDate, OffsetDateTime endDate) {
+    public Set<MovieReview> findAllByMovieIdAndCreateDateIsAfterAndCreateDateIsBefore(UUID id, OffsetDateTime startDate, OffsetDateTime endDate) {
         return repository.findAllByMovie_IdAndCreateDateIsAfterAndCreateDateIsBefore(id, startDate, endDate);
     }
 
-    public Set<MovieReview> findAllByMovie_IdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
+    public Set<MovieReview> findAllByMovieIdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
         return repository.findAllByMovie_IdAndCreateDateIsBefore(id, date);
     }
 
-    public Set<MovieReview> findAllByMovieGenresAndCreateDateIsAfterAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
-        return repository.findAllByMovieGenresAndCreateDateIsAfterAndCreateDateIsBefore(movieTvSeriesGenre, startDate, endDate);
+    public Set<MovieReview> findAllByMovieGenresAndCreateDateIsAfterAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
+        return repository.findAllByMovieGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(movieTvSeriesGenre, startDate, endDate);
     }
 
-    public Set<MovieReview> findAllByMovieGenresAndCreateDateIsBefore(MovieTvSeriesGenre movieTvSeriesGenre, OffsetDateTime date) {
-        return repository.findAllByMovieGenresAndCreateDateIsBefore(movieTvSeriesGenre, date);
+    public Set<MovieReview> findAllByMovieGenresAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime date) {
+        return repository.findAllByMovieGenresNameAndCreateDateIsBefore(movieTvSeriesGenre, date);
+    }
+
+    public Set<MovieReview> findAllByGenresName(String genre) {
+        return repository.findAllByMovieGenresName(genre);
     }
 
 }

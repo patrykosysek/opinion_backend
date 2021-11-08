@@ -3,6 +3,7 @@ package pl.polsl.opinion_backend.repositories.list.review;
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameReview;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
@@ -22,8 +23,10 @@ public interface GameReviewRepository extends BasicRepository<GameReview, UUID> 
 
     Set<GameReview> findAllByGame_IdAndCreateDateIsBefore(UUID id, OffsetDateTime date);
 
-    Set<GameReview> findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(GameGenre gameGenre, OffsetDateTime startDate, OffsetDateTime endDate);
+    Set<GameReview> findAllByGameGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(String gameGenre, OffsetDateTime startDate, OffsetDateTime endDate);
 
-    Set<GameReview> findAllByGameGenresAndCreateDateIsBefore(GameGenre gameGenre, OffsetDateTime date);
+    Set<GameReview> findAllByGameGenresNameAndCreateDateIsBefore(String gameGenre, OffsetDateTime date);
+
+    Set<GameReview> findAllByGameGenresName(String name);
 
 }

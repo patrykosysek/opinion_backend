@@ -2,6 +2,7 @@ package pl.polsl.opinion_backend.services.works.tvSeries;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.dtos.workOfCulture.StatisticResponseDTO;
 import pl.polsl.opinion_backend.dtos.workOfCulture.WorkOfCultureStatisticResponseDTO;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
@@ -26,10 +27,11 @@ public class TvSeriesService extends WorkOfCultureService<TvSeries, TvSeriesRepo
     public WorkOfCultureStatisticResponseDTO getStatistic(UUID id) {
         TvSeries tvSeries = getById(id);
         WorkOfCultureStatisticResponseDTO workOfCultureStatisticResponseDTO = new WorkOfCultureStatisticResponseDTO();
-        workOfCultureStatisticResponseDTO.setDiscussionCount(tvSeries.getDiscussions().size());
-        workOfCultureStatisticResponseDTO.setReviewCount(tvSeries.getReviews().size());
-        workOfCultureStatisticResponseDTO.setSeenListCount(tvSeries.getTvSeriesSeenLists().size());
-        workOfCultureStatisticResponseDTO.setWatchListCount(tvSeries.getTvSeriesWatchLists().size());
+        workOfCultureStatisticResponseDTO.setStatisticResponseDTO(new StatisticResponseDTO());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setDiscussionCount(tvSeries.getDiscussions().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setReviewCount(tvSeries.getReviews().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setSeenListCount(tvSeries.getTvSeriesSeenLists().size());
+        workOfCultureStatisticResponseDTO.getStatisticResponseDTO().setWatchListCount(tvSeries.getTvSeriesWatchLists().size());
 
         workOfCultureStatisticResponseDTO.setId(id);
         workOfCultureStatisticResponseDTO.setImageUrl(tvSeries.getImageUrl());

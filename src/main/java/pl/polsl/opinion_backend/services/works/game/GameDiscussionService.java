@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.dtos.discussion.AnswerCreateDTO;
 import pl.polsl.opinion_backend.dtos.discussion.DiscussionCreateDTO;
-import pl.polsl.opinion_backend.entities.genre.GameGenre;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.Game;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameDiscussionAnswer;
@@ -56,16 +56,20 @@ public class GameDiscussionService extends BasicService<GameDiscussion, GameDisc
         return repository.findAllByGame_IdAndCreateDateIsAfterAndCreateDateIsBefore(id, startDate, endDate);
     }
 
-    public  Set<GameDiscussion> findAllByGameIdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
+    public Set<GameDiscussion> findAllByGameIdAndCreateDateIsBefore(UUID id, OffsetDateTime date) {
         return repository.findAllByGame_IdAndCreateDateIsBefore(id, date);
     }
 
-    public Set<GameDiscussion> findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(GameGenre gameGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
-        return repository.findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(gameGenre, startDate, endDate);
+    public Set<GameDiscussion> findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(String gameGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
+        return repository.findAllByGameGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(gameGenre, startDate, endDate);
     }
 
-    public  Set<GameDiscussion> findAllByGameGenresAndCreateDateIsBefore(GameGenre gameGenre, OffsetDateTime date) {
-        return repository.findAllByGameGenresAndCreateDateIsBefore(gameGenre, date);
+    public Set<GameDiscussion> findAllByGameGenresAndCreateDateIsBefore(String gameGenre, OffsetDateTime date) {
+        return repository.findAllByGameGenresNameAndCreateDateIsBefore(gameGenre, date);
+    }
+
+    public Set<GameDiscussion> findAllByGenresName(String genre) {
+        return repository.findAllByGameGenresName(genre);
     }
 
 }

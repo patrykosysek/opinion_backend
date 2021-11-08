@@ -20,6 +20,7 @@ public enum SecurityEndpoints {
     V3_URL("/v3/**", false),
 
     RECOMMENDATION("/work-of-culture/{workOfCultureType}", false),
+    RECOMMENDED("/work-of-culture/recommendation", false),
     FILTRATION("/work-of-culture/{workOfCultureType}/filter", false);
 
     public final String value;

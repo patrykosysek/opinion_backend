@@ -2,7 +2,6 @@ package pl.polsl.opinion_backend.services.list.review;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameReview;
 import pl.polsl.opinion_backend.repositories.list.review.GameReviewRepository;
@@ -40,13 +39,16 @@ public class GameReviewService extends BasicService<GameReview, GameReviewReposi
         return repository.findAllByGame_IdAndCreateDateIsBefore(id, date);
     }
 
-    public Set<GameReview> findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(GameGenre gameGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
-        return repository.findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(gameGenre, startDate, endDate);
+    public Set<GameReview> findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(String gameGenre, OffsetDateTime startDate, OffsetDateTime endDate) {
+        return repository.findAllByGameGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(gameGenre, startDate, endDate);
     }
 
-    public Set<GameReview> findAllByGameGenresAndCreateDateIsBefore(GameGenre gameGenre, OffsetDateTime date) {
-        return repository.findAllByGameGenresAndCreateDateIsBefore(gameGenre, date);
+    public Set<GameReview> findAllByGameGenresNameAndCreateDateIsBefore(String gameGenre, OffsetDateTime date) {
+        return repository.findAllByGameGenresNameAndCreateDateIsBefore(gameGenre, date);
     }
 
+    public Set<GameReview> findAllByGenresName(String genre) {
+        return repository.findAllByGameGenresName(genre);
+    }
 
 }

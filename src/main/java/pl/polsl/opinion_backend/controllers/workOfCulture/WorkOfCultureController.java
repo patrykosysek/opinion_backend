@@ -119,15 +119,32 @@ public class WorkOfCultureController {
     @ApiResponse(responseCode = "200", description = "Statistic successfully returned")
     @PostMapping(value = "/{workOfCultureType}/{id}/time-statistic")
     @ResponseStatus(HttpStatus.OK)
-    public WorkOfCultureTimeStatisticResponseDTO getWorkOfCultureStatisticFromSpecificDate(@PathVariable
-                                                                                                   WorkOfCultureType workOfCultureType,
-                                                                                           @PathVariable
-                                                                                                   UUID id,
-                                                                                           @RequestBody
-                                                                                           @Valid
-                                                                                                   TimeDurationDTO timeDurationDTO
+    public StatisticTimeResponseDTO getWorkOfCultureStatisticFromSpecificDate(@PathVariable
+                                                                                      WorkOfCultureType workOfCultureType,
+                                                                              @PathVariable
+                                                                                      UUID id,
+                                                                              @RequestBody
+                                                                              @Valid
+                                                                                      TimeDurationDTO timeDurationDTO
     ) {
         return workOfCultureManagingService.getWorkOfCultureTimeStatistic(workOfCultureType, id, timeDurationDTO);
+    }
+
+    @Secured(ROLE_WORK_OF_CULTURE_STATISTIC)
+    @Operation(summary = "Get overall work of culture statistic")
+    @ApiResponse(responseCode = "200", description = "Statistic successfully returned")
+    @PostMapping(value = "/overall-statistic")
+    @ResponseStatus(HttpStatus.OK)
+    public GlobalStatisticResponseDTO getWorkOfCultureOverallStatistic(@RequestBody @Valid TimeDurationDTO timeDurationDTO) {
+        return workOfCultureManagingService.getWorkOfCultureOverallStatistic(timeDurationDTO);
+    }
+
+    @Operation(summary = "Get 5 recommended work of culture")
+    @ApiResponse(responseCode = "200", description = "Recommendation successfully returned")
+    @GetMapping(value = "/recommendation")
+    @ResponseStatus(HttpStatus.OK)
+    public Set<WorkOfCultureResponseDTO> getRecommendation(@PageableDefault Pageable pageable) {
+        return workOfCultureManagingService.getRecommendedWorks(pageable);
     }
 
 }
