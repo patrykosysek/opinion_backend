@@ -2,6 +2,8 @@ package pl.polsl.opinion_backend.services.user;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -126,5 +128,8 @@ public class UserService extends BasicService<User, UserRepository> implements U
         return save(userMapper.updateUser(user, dto));
     }
 
+    public Page<User> findAllFilteredByEmail(String email, Pageable pageable) {
+        return repository.findAllByEmailStartsWithIgnoreCase(email, pageable);
+    }
 
 }

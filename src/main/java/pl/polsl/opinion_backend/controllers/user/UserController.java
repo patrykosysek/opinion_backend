@@ -89,4 +89,13 @@ public class UserController {
         return userMapper.toUserResponseDTO(userService.changeLockStatus(id));
     }
 
+    @Secured(ROLE_USER_ALL)
+    @Operation(summary = "Get users filtered by email")
+    @ApiResponse(responseCode = "200", description = "Users found")
+    @GetMapping("/filter")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<UserResponseDTO> listAll(@PageableDefault Pageable pageable, @RequestParam String email) {
+        return userService.findAllFilteredByEmail(email, pageable).map(userMapper::toUserResponseDTO);
+    }
+
 }
