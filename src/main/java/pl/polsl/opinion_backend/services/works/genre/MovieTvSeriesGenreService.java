@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
+import pl.polsl.opinion_backend.mappers.qualifires.MovieTvSeriesGenresMapping;
 import pl.polsl.opinion_backend.repositories.works.genre.MovieTvSeriesGenreRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
@@ -43,4 +44,17 @@ public class MovieTvSeriesGenreService extends BasicService<MovieTvSeriesGenre, 
         return genreTypes;
 
     }
+
+    @MovieTvSeriesGenresMapping
+    public Set<GenreType> getGenreNames(Set<MovieTvSeriesGenre> genres) {
+        Set<GenreType> genreTypes = new HashSet<>();
+        genres.forEach(genre -> {
+            for (GenreType genreType : GenreType.values()) {
+                if (genre.getName().equals(genreType.getName()))
+                    genreTypes.add(genreType);
+            }
+        });
+        return genreTypes;
+    }
+
 }

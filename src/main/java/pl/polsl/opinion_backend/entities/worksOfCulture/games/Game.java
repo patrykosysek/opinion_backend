@@ -5,6 +5,7 @@ import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.list.game.GameSeenList;
 import pl.polsl.opinion_backend.entities.list.game.GameWatchList;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.helpers.Interest;
 
 import javax.persistence.*;
@@ -25,9 +26,13 @@ public class Game extends WorkOfCulture implements Interest {
     private Set<GameGenre> genres = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<GameDiscussion> discussions = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "game")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<GameReview> reviews = new HashSet<>();
 
     @OneToMany(orphanRemoval = true, mappedBy = "game")
@@ -60,5 +65,4 @@ public class Game extends WorkOfCulture implements Interest {
         return 0.3 * (0.6 * weeklyDiscussionGrow + 0.2 * monthlyDiscussionGrow + 0.2 * currentDiscussion) + 0.7 * (0.6 * weeklyReviewGrow + 0.2 * monthlyReviewGrow + 0.2 * currentReview);
 
     }
-
 }

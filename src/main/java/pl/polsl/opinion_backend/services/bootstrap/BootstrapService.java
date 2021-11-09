@@ -85,10 +85,10 @@ public class BootstrapService {
                 createDefaultUser();
                 getGenreTypes();
                 animeGenerating();
-//                mangaGenerating();
-//                movieGenerating();
-//                tvSeriesGenerating();
-                //gameGenerating();
+                mangaGenerating();
+                movieGenerating();
+                tvSeriesGenerating();
+                gameGenerating();
                 bootstrapStatusService.save(new BootstrapStatus(true));
             } catch (Exception e) {
                 log.info(e.getMessage());
@@ -273,7 +273,7 @@ public class BootstrapService {
                         existingAnime.getGenres().add(genre);
                         animeService.save(existingAnime);
 
-                    } else if (title != null && description != null && description.isBlank() && releaseDate != null && imageUrl != null) {
+                    } else if (title != null && description != null && !description.isBlank() && releaseDate != null && imageUrl != null) {
                         anime.setTitle(title);
                         anime.setApiId(apiId);
                         anime.setDescription(description);

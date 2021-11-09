@@ -5,6 +5,7 @@ import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.list.movie.MovieSeenList;
 import pl.polsl.opinion_backend.entities.list.movie.MovieWatchList;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.helpers.Interest;
 
 import javax.persistence.*;
@@ -25,9 +26,13 @@ public class Movie extends WorkOfCulture implements Interest {
     private Set<MovieTvSeriesGenre> genres = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<MovieDiscussion> discussions = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<MovieReview> reviews = new HashSet<>();
 
     @OneToMany(orphanRemoval = true, mappedBy = "movie")

@@ -973,4 +973,14 @@ public class WorkOfCultureManagingService {
         return recommended;
     }
 
+    public WorkOfCultureInformationResponseDTO getWorkOfCultureInformation(WorkOfCultureType workOfCultureType, UUID id) {
+
+        return switch (workOfCultureType) {
+            case ANIME -> animeMapper.toWorkOfCultureInformationResponseDTO(animeService.getById(id));
+            case MANGA -> mangaMapper.toWorkOfCultureInformationResponseDTO(mangaService.getById(id));
+            case MOVIE -> movieMapper.toWorkOfCultureInformationResponseDTO(movieService.getById(id));
+            case TVSERIES -> tvSeriesMapper.toWorkOfCultureInformationResponseDTO(tvSeriesService.getById(id));
+            case GAME -> gameMapper.toWorkOfCultureInformationResponseDTO(gameService.getById(id));
+        };
+    }
 }

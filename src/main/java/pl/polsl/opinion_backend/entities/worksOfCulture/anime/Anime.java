@@ -5,7 +5,9 @@ import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.helpers.Interest;
+import pl.polsl.opinion_backend.mappers.qualifires.AnimeMangaGenresMapping;
 
 import javax.persistence.*;
 import java.util.HashSet;

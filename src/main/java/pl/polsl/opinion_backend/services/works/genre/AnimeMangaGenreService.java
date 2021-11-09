@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
+import pl.polsl.opinion_backend.mappers.qualifires.AnimeMangaGenresMapping;
 import pl.polsl.opinion_backend.repositories.works.genre.AnimeMangaGenreRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
@@ -36,6 +37,18 @@ public class AnimeMangaGenreService extends BasicService<AnimeMangaGenre, AnimeM
         Iterable<AnimeMangaGenre> animeMangaGenres = findAll();
         Set<GenreType> genreTypes = new HashSet<>();
         animeMangaGenres.forEach(genre -> {
+            for (GenreType genreType : GenreType.values()) {
+                if (genre.getName().equals(genreType.getName()))
+                    genreTypes.add(genreType);
+            }
+        });
+        return genreTypes;
+    }
+
+    @AnimeMangaGenresMapping
+    public Set<GenreType> getGenreNames(Set<AnimeMangaGenre> genres) {
+        Set<GenreType> genreTypes = new HashSet<>();
+        genres.forEach(genre -> {
             for (GenreType genreType : GenreType.values()) {
                 if (genre.getName().equals(genreType.getName()))
                     genreTypes.add(genreType);

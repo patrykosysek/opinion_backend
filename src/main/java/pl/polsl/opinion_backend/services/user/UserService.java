@@ -15,6 +15,7 @@ import pl.polsl.opinion_backend.dtos.user.PreferenceCreateDTO;
 import pl.polsl.opinion_backend.dtos.user.UserCreateDTO;
 import pl.polsl.opinion_backend.dtos.user.UserUpdateDTO;
 import pl.polsl.opinion_backend.entities.user.User;
+import pl.polsl.opinion_backend.mappers.qualifires.UsernameMapping;
 import pl.polsl.opinion_backend.mappers.user.UserMapper;
 import pl.polsl.opinion_backend.repositories.user.UserRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
@@ -130,6 +131,11 @@ public class UserService extends BasicService<User, UserRepository> implements U
 
     public Page<User> findAllFilteredByEmail(String email, Pageable pageable) {
         return repository.findAllByEmailStartsWithIgnoreCase(email, pageable);
+    }
+
+    @UsernameMapping
+    public String getUsernameByCreateBy(UUID id) {
+        return getById(id).getNickname();
     }
 
 }

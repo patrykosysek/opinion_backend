@@ -147,4 +147,12 @@ public class WorkOfCultureController {
         return workOfCultureManagingService.getRecommendedWorks(pageable);
     }
 
+    @Operation(summary = "Get work of culture information")
+    @ApiResponse(responseCode = "200", description = "Information successfully returned")
+    @GetMapping(value = "/{workOfCultureType}/{id}/information")
+    @ResponseStatus(HttpStatus.OK)
+    public WorkOfCultureInformationResponseDTO getWorkOfCultureInformation(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID id) {
+        return workOfCultureManagingService.getWorkOfCultureInformation(workOfCultureType, id);
+    }
+
 }

@@ -5,6 +5,7 @@ import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.list.manga.MangaSeenList;
 import pl.polsl.opinion_backend.entities.list.manga.MangaWatchList;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.helpers.Interest;
 
 import javax.persistence.*;
@@ -26,9 +27,13 @@ public class Manga extends WorkOfCulture implements Interest {
     private Set<AnimeMangaGenre> genres = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manga")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<MangaDiscussion> discussions = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manga")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<MangaReview> reviews = new HashSet<>();
 
     @OneToMany(orphanRemoval = true, mappedBy = "manga")
@@ -61,6 +66,5 @@ public class Manga extends WorkOfCulture implements Interest {
         return 0.3 * (0.6 * weeklyDiscussionGrow + 0.2 * monthlyDiscussionGrow + 0.2 * currentDiscussion) + 0.7 * (0.6 * weeklyReviewGrow + 0.2 * monthlyReviewGrow + 0.2 * currentReview);
 
     }
-
 
 }
