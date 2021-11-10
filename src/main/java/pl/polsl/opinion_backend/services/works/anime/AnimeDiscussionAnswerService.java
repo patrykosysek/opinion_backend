@@ -1,7 +1,10 @@
 package pl.polsl.opinion_backend.services.works.anime;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussionAnswer;
 import pl.polsl.opinion_backend.repositories.works.anime.AnimeDiscussionAnswerRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
@@ -22,6 +25,10 @@ public class AnimeDiscussionAnswerService extends BasicService<AnimeDiscussionAn
 
     public void deleteAllByCreateBy(UUID createBy) {
         repository.deleteAllByCreateBy(createBy);
+    }
+
+    public Page<AnimeDiscussionAnswer> findAllByDiscussion(AnimeDiscussion animeDiscussion, Pageable pageable) {
+        return repository.findAllByDiscussion(animeDiscussion, pageable);
     }
 
 }

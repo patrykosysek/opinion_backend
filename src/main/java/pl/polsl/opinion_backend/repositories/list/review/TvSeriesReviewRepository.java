@@ -1,9 +1,9 @@
 package pl.polsl.opinion_backend.repositories.list.review;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
-import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesReview;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
@@ -28,5 +28,7 @@ public interface TvSeriesReviewRepository extends BasicRepository<TvSeriesReview
     Set<TvSeriesReview> findAllByTvSeriesGenresNameAndCreateDateIsBefore(String movieTvSeriesGenre, OffsetDateTime date);
 
     Set<TvSeriesReview> findAllByTvSeriesGenresName(String name);
+
+    Page<TvSeriesReview> findAllByReviewList(ReviewList reviewList, Pageable pageable);
 
 }

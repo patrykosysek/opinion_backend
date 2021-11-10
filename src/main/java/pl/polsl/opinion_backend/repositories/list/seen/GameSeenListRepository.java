@@ -1,5 +1,7 @@
 package pl.polsl.opinion_backend.repositories.list.seen;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
@@ -29,5 +31,7 @@ public interface GameSeenListRepository extends BasicRepository<GameSeenList, UU
     Set<GameSeenList> findAllByGameGenresNameAndCreateDateIsBefore(String gameGenre, OffsetDateTime date);
 
     Set<GameSeenList> findAllByGameGenresName(String name);
+
+    Page<GameSeenList> findAllBySeenList(SeenList seenList, Pageable pageable);
 
 }

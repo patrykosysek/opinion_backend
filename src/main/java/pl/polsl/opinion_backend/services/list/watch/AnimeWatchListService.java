@@ -1,6 +1,8 @@
 package pl.polsl.opinion_backend.services.list.watch;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
@@ -56,6 +58,10 @@ public class AnimeWatchListService extends BasicService<AnimeWatchList, AnimeWat
 
     public Set<AnimeWatchList> findAllByGenresName(String genre) {
         return repository.findAllByAnimeGenresName(genre);
+    }
+
+    public Page<AnimeWatchList> getAllByWatchList(WatchList watchList, Pageable pageable){
+        return repository.findAllByWatchList(watchList,pageable);
     }
 
 }

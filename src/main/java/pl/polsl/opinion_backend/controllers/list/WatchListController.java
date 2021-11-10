@@ -4,11 +4,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pl.polsl.opinion_backend.configuration.security.jwt.JwtStatics;
+import pl.polsl.opinion_backend.dtos.workOfCulture.WorkOfCultureResponseDTO;
 import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.services.list.ListManagingService;
 
@@ -40,6 +44,15 @@ public class WatchListController {
     @ResponseStatus(HttpStatus.OK)
     public void remove(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
         listManagingService.removeWorkOfCulture(workOfCultureType, workOfCultureId);
+    }
+
+    @Secured(ROLE_WATCH_LIST)
+    @Operation(summary = "Get work of culture from current user watch list ")
+    @ApiResponse(responseCode = "200", description = "Work of culture successfully returned")
+    @GetMapping("/{workOfCultureType}")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<WorkOfCultureResponseDTO> getWatchList(@PathVariable WorkOfCultureType workOfCultureType, @PageableDefault Pageable pageable) {
+        return listManagingService.getWatchListWorks(workOfCultureType, pageable);
     }
 
 }

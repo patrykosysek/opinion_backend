@@ -1,11 +1,11 @@
 package pl.polsl.opinion_backend.repositories.list.seen;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
 import pl.polsl.opinion_backend.entities.user.SeenList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
-import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
 import java.time.OffsetDateTime;
@@ -29,5 +29,7 @@ public interface AnimeSeenListRepository extends BasicRepository<AnimeSeenList, 
     Set<AnimeSeenList> findAllByAnimeGenresNameAndCreateDateIsBefore(String animeMangaGenre, OffsetDateTime date);
 
     Set<AnimeSeenList> findAllByAnimeGenresName(String name);
+
+    Page<AnimeSeenList> findAllBySeenList(SeenList seenList, Pageable pageable);
 
 }

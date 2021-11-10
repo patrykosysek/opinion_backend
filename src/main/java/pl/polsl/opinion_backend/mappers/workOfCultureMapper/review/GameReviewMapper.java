@@ -16,6 +16,7 @@ public interface GameReviewMapper {
 
     @Mapping(target = "author", source = "createBy", qualifiedBy = UsernameMapping.class)
     @Mapping(target = "title", source = "gameReview.game.title")
+    @Mapping(target = "id", source = "id")
     ReviewResponseDTO toReviewResponseDTO(GameReview gameReview);
 
     default LocalDate toLocalDate(OffsetDateTime offsetDateTime) {

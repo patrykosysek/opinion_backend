@@ -1,5 +1,7 @@
 package pl.polsl.opinion_backend.repositories.list.seen;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
@@ -30,5 +32,6 @@ public interface MangaSeenListRepository extends BasicRepository<MangaSeenList, 
 
     Set<MangaSeenList> findAllByMangaGenresName(String name);
 
+    Page<MangaSeenList> findAllBySeenList(SeenList seenList, Pageable pageable);
 
 }

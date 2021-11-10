@@ -1,5 +1,7 @@
 package pl.polsl.opinion_backend.repositories.list.watch;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
@@ -32,5 +34,6 @@ public interface MovieWatchListRepository extends BasicRepository<MovieWatchList
 
     Set<MovieWatchList> findAllByMovieGenresName(String name);
 
+    Page<MovieWatchList> findAllByWatchList(WatchList watchList, Pageable pageable);
 
 }

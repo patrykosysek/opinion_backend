@@ -1,6 +1,8 @@
 package pl.polsl.opinion_backend.services.list.seen;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
@@ -54,6 +56,10 @@ public class GameSeenListService extends BasicService<GameSeenList, GameSeenList
 
     public Set<GameSeenList> findAllByGenresName(String genre) {
         return repository.findAllByGameGenresName(genre);
+    }
+
+    public Page<GameSeenList> getAllBySeenList(SeenList seenList, Pageable pageable) {
+        return repository.findAllBySeenList(seenList, pageable);
     }
 
 }

@@ -1,7 +1,10 @@
 package pl.polsl.opinion_backend.services.works.tvSeries;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesDiscussionAnswer;
 import pl.polsl.opinion_backend.repositories.works.tvSeries.TvSeriesDiscussionAnswerRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
@@ -22,6 +25,10 @@ public class TvSeriesDiscussionAnswerService extends BasicService<TvSeriesDiscus
 
     public void deleteAllByCreateBy(UUID createBy) {
         repository.deleteAllByCreateBy(createBy);
+    }
+
+    public Page<TvSeriesDiscussionAnswer> findAllByDiscussion(TvSeriesDiscussion tvSeriesDiscussion, Pageable pageable) {
+        return repository.findAllByDiscussion(tvSeriesDiscussion, pageable);
     }
 
 }

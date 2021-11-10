@@ -1,8 +1,8 @@
 package pl.polsl.opinion_backend.repositories.list.seen;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
-import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
 import pl.polsl.opinion_backend.entities.list.tvSeries.TvSeriesSeenList;
 import pl.polsl.opinion_backend.entities.user.SeenList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
@@ -30,5 +30,6 @@ public interface TvSeriesSeenListRepository extends BasicRepository<TvSeriesSeen
 
     Set<TvSeriesSeenList> findAllByTvSeriesGenresName(String name);
 
+    Page<TvSeriesSeenList> findAllBySeenList(SeenList seenList, Pageable pageable);
 
 }

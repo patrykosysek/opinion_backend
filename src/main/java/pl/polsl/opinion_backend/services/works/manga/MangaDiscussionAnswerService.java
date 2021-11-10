@@ -1,7 +1,10 @@
 package pl.polsl.opinion_backend.services.works.manga;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.entities.worksOfCulture.manga.MangaDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.manga.MangaDiscussionAnswer;
 import pl.polsl.opinion_backend.repositories.works.manga.MangaDiscussionAnswerRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
@@ -22,6 +25,10 @@ public class MangaDiscussionAnswerService extends BasicService<MangaDiscussionAn
 
     public void deleteAllByCreateBy(UUID createBy) {
         repository.deleteAllByCreateBy(createBy);
+    }
+
+    public Page<MangaDiscussionAnswer> findAllByDiscussion(MangaDiscussion mangaDiscussion, Pageable pageable) {
+        return repository.findAllByDiscussion(mangaDiscussion, pageable);
     }
 
 }

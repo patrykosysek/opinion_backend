@@ -1,7 +1,10 @@
 package pl.polsl.opinion_backend.services.works.game;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameDiscussion;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameDiscussionAnswer;
 import pl.polsl.opinion_backend.repositories.works.game.GameDiscussionAnswerRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
@@ -22,6 +25,10 @@ public class GameDiscussionAnswerService extends BasicService<GameDiscussionAnsw
 
     public void deleteAllByCreateBy(UUID createBy) {
         repository.deleteAllByCreateBy(createBy);
+    }
+
+    public Page<GameDiscussionAnswer> findAllByDiscussion(GameDiscussion gameDiscussion, Pageable pageable) {
+        return repository.findAllByDiscussion(gameDiscussion, pageable);
     }
 
 }

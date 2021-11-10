@@ -17,6 +17,7 @@ public interface MovieReviewMapper {
 
     @Mapping(target = "author", source = "createBy", qualifiedBy = UsernameMapping.class)
     @Mapping(target = "title", source = "movieReview.movie.title")
+    @Mapping(target = "id", source = "id")
     ReviewResponseDTO toReviewResponseDTO(MovieReview movieReview);
 
     default LocalDate toLocalDate(OffsetDateTime offsetDateTime) {

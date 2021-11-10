@@ -1,11 +1,12 @@
 package pl.polsl.opinion_backend.services.list.seen;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.list.tvSeries.TvSeriesSeenList;
 import pl.polsl.opinion_backend.entities.user.SeenList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
-import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesReview;
 import pl.polsl.opinion_backend.repositories.list.seen.TvSeriesSeenListRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
@@ -51,6 +52,10 @@ public class TvSeriesSeenListService extends BasicService<TvSeriesSeenList, TvSe
 
     public Set<TvSeriesSeenList> findAllByGenresName(String genre) {
         return repository.findAllByTvSeriesGenresName(genre);
+    }
+
+    public Page<TvSeriesSeenList> getAllBySeenList(SeenList seenList, Pageable pageable) {
+        return repository.findAllBySeenList(seenList, pageable);
     }
 
 }

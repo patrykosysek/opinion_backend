@@ -1,7 +1,10 @@
 package pl.polsl.opinion_backend.services.list.watch;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
 import pl.polsl.opinion_backend.entities.list.manga.MangaSeenList;
 import pl.polsl.opinion_backend.entities.list.manga.MangaWatchList;
 import pl.polsl.opinion_backend.entities.user.WatchList;
@@ -55,6 +58,10 @@ public class MangaWatchListService extends BasicService<MangaWatchList, MangaWat
 
     public Set<MangaWatchList> findAllByGenresName(String genre) {
         return repository.findAllByMangaGenresName(genre);
+    }
+
+    public Page<MangaWatchList> getAllByWatchList(WatchList watchList, Pageable pageable){
+        return repository.findAllByWatchList(watchList,pageable);
     }
 
 }

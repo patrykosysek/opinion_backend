@@ -1,6 +1,8 @@
 package pl.polsl.opinion_backend.services.list.review;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesReview;
@@ -49,6 +51,10 @@ public class TvSeriesReviewService extends BasicService<TvSeriesReview, TvSeries
 
     public Set<TvSeriesReview> findAllByGenresName(String genre) {
         return repository.findAllByTvSeriesGenresName(genre);
+    }
+
+    public Page<TvSeriesReview> getAllByReviewList(ReviewList reviewList, Pageable pageable) {
+        return repository.findAllByReviewList(reviewList, pageable);
     }
 
 }

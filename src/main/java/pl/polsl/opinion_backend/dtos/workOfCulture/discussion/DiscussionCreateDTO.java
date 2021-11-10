@@ -1,4 +1,4 @@
-package pl.polsl.opinion_backend.dtos.discussion;
+package pl.polsl.opinion_backend.dtos.workOfCulture.discussion;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

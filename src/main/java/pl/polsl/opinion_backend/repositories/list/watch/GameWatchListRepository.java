@@ -1,5 +1,7 @@
 package pl.polsl.opinion_backend.repositories.list.watch;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
@@ -32,5 +34,7 @@ public interface GameWatchListRepository extends BasicRepository<GameWatchList, 
     Set<GameWatchList> findAllByGameGenresNameAndCreateDateIsBefore(String gameGenre, OffsetDateTime date);
 
     Set<GameWatchList> findAllByGameGenresName(String name);
+
+    Page<GameWatchList> findAllByWatchList(WatchList watchList, Pageable pageable);
 
 }
