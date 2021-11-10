@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.UUID;
 
 @Data
@@ -14,7 +15,7 @@ import java.util.UUID;
 public class ReviewResponseDTO {
 
     private UUID id;
-    
+
     private String title;
 
     private String author;
@@ -24,5 +25,7 @@ public class ReviewResponseDTO {
     private int likes = 0;
 
     private LocalDate createDate;
+
+    private Optional<Boolean> userLike;
 
 }

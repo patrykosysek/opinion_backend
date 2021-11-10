@@ -1,15 +1,12 @@
 package pl.polsl.opinion_backend.entities.worksOfCulture.games;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,7 +24,11 @@ public class GameReview extends BasicAuditing {
     @Column(nullable = false, columnDefinition = "CLOB")
     private String comment;
 
-    private int likes = 0;
+    @OneToMany(mappedBy = "gameReview", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<GameReviewLike> gameReviewLikes = new HashSet<>();
+
 
     public void addGame(Game game) {
         this.game = game;
@@ -37,6 +38,11 @@ public class GameReview extends BasicAuditing {
     public void addReviewList(ReviewList reviewList) {
         this.reviewList = reviewList;
         reviewList.getGameReviews().add(this);
+    }
+
+    public void addLike(GameReviewLike gameReviewLike) {
+        gameReviewLike.setGameReview(this);
+        this.gameReviewLikes.add(gameReviewLike);
     }
 
 }

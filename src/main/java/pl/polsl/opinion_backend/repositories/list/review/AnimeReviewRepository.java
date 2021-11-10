@@ -31,4 +31,10 @@ public interface AnimeReviewRepository extends BasicRepository<AnimeReview, UUID
 
     Page<AnimeReview> findAllByReviewList(ReviewList reviewList, Pageable pageable);
 
+    Page<AnimeReview> findAllByAnime_Id(UUID id, Pageable pageable);
+
+    Page<AnimeReview> findAllByAnime_IdOrderByCreateDateAsc(UUID id, Pageable pageable);
+
+    Page<AnimeReview> findAllByAnime_IdOrderByCreateDateDesc(UUID id, Pageable pageable);
+
 }

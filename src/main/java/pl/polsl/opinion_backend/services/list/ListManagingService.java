@@ -228,34 +228,27 @@ public class ListManagingService {
 
 
     @Transactional
-    public void addWorkOfCultureWithReview(WorkOfCultureType workOfCultureType, UUID
+    public ReviewResponseDTO addWorkOfCultureWithReview(WorkOfCultureType workOfCultureType, UUID
             workOfCultureId, ReviewCreateDTO reviewCreateDTO) {
         UUID userId = userService.getCurrentUser().getId();
         User user = userService.getById(userId);
         ReviewList reviewList = user.getReviewList();
 
-        switch (workOfCultureType) {
-            case ANIME -> {
-                reviewListService.addAnime(workOfCultureId, reviewList, reviewCreateDTO);
-            }
-            case MANGA -> {
-                reviewListService.addManga(workOfCultureId, reviewList, reviewCreateDTO);
-
-            }
-            case MOVIE -> {
-                reviewListService.addMovie(workOfCultureId, reviewList, reviewCreateDTO);
-
-            }
-            case TVSERIES -> {
-                reviewListService.addTvSeries(workOfCultureId, reviewList, reviewCreateDTO);
-            }
-            case GAME -> {
-                reviewListService.addGame(workOfCultureId, reviewList, reviewCreateDTO);
-            }
-            default -> throw new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND);
-        }
-
         addWorkOfCultureToSeenListWithoutReview(workOfCultureType, workOfCultureId);
+
+        return switch (workOfCultureType) {
+            case ANIME -> animeReviewMapper.toReviewResponseDTO(reviewListService.addAnime(workOfCultureId, reviewList, reviewCreateDTO));
+
+            case MANGA -> mangaReviewMapper.toReviewResponseDTO(reviewListService.addManga(workOfCultureId, reviewList, reviewCreateDTO));
+
+            case MOVIE -> movieReviewMapper.toReviewResponseDTO(reviewListService.addMovie(workOfCultureId, reviewList, reviewCreateDTO));
+
+            case TVSERIES -> tvSeriesReviewMapper.toReviewResponseDTO(reviewListService.addTvSeries(workOfCultureId, reviewList, reviewCreateDTO));
+
+            case GAME -> gameReviewMapper.toReviewResponseDTO(reviewListService.addGame(workOfCultureId, reviewList, reviewCreateDTO));
+        };
+
+        //  addWorkOfCultureToSeenListWithoutReview(workOfCultureType, workOfCultureId);
 
     }
 

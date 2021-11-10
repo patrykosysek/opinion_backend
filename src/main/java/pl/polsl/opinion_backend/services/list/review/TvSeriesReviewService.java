@@ -57,4 +57,17 @@ public class TvSeriesReviewService extends BasicService<TvSeriesReview, TvSeries
         return repository.findAllByReviewList(reviewList, pageable);
     }
 
+    public Page<TvSeriesReview> findAllByTvSeriesId(UUID id, Pageable pageable) {
+        return repository.findAllByTvSeries_Id(id, pageable);
+    }
+
+    public Page<TvSeriesReview> findAllByTvSeriesIdOrderByCreateDateAsc(UUID id, Pageable pageable) {
+        return repository.findAllByTvSeries_IdOrderByCreateDateAsc(id, pageable);
+    }
+
+    public Page<TvSeriesReview> findAllByTvSeriesIdOrderByCreateDateDesc(UUID id, Pageable pageable) {
+        return repository.findAllByTvSeries_IdOrderByCreateDateDesc(id, pageable);
+    }
+
+
 }

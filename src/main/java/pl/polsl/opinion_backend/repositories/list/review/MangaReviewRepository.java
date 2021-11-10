@@ -3,9 +3,7 @@ package pl.polsl.opinion_backend.repositories.list.review;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
-import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.manga.MangaReview;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
@@ -32,5 +30,11 @@ public interface MangaReviewRepository extends BasicRepository<MangaReview, UUID
     Set<MangaReview> findAllByMangaGenresName(String name);
 
     Page<MangaReview> findAllByReviewList(ReviewList reviewList, Pageable pageable);
+
+    Page<MangaReview> findAllByManga_Id(UUID id, Pageable pageable);
+
+    Page<MangaReview> findAllByManga_IdOrderByCreateDateAsc(UUID id,Pageable pageable);
+
+    Page<MangaReview> findAllByManga_IdOrderByCreateDateDesc(UUID id, Pageable pageable);
 
 }

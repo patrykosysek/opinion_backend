@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
-import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.manga.MangaReview;
 import pl.polsl.opinion_backend.repositories.list.review.MangaReviewRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
@@ -56,6 +55,18 @@ public class MangaReviewService extends BasicService<MangaReview, MangaReviewRep
 
     public Page<MangaReview> getAllByReviewList(ReviewList reviewList, Pageable pageable) {
         return repository.findAllByReviewList(reviewList, pageable);
+    }
+
+    public Page<MangaReview> findAllByMangaId(UUID id, Pageable pageable) {
+        return repository.findAllByManga_Id(id, pageable);
+    }
+
+    public Page<MangaReview> findAllByMangaIdOrderByCreateDateAsc(UUID id, Pageable pageable) {
+        return repository.findAllByManga_IdOrderByCreateDateAsc(id, pageable);
+    }
+
+    public Page<MangaReview> findAllByMangaIdOrderByCreateDateDesc(UUID id, Pageable pageable) {
+        return repository.findAllByManga_IdOrderByCreateDateDesc(id, pageable);
     }
 
 }

@@ -96,5 +96,13 @@ public class ErrorMessages {
     public static final String START_DATE_REQUIRED = "startDate.required";
     public static final String END_DATE_REQUIRED = "endDate.required";
 
+    public static final String ANIME_REVIEW_LIKE_NOT_FOUND = "animeReviewLike.notFound";
+    public static final String MANGA_REVIEW_LIKE_NOT_FOUND = "mangaReviewLike.notFound";
+    public static final String MOVIE_REVIEW_LIKE_NOT_FOUND = "movieReviewLike.notFound";
+    public static final String TV_SERIES_REVIEW_LIKE_NOT_FOUND = "tvSeriesReviewLike.notFound";
+    public static final String GAME_REVIEW_LIKE_NOT_FOUND = "gameReviewLike.notFound";
+
+    public static final String REVIEW_ALREADY_LIKED = "review.alreadyLiked";
+    public static final String REVIEW_ALREADY_DISLIKED = "review.alreadyDisliked";
 
 }

@@ -31,4 +31,10 @@ public interface TvSeriesReviewRepository extends BasicRepository<TvSeriesReview
 
     Page<TvSeriesReview> findAllByReviewList(ReviewList reviewList, Pageable pageable);
 
+    Page<TvSeriesReview> findAllByTvSeries_Id(UUID id, Pageable pageable);
+
+    Page<TvSeriesReview> findAllByTvSeries_IdOrderByCreateDateAsc(UUID id, Pageable pageable);
+
+    Page<TvSeriesReview> findAllByTvSeries_IdOrderByCreateDateDesc(UUID id, Pageable pageable);
+
 }

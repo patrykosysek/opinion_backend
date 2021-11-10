@@ -57,4 +57,16 @@ public class AnimeReviewService extends BasicService<AnimeReview, AnimeReviewRep
         return repository.findAllByReviewList(reviewList, pageable);
     }
 
+    public Page<AnimeReview> findAllByAnimeId(UUID id, Pageable pageable) {
+        return repository.findAllByAnime_Id(id, pageable);
+    }
+
+    public Page<AnimeReview> findAllByAnimeIdOrderByCreateDateAsc(UUID id, Pageable pageable) {
+        return repository.findAllByAnime_IdOrderByCreateDateAsc(id, pageable);
+    }
+
+    public Page<AnimeReview> findAllByAnimeIdOrderByCreateDateDesc(UUID id, Pageable pageable) {
+        return repository.findAllByAnime_IdOrderByCreateDateDesc(id, pageable);
+    }
+
 }

@@ -3,9 +3,7 @@ package pl.polsl.opinion_backend.repositories.list.review;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
-import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameReview;
 import pl.polsl.opinion_backend.repositories.base.BasicRepository;
 
@@ -32,6 +30,12 @@ public interface GameReviewRepository extends BasicRepository<GameReview, UUID> 
     Set<GameReview> findAllByGameGenresName(String name);
 
     Page<GameReview> findAllByReviewList(ReviewList reviewList, Pageable pageable);
+
+    Page<GameReview> findAllByGame_Id(UUID id, Pageable pageable);
+
+    Page<GameReview> findAllByGame_IdOrderByCreateDateAsc(UUID id, Pageable pageable);
+
+    Page<GameReview> findAllByGame_IdOrderByCreateDateDesc(UUID id, Pageable pageable);
 
 
 }

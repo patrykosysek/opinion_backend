@@ -49,12 +49,58 @@ public class ReviewController {
     }
 
     @Secured(ROLE_REVIEW_LIST)
-    @Operation(summary = "Add work of culture to current user review list")
+    @Operation(summary = "Add review to work of culture")
     @ApiResponse(responseCode = "201", description = "Work of culture successfully added")
     @PostMapping("/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @RequestBody ReviewCreateDTO reviewCreateDTO) {
-        listManagingService.addWorkOfCultureWithReview(workOfCultureType, workOfCultureId, reviewCreateDTO);
+    public ReviewResponseDTO create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @RequestBody ReviewCreateDTO reviewCreateDTO) {
+        return listManagingService.addWorkOfCultureWithReview(workOfCultureType, workOfCultureId, reviewCreateDTO);
     }
+
+    @Secured(ROLE_REVIEW_LIST)
+    @Operation(summary = "Like pointed review")
+    @ApiResponse(responseCode = "201", description = "Review successfully liked")
+    @PatchMapping("/{workOfCultureType}/{id}/like")
+    @ResponseStatus(HttpStatus.OK)
+    public ReviewResponseDTO likeReview(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID id) {
+        return reviewManagingService.likeReview(id, workOfCultureType);
+    }
+
+    @Secured(ROLE_REVIEW_LIST)
+    @Operation(summary = "Dislike pointed review")
+    @ApiResponse(responseCode = "201", description = "Review successfully liked")
+    @PatchMapping("/{workOfCultureType}/{id}/dislike")
+    @ResponseStatus(HttpStatus.OK)
+    public ReviewResponseDTO dislikeReview(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID id) {
+        return reviewManagingService.dislikeReview(id, workOfCultureType);
+    }
+
+    @Secured(ROLE_REVIEW_LIST)
+    @Operation(summary = "Get pointed work of culture reviews")
+    @ApiResponse(responseCode = "200", description = "Reviews successfully returned")
+    @GetMapping("/{workOfCultureType}/{workOfCultureId}/reviews")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<ReviewResponseDTO> getWorkOfCultureReviews(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @PageableDefault Pageable pageable) {
+        return reviewManagingService.getWorkOfCultureReviews(workOfCultureType, workOfCultureId, pageable);
+    }
+
+    @Secured(ROLE_REVIEW_LIST)
+    @Operation(summary = "Get pointed work of culture reviews by likes")
+    @ApiResponse(responseCode = "200", description = "Reviews successfully returned")
+    @GetMapping("/{workOfCultureType}/{workOfCultureId}/likes")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<ReviewResponseDTO> getWorkOfCultureReviewsByLikes(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @PageableDefault Pageable pageable, @RequestParam boolean favourite) {
+        return reviewManagingService.getReviewsByLikes(workOfCultureType, workOfCultureId, pageable, favourite);
+    }
+
+    @Secured(ROLE_REVIEW_LIST)
+    @Operation(summary = "Get pointed work of culture reviews by date")
+    @ApiResponse(responseCode = "200", description = "Reviews successfully returned")
+    @GetMapping("/{workOfCultureType}/{workOfCultureId}/date")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<ReviewResponseDTO> getWorkOfCultureReviewsByDate(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @PageableDefault Pageable pageable, @RequestParam boolean oldest) {
+        return reviewManagingService.getReviewsByDate(workOfCultureType, workOfCultureId, pageable, oldest);
+    }
+
 
 }

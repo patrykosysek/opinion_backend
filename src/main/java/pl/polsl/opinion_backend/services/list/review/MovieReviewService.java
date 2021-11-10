@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
-import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.movies.MovieReview;
 import pl.polsl.opinion_backend.repositories.list.review.MovieReviewRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
@@ -56,6 +55,18 @@ public class MovieReviewService extends BasicService<MovieReview, MovieReviewRep
 
     public Page<MovieReview> getAllByReviewList(ReviewList reviewList, Pageable pageable) {
         return repository.findAllByReviewList(reviewList, pageable);
+    }
+
+    public Page<MovieReview> findAllByMovieId(UUID id, Pageable pageable) {
+        return repository.findAllByMovie_Id(id, pageable);
+    }
+
+    public Page<MovieReview> findAllByMovieIdOrderByCreateDateAsc(UUID id, Pageable pageable) {
+        return repository.findAllByMovie_IdOrderByCreateDateAsc(id, pageable);
+    }
+
+    public Page<MovieReview> findAllByMovieIdOrderByCreateDateDesc(UUID id, Pageable pageable) {
+        return repository.findAllByMovie_IdOrderByCreateDateDesc(id, pageable);
     }
 
 }
