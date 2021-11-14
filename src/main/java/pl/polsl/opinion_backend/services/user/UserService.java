@@ -88,24 +88,16 @@ public class UserService extends BasicService<User, UserRepository> implements U
 
         for (PreferenceCreateDTO p : dto.getPreferences()) {
             switch (p.getWorkOfCultureType()) {
-                case ANIME:
-                    if (!animeService.existsByTitle(p.getFavouriteTitle()) || !animeMangaGenreService.existsByName(p.getFavouriteGenre().getName()))
+                case ANIME, MANGA:
+                    if (!animeMangaGenreService.existsByName(p.getFavouriteGenre().getName()))
                         throw new IllegalArgumentException(WRONG_PREFERENCE);
                     break;
-                case MANGA:
-                    if (!mangaService.existsByTitle(p.getFavouriteTitle()) || !animeMangaGenreService.existsByName(p.getFavouriteGenre().getName()))
-                        throw new IllegalArgumentException(WRONG_PREFERENCE);
-                    break;
-                case MOVIE:
-                    if (!movieService.existsByTitle(p.getFavouriteTitle()) || !movieTvSeriesGenreService.existsByName(p.getFavouriteGenre().getName()))
-                        throw new IllegalArgumentException(WRONG_PREFERENCE);
-                    break;
-                case TVSERIES:
-                    if (!tvSeriesService.existsByTitle(p.getFavouriteTitle()) || !movieTvSeriesGenreService.existsByName(p.getFavouriteGenre().getName()))
+                case MOVIE, TVSERIES:
+                    if (!movieTvSeriesGenreService.existsByName(p.getFavouriteGenre().getName()))
                         throw new IllegalArgumentException(WRONG_PREFERENCE);
                     break;
                 case GAME:
-                    if (!gameService.existsByTitle(p.getFavouriteTitle()) || !gameGenreService.existsByName(p.getFavouriteGenre().getName()))
+                    if (!gameGenreService.existsByName(p.getFavouriteGenre().getName()))
                         throw new IllegalArgumentException(WRONG_PREFERENCE);
                     break;
                 default:

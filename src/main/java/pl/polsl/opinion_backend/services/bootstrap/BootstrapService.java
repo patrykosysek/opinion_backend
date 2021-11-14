@@ -120,7 +120,7 @@ public class BootstrapService {
         Preference preference = new Preference();
         preference.setFavouriteGenre(GenreType.ACTION);
         preference.setWorkOfCultureType(WorkOfCultureType.ANIME);
-        preference.setFavouriteTitle("Bansoukousaten");
+//        preference.setFavouriteTitle("Bansoukousaten");
         user.addPreference(preference);
         user.getRoleGroups().add(roleGroupService.getByRoleName("ADMIN"));
         userService.save(user);

@@ -179,7 +179,7 @@ public class WorkOfCultureManagingService {
     private Page<WorkOfCultureResponseDTO> getAnimeRecommendationByPreference(Preference preference, Pageable pageable) {
         if (preference != null) {
             Set<Anime> animeSet = animeService.getAllByGenreName(preference.getFavouriteGenre().getName());
-            animeSet.remove(animeSet.stream().filter(a -> a.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
+//            animeSet.remove(animeSet.stream().filter(a -> a.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
             List<Anime> animeList = animeSet.stream().sorted(Comparator.comparingDouble(Anime::workOfCultureInterest).reversed()).collect(Collectors.toList());
             return new PageImpl<>(animeList, pageable, animeList.size()).map(animeMapper::toWorkOfCultureResponseDTO);
 
@@ -189,7 +189,7 @@ public class WorkOfCultureManagingService {
     private Page<WorkOfCultureResponseDTO> getMangaRecommendationByPreference(Preference preference, Pageable pageable) {
         if (preference != null) {
             Set<Manga> mangaSet = mangaService.getAllByGenreName(preference.getFavouriteGenre().getName());
-            mangaSet.remove(mangaSet.stream().filter(m -> m.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
+//            mangaSet.remove(mangaSet.stream().filter(m -> m.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
             List<Manga> mangaList = mangaSet.stream().sorted(Comparator.comparingDouble(Manga::workOfCultureInterest).reversed()).collect(Collectors.toList());
             return new PageImpl<>(mangaList, pageable, mangaList.size()).map(mangaMapper::toWorkOfCultureResponseDTO);
         } else return getMangaRecommendation(Optional.empty(), pageable);
@@ -198,7 +198,7 @@ public class WorkOfCultureManagingService {
     private Page<WorkOfCultureResponseDTO> getMovieRecommendationByPreference(Preference preference, Pageable pageable) {
         if (preference != null) {
             Set<Movie> movieSet = movieService.getAllByGenreName(preference.getFavouriteGenre().getName());
-            movieSet.remove(movieSet.stream().filter(m -> m.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
+//            movieSet.remove(movieSet.stream().filter(m -> m.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
             List<Movie> movieList = movieSet.stream().sorted(Comparator.comparingDouble(Movie::workOfCultureInterest).reversed()).collect(Collectors.toList());
             return new PageImpl<>(movieList, pageable, movieList.size()).map(movieMapper::toWorkOfCultureResponseDTO);
         } else return getMovieRecommendation(Optional.empty(), pageable);
@@ -207,7 +207,7 @@ public class WorkOfCultureManagingService {
     private Page<WorkOfCultureResponseDTO> getGameRecommendationByPreference(Preference preference, Pageable pageable) {
         if (preference != null) {
             Set<Game> gameSet = gameService.getAllByGenreName(preference.getFavouriteGenre().getName());
-            gameSet.remove(gameSet.stream().filter(g -> g.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
+//            gameSet.remove(gameSet.stream().filter(g -> g.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
             List<Game> gameList = gameSet.stream().sorted(Comparator.comparingDouble(Game::workOfCultureInterest).reversed()).collect(Collectors.toList());
             return new PageImpl<>(gameList, pageable, gameList.size()).map(gameMapper::toWorkOfCultureResponseDTO);
         } else return getGameRecommendation(Optional.empty(), pageable);
@@ -216,7 +216,7 @@ public class WorkOfCultureManagingService {
     private Page<WorkOfCultureResponseDTO> getTvSeriesRecommendationByPreference(Preference preference, Pageable pageable) {
         if (preference != null) {
             Set<TvSeries> tvSeriesSet = tvSeriesService.getAllByGenreName(preference.getFavouriteGenre().getName());
-            tvSeriesSet.remove(tvSeriesSet.stream().filter(t -> t.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
+//            tvSeriesSet.remove(tvSeriesSet.stream().filter(t -> t.getTitle().equals(preference.getFavouriteTitle())).findFirst().orElse(null));
             List<TvSeries> tvSeriesList = tvSeriesSet.stream().sorted(Comparator.comparingDouble(TvSeries::workOfCultureInterest).reversed()).collect(Collectors.toList());
             return new PageImpl<>(tvSeriesList, pageable, tvSeriesList.size()).map(tvSeriesMapper::toWorkOfCultureResponseDTO);
         } else return getTvSeriesRecommendation(Optional.empty(), pageable);

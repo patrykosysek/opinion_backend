@@ -28,7 +28,7 @@ public class Preference extends BasicAuditing {
     @Enumerated(value = EnumType.STRING)
     private GenreType favouriteGenre;
 
-    @Column(nullable = false)
-    private String favouriteTitle;
+//    @Column(nullable = false)
+//    private String favouriteTitle;
 
 }
