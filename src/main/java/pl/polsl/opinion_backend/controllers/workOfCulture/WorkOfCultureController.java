@@ -143,7 +143,7 @@ public class WorkOfCultureController {
     @ApiResponse(responseCode = "200", description = "Recommendation successfully returned")
     @GetMapping(value = "/recommendation")
     @ResponseStatus(HttpStatus.OK)
-    public Set<WorkOfCultureResponseDTO> getRecommendation(@PageableDefault Pageable pageable) {
+    public Set<WorkOfCultureResponseDTO> getRecommendation(Pageable pageable) {
         return workOfCultureManagingService.getRecommendedWorks(pageable);
     }
 
