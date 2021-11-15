@@ -33,8 +33,8 @@ public class WatchListController {
     @ApiResponse(responseCode = "201", description = "Work of culture successfully added")
     @PostMapping("/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
-        listManagingService.addWorkOfCultureToWatchList(workOfCultureType, workOfCultureId);
+    public UUID create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
+       return listManagingService.addWorkOfCultureToWatchList(workOfCultureType, workOfCultureId);
     }
 
     @Secured(ROLE_WATCH_LIST)

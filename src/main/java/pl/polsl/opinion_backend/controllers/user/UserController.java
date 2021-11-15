@@ -34,10 +34,9 @@ public class UserController {
     private final UserService userService;
     private final DiscussionManagingService discussionManagingService;
 
-    @Secured(ROLE_USER_ALL)
     @Operation(summary = "Create user")
     @ApiResponse(responseCode = "201", description = "User successfully created")
-    @PostMapping
+    @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDTO create(@RequestBody @Valid UserCreateDTO dto) {
         return userMapper.toUserResponseDTO(userService.create(dto));

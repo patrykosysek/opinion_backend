@@ -76,6 +76,15 @@ public class WorkOfCultureController {
         return workOfCultureManagingService.getWorksOfCultureGenres();
     }
 
+    @Operation(summary = "Get all works of culture genres")
+    @ApiResponse(responseCode = "200", description = "Genres successfully returned")
+    @GetMapping(value = "/allGenres")
+    @ResponseStatus(HttpStatus.OK)
+    public Set<GenreType> getAllWorksGenres() {
+        return workOfCultureManagingService.getAllWorksOfCultureGenres();
+    }
+
+
     @Operation(summary = "Get work of culture filtered by title")
     @ApiResponse(responseCode = "200", description = "Work of culture successfully returned")
     @GetMapping(value = "/{workOfCultureType}/filter")

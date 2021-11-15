@@ -33,8 +33,8 @@ public class SeenListController {
     @ApiResponse(responseCode = "201", description = "Work of culture successfully added")
     @PostMapping("/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
-        listManagingService.addWorkOfCultureToSeenList(workOfCultureType, workOfCultureId);
+    public UUID create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
+        return listManagingService.addWorkOfCultureToSeenList(workOfCultureType, workOfCultureId);
     }
 
     @Secured(ROLE_SEEN_LIST)

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.polsl.opinion_backend.dtos.user.PreferenceCreateDTO;
 import pl.polsl.opinion_backend.dtos.user.UserCreateDTO;
 import pl.polsl.opinion_backend.dtos.user.UserUpdateDTO;
+import pl.polsl.opinion_backend.entities.user.Preference;
 import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.mappers.qualifires.UsernameMapping;
 import pl.polsl.opinion_backend.mappers.user.UserMapper;
@@ -106,6 +107,9 @@ public class UserService extends BasicService<User, UserRepository> implements U
         }
 
         User user = userMapper.toUser(dto);
+        for (Preference preference : user.getPreferences()) {
+            preference.setUser(user);
+        }
         return this.save(user);
     }
 

@@ -236,8 +236,14 @@ public class WorkOfCultureManagingService {
             }
 
         }
+
         return workGenreResponseDTOSet;
     }
+
+    public Set<GenreType> getAllWorksOfCultureGenres() {
+        return Arrays.stream(GenreType.values()).collect(Collectors.toSet());
+    }
+
 
     public Page<WorkOfCultureResponseDTO> getWorkOfCultureFilteredByTitle(String title, WorkOfCultureType workOfCultureType, Pageable pageable) {
         return switch (workOfCultureType) {

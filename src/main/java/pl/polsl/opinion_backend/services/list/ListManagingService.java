@@ -97,7 +97,7 @@ public class ListManagingService {
     }
 
     @Transactional
-    public void addWorkOfCultureToWatchList(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
+    public UUID addWorkOfCultureToWatchList(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
         UUID userId = userService.getCurrentUser().getId();
         User user = userService.getById(userId);
         WatchList watchList = user.getWatchList();
@@ -120,6 +120,7 @@ public class ListManagingService {
             }
             default -> throw new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND);
         }
+        return workOfCultureId;
     }
 
     public void addWorkOfCultureToSeenListWithoutReview(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
@@ -173,7 +174,7 @@ public class ListManagingService {
         }
     }
 
-    public void addWorkOfCultureToSeenList(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
+    public UUID addWorkOfCultureToSeenList(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
         UUID userId = userService.getCurrentUser().getId();
         User user = userService.getById(userId);
         WatchList watchList = user.getWatchList();
@@ -208,6 +209,7 @@ public class ListManagingService {
             }
             default -> throw new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND);
         }
+        return workOfCultureId;
     }
 
 

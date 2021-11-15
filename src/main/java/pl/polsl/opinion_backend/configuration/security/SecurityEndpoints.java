@@ -21,7 +21,8 @@ public enum SecurityEndpoints {
 
     RECOMMENDATION("/work-of-culture/{workOfCultureType}", false),
     RECOMMENDED("/work-of-culture/recommendation", false),
-    FILTRATION("/work-of-culture/{workOfCultureType}/filter", false);
+    FILTRATION("/work-of-culture/{workOfCultureType}/filter", false),
+    REGISTRATION("/users/registration", false);
 
     public final String value;
     public final boolean authentication;
