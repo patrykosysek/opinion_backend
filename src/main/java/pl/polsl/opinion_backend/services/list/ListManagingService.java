@@ -213,7 +213,7 @@ public class ListManagingService {
     }
 
 
-    public void removeWorkOfCulture(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
+    public UUID removeWorkOfCulture(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
         UUID userId = userService.getCurrentUser().getId();
         User user = userService.getById(userId);
         WatchList watchList = user.getWatchList();
@@ -226,6 +226,9 @@ public class ListManagingService {
             case GAME -> watchListService.removeGame(workOfCultureId, watchList);
             default -> throw new IllegalArgumentException(WORK_OF_CULTURE_NOT_FOUND);
         }
+
+        return workOfCultureId;
+
     }
 
 

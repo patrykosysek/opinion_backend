@@ -34,7 +34,7 @@ public class WatchListController {
     @PostMapping("/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.CREATED)
     public UUID create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
-       return listManagingService.addWorkOfCultureToWatchList(workOfCultureType, workOfCultureId);
+        return listManagingService.addWorkOfCultureToWatchList(workOfCultureType, workOfCultureId);
     }
 
     @Secured(ROLE_WATCH_LIST)
@@ -42,8 +42,8 @@ public class WatchListController {
     @ApiResponse(responseCode = "200", description = "Work of culture successfully removed")
     @DeleteMapping(value = "/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.OK)
-    public void remove(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
-        listManagingService.removeWorkOfCulture(workOfCultureType, workOfCultureId);
+    public UUID remove(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
+        return listManagingService.removeWorkOfCulture(workOfCultureType, workOfCultureId);
     }
 
     @Secured(ROLE_WATCH_LIST)
