@@ -6,6 +6,8 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.dtos.workOfCulture.review.ReviewResponseDTO;
+import pl.polsl.opinion_backend.entities.user.ReviewList;
+import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReview;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeReviewLike;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameReview;
@@ -400,4 +402,33 @@ public class ReviewManagingService {
         return new PageImpl<>(tvSeriesReviews, pageable, tvSeriesReviews.size()).map(tvSeriesReviewMapper::toReviewResponseDTO);
     }
 
+    public boolean hasUserAddReview(WorkOfCultureType workOfCultureType, UUID workOfCultureId) {
+        UUID userId = userService.getCurrentUser().getId();
+        User user = userService.getById(userId);
+        ReviewList reviewList = user.getReviewList();
+
+        switch (workOfCultureType) {
+            case ANIME -> {
+                return animeReviewService.existsByReviewListAndAnimeId(reviewList, workOfCultureId);
+            }
+            case MANGA -> {
+                return mangaReviewService.existsByReviewListAndMangaId(reviewList, workOfCultureId);
+
+            }
+            case MOVIE -> {
+                return movieReviewService.existsByReviewListAndMovieId(reviewList, workOfCultureId);
+
+            }
+            case TVSERIES -> {
+                return tvSeriesReviewService.existsByReviewListAndTvSeriesId(reviewList, workOfCultureId);
+
+            }
+            case GAME -> {
+                return gameReviewService.existsByReviewListAndGameId(reviewList, workOfCultureId);
+
+            }
+
+        }
+        return false;
+    }
 }

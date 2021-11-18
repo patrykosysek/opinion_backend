@@ -103,4 +103,14 @@ public class ReviewController {
     }
 
 
+    @Secured(ROLE_REVIEW_LIST)
+    @Operation(summary = "Returns answer if user already added review to pointed work of culture")
+    @ApiResponse(responseCode = "200", description = "Reviews successfully returned")
+    @GetMapping("/{workOfCultureType}/{workOfCultureId}/reviewed")
+    @ResponseStatus(HttpStatus.OK)
+    public boolean hasUserAddReview(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId) {
+        return reviewManagingService.hasUserAddReview(workOfCultureType, workOfCultureId);
+    }
+
+
 }
