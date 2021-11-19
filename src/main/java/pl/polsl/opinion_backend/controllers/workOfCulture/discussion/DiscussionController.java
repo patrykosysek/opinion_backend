@@ -16,6 +16,7 @@ import pl.polsl.opinion_backend.dtos.workOfCulture.discussion.*;
 import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.services.works.discussion.DiscussionManagingService;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_DISCUSSION;
@@ -33,7 +34,7 @@ public class DiscussionController {
     @ApiResponse(responseCode = "201", description = "Discussion successfully added")
     @PostMapping("/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public DiscussionResponseDTO create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @RequestBody DiscussionCreateDTO discussionCreateDTO) {
+    public DiscussionResponseDTO create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @RequestBody @Valid DiscussionCreateDTO discussionCreateDTO) {
         return discussionManagingService.addDiscussion(workOfCultureType, workOfCultureId, discussionCreateDTO);
     }
 
@@ -42,7 +43,7 @@ public class DiscussionController {
     @ApiResponse(responseCode = "201", description = "Answer successfully added")
     @PostMapping("/{workOfCultureType}/{discussionId}/answer")
     @ResponseStatus(HttpStatus.CREATED)
-    public AnswerResponseDTO createAnswer(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID discussionId, @RequestBody AnswerCreateDTO answerCreateDTO) {
+    public AnswerResponseDTO createAnswer(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID discussionId, @RequestBody @Valid AnswerCreateDTO answerCreateDTO) {
         return discussionManagingService.addAnswer(workOfCultureType, discussionId, answerCreateDTO);
     }
 

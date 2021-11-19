@@ -18,6 +18,7 @@ import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.services.list.ListManagingService;
 import pl.polsl.opinion_backend.services.works.review.ReviewManagingService;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_REVIEW_LIST;
@@ -53,7 +54,7 @@ public class ReviewController {
     @ApiResponse(responseCode = "201", description = "Work of culture successfully added")
     @PostMapping("/{workOfCultureType}/{workOfCultureId}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ReviewResponseDTO create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @RequestBody ReviewCreateDTO reviewCreateDTO) {
+    public ReviewResponseDTO create(@PathVariable WorkOfCultureType workOfCultureType, @PathVariable UUID workOfCultureId, @RequestBody @Valid ReviewCreateDTO reviewCreateDTO) {
         return listManagingService.addWorkOfCultureWithReview(workOfCultureType, workOfCultureId, reviewCreateDTO);
     }
 
