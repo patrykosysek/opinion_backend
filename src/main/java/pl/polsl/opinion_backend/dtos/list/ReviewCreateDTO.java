@@ -16,7 +16,7 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.REVIEW_SIZE;
 public class ReviewCreateDTO {
 
     @NotBlank(message = REVIEW_REQUIRED)
-    @Size(max = 200, message = REVIEW_SIZE)
+    @Size(max = 3000, message = REVIEW_SIZE)
     private String review;
 
 }
