@@ -14,11 +14,9 @@ import java.util.UUID;
 public class DiscussionResponseDTO {
 
     private UUID id;
-
     private String topic;
-
     private LocalDate createDate;
-
     private String title;
+    private String text;
 
 }

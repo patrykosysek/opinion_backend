@@ -9,6 +9,7 @@ import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussionAns
 import pl.polsl.opinion_backend.repositories.works.anime.AnimeDiscussionAnswerRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -27,8 +28,8 @@ public class AnimeDiscussionAnswerService extends BasicService<AnimeDiscussionAn
         repository.deleteAllByCreateBy(createBy);
     }
 
-    public Page<AnimeDiscussionAnswer> findAllByDiscussion(AnimeDiscussion animeDiscussion, Pageable pageable) {
-        return repository.findAllByDiscussion(animeDiscussion, pageable);
+    public List<AnimeDiscussionAnswer> findAllByDiscussion(AnimeDiscussion animeDiscussion) {
+        return repository.findAllByDiscussion(animeDiscussion);
     }
 
 }

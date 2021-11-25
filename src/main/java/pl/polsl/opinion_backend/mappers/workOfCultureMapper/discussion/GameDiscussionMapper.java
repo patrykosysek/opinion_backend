@@ -18,6 +18,7 @@ import java.time.OffsetDateTime;
 public interface GameDiscussionMapper {
 
     @Mapping(target = "title", source = "gameDiscussion.game.title")
+    @Mapping(target = "text",source = "gameDiscussion.text")
     DiscussionResponseDTO toDiscussionResponseDTO(GameDiscussion gameDiscussion);
 
     default LocalDate toLocalDate(OffsetDateTime offsetDateTime) {

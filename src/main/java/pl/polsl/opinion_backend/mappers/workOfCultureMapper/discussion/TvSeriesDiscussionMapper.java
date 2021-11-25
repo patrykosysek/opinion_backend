@@ -18,6 +18,7 @@ import java.time.OffsetDateTime;
 public interface TvSeriesDiscussionMapper {
 
     @Mapping(target = "title", source = "tvSeriesDiscussion.tvSeries.title")
+    @Mapping(target = "text",source = "tvSeriesDiscussion.text")
     DiscussionResponseDTO toDiscussionResponseDTO(TvSeriesDiscussion tvSeriesDiscussion);
 
     default LocalDate toLocalDate(OffsetDateTime offsetDateTime) {

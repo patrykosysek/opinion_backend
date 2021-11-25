@@ -16,7 +16,7 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.TEXT_SIZE;
 public class AnswerCreateDTO {
 
     @NotBlank(message = TEXT_REQUIRED)
-    @Size(max = 200, message = TEXT_SIZE)
+    @Size(max = 3000, message = TEXT_SIZE)
     private String text;
 
 }

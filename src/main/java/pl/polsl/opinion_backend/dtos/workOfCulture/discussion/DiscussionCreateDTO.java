@@ -19,7 +19,7 @@ public class DiscussionCreateDTO {
     private String topic;
 
     @NotBlank(message = TEXT_REQUIRED)
-    @Size(max = 300, message = TEXT_SIZE)
+    @Size(max = 3000, message = TEXT_SIZE)
     private String text;
 
 }

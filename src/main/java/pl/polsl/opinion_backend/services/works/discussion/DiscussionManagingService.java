@@ -3,15 +3,21 @@ package pl.polsl.opinion_backend.services.works.discussion;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.polsl.opinion_backend.dtos.workOfCulture.discussion.*;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussion;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeDiscussionAnswer;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameDiscussion;
+import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameDiscussionAnswer;
 import pl.polsl.opinion_backend.entities.worksOfCulture.manga.MangaDiscussion;
+import pl.polsl.opinion_backend.entities.worksOfCulture.manga.MangaDiscussionAnswer;
 import pl.polsl.opinion_backend.entities.worksOfCulture.movies.MovieDiscussion;
+import pl.polsl.opinion_backend.entities.worksOfCulture.movies.MovieDiscussionAnswer;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesDiscussion;
+import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesDiscussionAnswer;
 import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.mappers.workOfCultureMapper.discussion.*;
 import pl.polsl.opinion_backend.mappers.workOfCultureMapper.discussion.answer.*;
@@ -27,6 +33,7 @@ import pl.polsl.opinion_backend.services.works.movie.MovieDiscussionService;
 import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesDiscussionAnswerService;
 import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesDiscussionService;
 
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -223,35 +230,40 @@ public class DiscussionManagingService {
 
     public DiscussionInformationResponseDTO getAnimeDiscussionInformation(UUID id, Pageable pageable) {
         AnimeDiscussion animeDiscussion = animeDiscussionService.getById(id);
-        Page<AnswerResponseDTO> answers = animeDiscussionAnswerService.findAllByDiscussion(animeDiscussion, pageable).map(animeAnswerDiscussionMapper::toAnswerResponseDTO);
+        List<AnimeDiscussionAnswer> animeDiscussionAnswerList = animeDiscussionAnswerService.findAllByDiscussion(animeDiscussion);
+        Page<AnswerResponseDTO> answers = new PageImpl<>(animeDiscussionAnswerList, pageable, animeDiscussionAnswerList.size()).map(animeAnswerDiscussionMapper::toAnswerResponseDTO);
 
         return animeDiscussionMapper.toDiscussionInformationResponseDTO(animeDiscussion, answers);
     }
 
     public DiscussionInformationResponseDTO getMangaDiscussionInformation(UUID id, Pageable pageable) {
         MangaDiscussion mangaDiscussion = mangaDiscussionService.getById(id);
-        Page<AnswerResponseDTO> answers = mangaDiscussionAnswerService.findAllByDiscussion(mangaDiscussion, pageable).map(mangaAnswerDiscussionMapper::toAnswerResponseDTO);
+        List<MangaDiscussionAnswer> mangaDiscussionAnswerList = mangaDiscussionAnswerService.findAllByDiscussion(mangaDiscussion);
+        Page<AnswerResponseDTO> answers = new PageImpl<>(mangaDiscussionAnswerList, pageable, mangaDiscussionAnswerList.size()).map(mangaAnswerDiscussionMapper::toAnswerResponseDTO);
 
         return mangaDiscussionMapper.toDiscussionInformationResponseDTO(mangaDiscussion, answers);
     }
 
     public DiscussionInformationResponseDTO getMovieDiscussionInformation(UUID id, Pageable pageable) {
         MovieDiscussion movieDiscussion = movieDiscussionService.getById(id);
-        Page<AnswerResponseDTO> answers = movieDiscussionAnswerService.findAllByDiscussion(movieDiscussion, pageable).map(movieAnswerDiscussionMapper::toAnswerResponseDTO);
+        List<MovieDiscussionAnswer> movieDiscussionAnswersList = movieDiscussionAnswerService.findAllByDiscussion(movieDiscussion);
+        Page<AnswerResponseDTO> answers = new PageImpl<>(movieDiscussionAnswersList, pageable, movieDiscussionAnswersList.size()).map(movieAnswerDiscussionMapper::toAnswerResponseDTO);
 
         return movieDiscussionMapper.toDiscussionInformationResponseDTO(movieDiscussion, answers);
     }
 
     public DiscussionInformationResponseDTO getTvSeriesDiscussionInformation(UUID id, Pageable pageable) {
         TvSeriesDiscussion tvSeriesDiscussion = tvSeriesDiscussionService.getById(id);
-        Page<AnswerResponseDTO> answers = tvSeriesDiscussionAnswerService.findAllByDiscussion(tvSeriesDiscussion, pageable).map(tvSeriesAnswerDiscussionMapper::toAnswerResponseDTO);
+        List<TvSeriesDiscussionAnswer> tvSeriesDiscussionAnswerList = tvSeriesDiscussionAnswerService.findAllByDiscussion(tvSeriesDiscussion);
+        Page<AnswerResponseDTO> answers = new PageImpl<>(tvSeriesDiscussionAnswerList, pageable, tvSeriesDiscussionAnswerList.size()).map(tvSeriesAnswerDiscussionMapper::toAnswerResponseDTO);
 
         return tvSeriesDiscussionMapper.toDiscussionInformationResponseDTO(tvSeriesDiscussion, answers);
     }
 
     public DiscussionInformationResponseDTO getGameDiscussionInformation(UUID id, Pageable pageable) {
         GameDiscussion gameDiscussion = gameDiscussionService.getById(id);
-        Page<AnswerResponseDTO> answers = gameDiscussionAnswerService.findAllByDiscussion(gameDiscussion, pageable).map(gameAnswerDiscussionMapper::toAnswerResponseDTO);
+        List<GameDiscussionAnswer> gameDiscussionAnswerList = gameDiscussionAnswerService.findAllByDiscussion(gameDiscussion);
+        Page<AnswerResponseDTO> answers = new PageImpl<>(gameDiscussionAnswerList, pageable, gameDiscussionAnswerList.size()).map(gameAnswerDiscussionMapper::toAnswerResponseDTO);
 
         return gameDiscussionMapper.toDiscussionInformationResponseDTO(gameDiscussion, answers);
     }

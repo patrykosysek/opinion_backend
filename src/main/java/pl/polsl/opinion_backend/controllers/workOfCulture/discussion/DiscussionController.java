@@ -56,6 +56,7 @@ public class DiscussionController {
         return discussionManagingService.getDiscussionByCreateBy(workOfCultureType, pageable);
     }
 
+    //!//
     @Secured(ROLE_DISCUSSION)
     @Operation(summary = "Get current user discussions ordered by date desc")
     @ApiResponse(responseCode = "201", description = "Discussions successfully returned")
@@ -74,6 +75,7 @@ public class DiscussionController {
         return discussionManagingService.getDiscussionByCreateByAsc(workOfCultureType, pageable);
     }
 
+    //!//
     @Secured(ROLE_DISCUSSION)
     @Operation(summary = "Get current user discussions filtered by topic and ordered by date desc")
     @ApiResponse(responseCode = "201", description = "Discussions successfully returned")

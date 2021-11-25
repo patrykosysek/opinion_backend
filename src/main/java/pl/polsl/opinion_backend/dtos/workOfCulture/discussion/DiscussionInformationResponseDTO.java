@@ -19,6 +19,7 @@ public class DiscussionInformationResponseDTO {
     private LocalDate createDate;
     private String title;
     private String author;
+    private String text;
 
     Page<AnswerResponseDTO> answers;
 
