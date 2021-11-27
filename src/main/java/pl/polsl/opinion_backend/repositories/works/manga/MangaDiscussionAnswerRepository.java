@@ -13,6 +13,6 @@ public interface MangaDiscussionAnswerRepository extends BasicRepository<MangaDi
 
     void deleteAllByCreateBy(UUID createBy);
 
-    List<MangaDiscussionAnswer> findAllByDiscussion(MangaDiscussion mangaDiscussion);
+    List<MangaDiscussionAnswer> findAllByDiscussionOrderByCreateDateDesc(MangaDiscussion mangaDiscussion);
 
 }

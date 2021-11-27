@@ -13,6 +13,6 @@ public interface AnimeDiscussionAnswerRepository extends BasicRepository<AnimeDi
 
     void deleteAllByCreateBy(UUID createBy);
 
-    List<AnimeDiscussionAnswer> findAllByDiscussion(AnimeDiscussion animeDiscussion);
+    List<AnimeDiscussionAnswer> findAllByDiscussionOrderByCreateDateDesc(AnimeDiscussion animeDiscussion);
 
 }

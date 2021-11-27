@@ -27,7 +27,7 @@ public class MangaDiscussionAnswerService extends BasicService<MangaDiscussionAn
     }
 
     public List<MangaDiscussionAnswer> findAllByDiscussion(MangaDiscussion mangaDiscussion) {
-        return repository.findAllByDiscussion(mangaDiscussion);
+        return repository.findAllByDiscussionOrderByCreateDateDesc(mangaDiscussion);
     }
 
 }

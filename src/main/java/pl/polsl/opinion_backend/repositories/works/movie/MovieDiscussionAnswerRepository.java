@@ -13,6 +13,6 @@ public interface MovieDiscussionAnswerRepository extends BasicRepository<MovieDi
 
     void deleteAllByCreateBy(UUID createBy);
 
-    List<MovieDiscussionAnswer> findAllByDiscussion(MovieDiscussion movieDiscussion);
+    List<MovieDiscussionAnswer> findAllByDiscussionOrderByCreateDateDesc(MovieDiscussion movieDiscussion);
 
 }

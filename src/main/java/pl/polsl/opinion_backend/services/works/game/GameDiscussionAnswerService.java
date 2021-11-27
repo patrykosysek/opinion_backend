@@ -27,7 +27,7 @@ public class GameDiscussionAnswerService extends BasicService<GameDiscussionAnsw
     }
 
     public List<GameDiscussionAnswer> findAllByDiscussion(GameDiscussion gameDiscussion) {
-        return repository.findAllByDiscussion(gameDiscussion);
+        return repository.findAllByDiscussionOrderByCreateDateDesc(gameDiscussion);
     }
 
 }

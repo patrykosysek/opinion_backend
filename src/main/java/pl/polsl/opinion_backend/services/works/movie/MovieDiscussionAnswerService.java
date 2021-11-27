@@ -29,7 +29,7 @@ public class MovieDiscussionAnswerService extends BasicService<MovieDiscussionAn
     }
 
     public List<MovieDiscussionAnswer> findAllByDiscussion(MovieDiscussion movieDiscussion) {
-        return repository.findAllByDiscussion(movieDiscussion );
+        return repository.findAllByDiscussionOrderByCreateDateDesc(movieDiscussion );
     }
 
 }

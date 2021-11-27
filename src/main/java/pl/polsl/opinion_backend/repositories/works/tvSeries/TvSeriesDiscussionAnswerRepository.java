@@ -13,6 +13,6 @@ public interface TvSeriesDiscussionAnswerRepository extends BasicRepository<TvSe
 
     void deleteAllByCreateBy(UUID createBy);
 
-    List<TvSeriesDiscussionAnswer> findAllByDiscussion(TvSeriesDiscussion tvSeriesDiscussion);
+    List<TvSeriesDiscussionAnswer> findAllByDiscussionOrderByCreateDateDesc(TvSeriesDiscussion tvSeriesDiscussion);
 
 }

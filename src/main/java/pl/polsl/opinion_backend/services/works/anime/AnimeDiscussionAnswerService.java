@@ -29,7 +29,7 @@ public class AnimeDiscussionAnswerService extends BasicService<AnimeDiscussionAn
     }
 
     public List<AnimeDiscussionAnswer> findAllByDiscussion(AnimeDiscussion animeDiscussion) {
-        return repository.findAllByDiscussion(animeDiscussion);
+        return repository.findAllByDiscussionOrderByCreateDateDesc(animeDiscussion);
     }
 
 }

@@ -27,7 +27,7 @@ public class TvSeriesDiscussionAnswerService extends BasicService<TvSeriesDiscus
     }
 
     public List<TvSeriesDiscussionAnswer> findAllByDiscussion(TvSeriesDiscussion tvSeriesDiscussion) {
-        return repository.findAllByDiscussion(tvSeriesDiscussion);
+        return repository.findAllByDiscussionOrderByCreateDateDesc(tvSeriesDiscussion);
     }
 
 }

@@ -13,6 +13,6 @@ public interface GameDiscussionAnswerRepository extends BasicRepository<GameDisc
 
     void deleteAllByCreateBy(UUID createBy);
 
-    List<GameDiscussionAnswer> findAllByDiscussion(GameDiscussion gameDiscussion);
+    List<GameDiscussionAnswer> findAllByDiscussionOrderByCreateDateDesc(GameDiscussion gameDiscussion);
 
 }
