@@ -113,7 +113,7 @@ public class WorkOfCultureController {
     @Secured(ROLE_WORK_OF_CULTURE_STATISTIC)
     @Operation(summary = "Get pointed work of culture statistic")
     @ApiResponse(responseCode = "200", description = "Statistic successfully returned")
-    @GetMapping(value = "/{workOfCultureType}/{id}}/statistic")
+    @GetMapping(value = "/{workOfCultureType}/{id}/statistic")
     @ResponseStatus(HttpStatus.OK)
     public WorkOfCultureStatisticResponseDTO getWorkOfCultureStatistic(@PathVariable
                                                                                WorkOfCultureType workOfCultureType,
