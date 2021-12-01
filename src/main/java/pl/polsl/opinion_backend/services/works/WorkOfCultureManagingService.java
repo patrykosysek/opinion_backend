@@ -1,6 +1,7 @@
 package pl.polsl.opinion_backend.services.works;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -65,6 +66,7 @@ import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_
 
 @RequiredArgsConstructor
 @Service
+@Slf4j
 public class WorkOfCultureManagingService {
     private final AnimeService animeService;
     private final MangaService mangaService;
@@ -505,19 +507,19 @@ public class WorkOfCultureManagingService {
 
         int reviewCountBefore = gameReviewsBefore.size();
         int reviewCountGain = gameReviewsBetween.size();
-        int reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain;
+        int reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain == 0 ? 0 : 100;
 
         int discussionCountBefore = gameDiscussionsBefore.size();
         int discussionCountGain = gameDiscussionsBetween.size();
-        int discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain;
+        int discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain == 0 ? 0 : 100;
 
         int watchListCountBefore = gameWatchListsBefore.size();
         int watchListCountGain = gameWatchListsBetween.size();
-        int watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain;
+        int watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain == 0 ? 0 : 100;
 
         int seenListCountBefore = gameSeenListsBefore.size();
         int seenListCountGain = gameSeenListsBetween.size();
-        int seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain;
+        int seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain == 0 ? 0 : 100;
 
 
         StatisticTimeResponseDTO statisticTimeResponseDTO = new StatisticTimeResponseDTO();
@@ -603,22 +605,23 @@ public class WorkOfCultureManagingService {
             reviewCount = animeReviewService.findAllByGenresName(genreName).size();
             reviewCountBefore = animeReviewService.findAllByAnimeGenresAndCreateDateIsBefore(genreName, startDate).size();
             reviewCountGain = animeReviewService.findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain;
+            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain == 0 ? 0 : 100;
+
 
             discussionCount = animeDiscussionService.findAllByGenresName(genreName).size();
             discussionCountBefore = animeDiscussionService.findAllByAnimeGenresAndCreateDateIsBefore(genreName, startDate).size();
             discussionCountGain = animeDiscussionService.findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain;
+            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain == 0 ? 0 : 100;
 
             watchListCount = animeWatchListService.findAllByGenresName(genreName).size();
             watchListCountBefore = animeWatchListService.findAllByAnimeGenresAndCreateDateIsBefore(genreName, startDate).size();
             watchListCountGain = animeWatchListService.findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain;
+            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain == 0 ? 0 : 100;
 
             seenListCount = animeSeenListService.findAllByGenresName(genreName).size();
             seenListCountBefore = animeSeenListService.findAllByAnimeGenresAndCreateDateIsBefore(genreName, startDate).size();
             seenListCountGain = animeSeenListService.findAllByAnimeGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain;
+            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain == 0 ? 0 : 100;
 
             genreStatistic.setReviewCount(reviewCount);
             genreStatistic.setReviewCountBefore(reviewCountBefore);
@@ -628,7 +631,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setDiscussionCount(discussionCount);
             genreStatistic.setDiscussionCountBefore(discussionCountBefore);
             genreStatistic.setDiscussionCountGain(discussionCountGain);
-            genreStatistic.setReviewCountGainPercent(discussionCountGainPercent);
+            genreStatistic.setDiscussionCountGainPercent(discussionCountGainPercent);
 
             genreStatistic.setWatchListCount(watchListCount);
             genreStatistic.setWatchListCountBefore(watchListCountBefore);
@@ -638,7 +641,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setSeenListCount(seenListCount);
             genreStatistic.setSeenListCountBefore(seenListCountBefore);
             genreStatistic.setSeenListCountGain(seenListCountGain);
-            genreStatistic.setWatchListCountGainPercent(seenListCountGainPercent);
+            genreStatistic.setSeenListCountGainPercent(seenListCountGainPercent);
 
             statistic.add(genreStatistic);
         }
@@ -684,22 +687,22 @@ public class WorkOfCultureManagingService {
             reviewCount = mangaReviewService.findAllByGenresName(genreName).size();
             reviewCountBefore = mangaReviewService.findAllByMangaGenresAndCreateDateIsBefore(genreName, startDate).size();
             reviewCountGain = mangaReviewService.findAllByMangaGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain;
+            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain == 0 ? 0 : 100;
 
             discussionCount = mangaDiscussionService.findAllByGenresName(genreName).size();
             discussionCountBefore = mangaDiscussionService.findAllByMangaGenresAndCreateDateIsBefore(genreName, startDate).size();
             discussionCountGain = mangaDiscussionService.findAllByMangaGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain;
+            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain == 0 ? 0 : 100;
 
             watchListCount = mangaWatchListService.findAllByGenresName(genreName).size();
             watchListCountBefore = mangaWatchListService.findAllByMangaGenresAndCreateDateIsBefore(genreName, startDate).size();
             watchListCountGain = mangaWatchListService.findAllByMangaGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain;
+            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain == 0 ? 0 : 100;
 
             seenListCount = mangaSeenListService.findAllByGenresName(genreName).size();
             seenListCountBefore = mangaSeenListService.findAllByMangaGenresAndCreateDateIsBefore(genreName, startDate).size();
             seenListCountGain = mangaSeenListService.findAllByMangaGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain;
+            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain == 0 ? 0 : 100;
 
             genreStatistic.setReviewCount(reviewCount);
             genreStatistic.setReviewCountBefore(reviewCountBefore);
@@ -709,7 +712,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setDiscussionCount(discussionCount);
             genreStatistic.setDiscussionCountBefore(discussionCountBefore);
             genreStatistic.setDiscussionCountGain(discussionCountGain);
-            genreStatistic.setReviewCountGainPercent(discussionCountGainPercent);
+            genreStatistic.setDiscussionCountGainPercent(discussionCountGainPercent);
 
             genreStatistic.setWatchListCount(watchListCount);
             genreStatistic.setWatchListCountBefore(watchListCountBefore);
@@ -719,7 +722,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setSeenListCount(seenListCount);
             genreStatistic.setSeenListCountBefore(seenListCountBefore);
             genreStatistic.setSeenListCountGain(seenListCountGain);
-            genreStatistic.setWatchListCountGainPercent(seenListCountGainPercent);
+            genreStatistic.setSeenListCountGainPercent(seenListCountGainPercent);
 
             statistic.add(genreStatistic);
         }
@@ -765,22 +768,22 @@ public class WorkOfCultureManagingService {
             reviewCount = movieReviewService.findAllByGenresName(genreName).size();
             reviewCountBefore = movieReviewService.findAllByMovieGenresAndCreateDateIsBefore(genreName, startDate).size();
             reviewCountGain = movieReviewService.findAllByMovieGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain;
+            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain == 0 ? 0 : 100;
 
             discussionCount = movieDiscussionService.findAllByGenresName(genreName).size();
             discussionCountBefore = movieDiscussionService.findAllByMovieGenresAndCreateDateIsBefore(genreName, startDate).size();
             discussionCountGain = movieDiscussionService.findAllByMovieGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain;
+            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain == 0 ? 0 : 100;
 
             watchListCount = movieWatchListService.findAllByGenresName(genreName).size();
             watchListCountBefore = movieWatchListService.findAllByMovieGenresAndCreateDateIsBefore(genreName, startDate).size();
             watchListCountGain = movieWatchListService.findAllByMovieGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain;
+            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain == 0 ? 0 : 100;
 
             seenListCount = movieSeenListService.findAllByGenresName(genreName).size();
             seenListCountBefore = movieSeenListService.findAllByMovieGenresAndCreateDateIsBefore(genreName, startDate).size();
             seenListCountGain = movieSeenListService.findAllByMovieGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain;
+            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain == 0 ? 0 : 100;
 
             genreStatistic.setReviewCount(reviewCount);
             genreStatistic.setReviewCountBefore(reviewCountBefore);
@@ -790,7 +793,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setDiscussionCount(discussionCount);
             genreStatistic.setDiscussionCountBefore(discussionCountBefore);
             genreStatistic.setDiscussionCountGain(discussionCountGain);
-            genreStatistic.setReviewCountGainPercent(discussionCountGainPercent);
+            genreStatistic.setDiscussionCountGainPercent(discussionCountGainPercent);
 
             genreStatistic.setWatchListCount(watchListCount);
             genreStatistic.setWatchListCountBefore(watchListCountBefore);
@@ -800,7 +803,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setSeenListCount(seenListCount);
             genreStatistic.setSeenListCountBefore(seenListCountBefore);
             genreStatistic.setSeenListCountGain(seenListCountGain);
-            genreStatistic.setWatchListCountGainPercent(seenListCountGainPercent);
+            genreStatistic.setSeenListCountGainPercent(seenListCountGainPercent);
 
             statistic.add(genreStatistic);
         }
@@ -846,22 +849,22 @@ public class WorkOfCultureManagingService {
             reviewCount = tvSeriesReviewService.findAllByGenresName(genreName).size();
             reviewCountBefore = tvSeriesReviewService.findAllByTvSeriesGenresAndCreateDateIsBefore(genreName, startDate).size();
             reviewCountGain = tvSeriesReviewService.findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain;
+            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain == 0 ? 0 : 100;
 
             discussionCount = tvSeriesDiscussionService.findAllByGenresName(genreName).size();
             discussionCountBefore = tvSeriesDiscussionService.findAllByTvSeriesGenresAndCreateDateIsBefore(genreName, startDate).size();
             discussionCountGain = tvSeriesDiscussionService.findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain;
+            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain == 0 ? 0 : 100;
 
             watchListCount = tvSeriesWatchListService.findAllByGenresName(genreName).size();
             watchListCountBefore = tvSeriesWatchListService.findAllByTvSeriesGenresAndCreateDateIsBefore(genreName, startDate).size();
             watchListCountGain = tvSeriesWatchListService.findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain;
+            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain == 0 ? 0 : 100;
 
             seenListCount = tvSeriesSeenListService.findAllByGenresName(genreName).size();
             seenListCountBefore = tvSeriesSeenListService.findAllByTvSeriesGenresAndCreateDateIsBefore(genreName, startDate).size();
             seenListCountGain = tvSeriesSeenListService.findAllByTvSeriesGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain;
+            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain == 0 ? 0 : 100;
 
             genreStatistic.setReviewCount(reviewCount);
             genreStatistic.setReviewCountBefore(reviewCountBefore);
@@ -871,7 +874,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setDiscussionCount(discussionCount);
             genreStatistic.setDiscussionCountBefore(discussionCountBefore);
             genreStatistic.setDiscussionCountGain(discussionCountGain);
-            genreStatistic.setReviewCountGainPercent(discussionCountGainPercent);
+            genreStatistic.setDiscussionCountGainPercent(discussionCountGainPercent);
 
             genreStatistic.setWatchListCount(watchListCount);
             genreStatistic.setWatchListCountBefore(watchListCountBefore);
@@ -881,7 +884,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setSeenListCount(seenListCount);
             genreStatistic.setSeenListCountBefore(seenListCountBefore);
             genreStatistic.setSeenListCountGain(seenListCountGain);
-            genreStatistic.setWatchListCountGainPercent(seenListCountGainPercent);
+            genreStatistic.setSeenListCountGainPercent(seenListCountGainPercent);
 
             statistic.add(genreStatistic);
         }
@@ -927,22 +930,22 @@ public class WorkOfCultureManagingService {
             reviewCount = gameReviewService.findAllByGenresName(genreName).size();
             reviewCountBefore = gameReviewService.findAllByGameGenresNameAndCreateDateIsBefore(genreName, startDate).size();
             reviewCountGain = gameReviewService.findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain;
+            reviewCountGainPercent = reviewCountBefore != 0 ? reviewCountGain * 100 / reviewCountBefore : reviewCountGain == 0 ? 0 : 100;
 
             discussionCount = gameDiscussionService.findAllByGenresName(genreName).size();
             discussionCountBefore = gameDiscussionService.findAllByGameGenresAndCreateDateIsBefore(genreName, startDate).size();
             discussionCountGain = gameDiscussionService.findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain;
+            discussionCountGainPercent = discussionCountBefore != 0 ? discussionCountGain * 100 / discussionCountBefore : discussionCountGain == 0 ? 0 : 100;
 
             watchListCount = gameWatchListService.findAllByGenresName(genreName).size();
             watchListCountBefore = gameWatchListService.findAllByGameGenresAndCreateDateIsBefore(genreName, startDate).size();
             watchListCountGain = gameWatchListService.findAllByGameGenresAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain;
+            watchListCountGainPercent = watchListCountBefore != 0 ? watchListCountGain * 100 / watchListCountBefore : watchListCountGain == 0 ? 0 : 100;
 
             seenListCount = gameSeenListService.findAllByGenresName(genreName).size();
             seenListCountBefore = gameSeenListService.findAllByGameGenresNameAndCreateDateIsBefore(genreName, startDate).size();
             seenListCountGain = gameSeenListService.findAllByGameGenresNameAndCreateDateIsAfterAndCreateDateIsBefore(genreName, startDate, endDate).size();
-            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain;
+            seenListCountGainPercent = seenListCountBefore != 0 ? seenListCountGain * 100 / seenListCountBefore : seenListCountGain == 0 ? 0 : 100;
 
             genreStatistic.setReviewCount(reviewCount);
             genreStatistic.setReviewCountBefore(reviewCountBefore);
@@ -952,7 +955,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setDiscussionCount(discussionCount);
             genreStatistic.setDiscussionCountBefore(discussionCountBefore);
             genreStatistic.setDiscussionCountGain(discussionCountGain);
-            genreStatistic.setReviewCountGainPercent(discussionCountGainPercent);
+            genreStatistic.setDiscussionCountGainPercent(discussionCountGainPercent);
 
             genreStatistic.setWatchListCount(watchListCount);
             genreStatistic.setWatchListCountBefore(watchListCountBefore);
@@ -962,7 +965,7 @@ public class WorkOfCultureManagingService {
             genreStatistic.setSeenListCount(seenListCount);
             genreStatistic.setSeenListCountBefore(seenListCountBefore);
             genreStatistic.setSeenListCountGain(seenListCountGain);
-            genreStatistic.setWatchListCountGainPercent(seenListCountGainPercent);
+            genreStatistic.setSeenListCountGainPercent(seenListCountGainPercent);
 
             statistic.add(genreStatistic);
         }
