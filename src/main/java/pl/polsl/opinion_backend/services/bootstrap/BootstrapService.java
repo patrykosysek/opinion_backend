@@ -73,11 +73,11 @@ public class BootstrapService {
                 createDefaultAdmin();
                 createDefaultUser();
                 getGenreTypes();
+                mangaGenerating();
+                movieGenerating();
+                tvSeriesGenerating();
+                gameGenerating();
                 animeGenerating();
-//                mangaGenerating();
-//                movieGenerating();
-//                tvSeriesGenerating();
-                //gameGenerating();
                 bootstrapStatusService.save(new BootstrapStatus(true));
             } catch (Exception e) {
                 log.info(e.getMessage());

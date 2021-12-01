@@ -8,7 +8,7 @@ public enum AnimeMangaGenreEnum {
     ADVENTURE("2", "Adventure"),
     CARS("3", "Cars"),
     COMEDY("4", "Comedy"),
-    DEMONS("6", "Demons"),
+//    DEMONS("6", "Demons"),
     MYSTERY("7", "Mystery"),
     DRAMA("8", "Drama"),
     FANTASY("10", "Fantasy"),
