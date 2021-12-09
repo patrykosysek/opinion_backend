@@ -12,4 +12,8 @@ public interface GameGenreRepository extends BasicRepository<GameGenre, UUID> {
 
     Optional<GameGenre> findByName(String name);
 
+    boolean existsByName(String name);
+
+
+
 }

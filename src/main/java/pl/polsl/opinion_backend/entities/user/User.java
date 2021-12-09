@@ -1,10 +1,7 @@
 package pl.polsl.opinion_backend.entities.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,11 +9,13 @@ import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
+import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,6 +53,8 @@ public class User extends BasicAuditing implements UserDetails {
     private Set<RoleGroup> roleGroups = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Preference> preferences = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -121,6 +122,15 @@ public class User extends BasicAuditing implements UserDetails {
     @JsonIgnore
     public boolean isAdmin() {
         return roleGroups.stream().anyMatch(roleGroup -> roleGroup.getName().equals(ADMIN.name()));
+    }
+
+    public Preference getPreferenceOf(WorkOfCultureType workOfCultureType) {
+        return this.preferences.stream().filter(preference -> preference.getWorkOfCultureType().equals(workOfCultureType)).findFirst().orElse(null);
+    }
+
+    public void addPreference(Preference preference) {
+        preference.setUser(this);
+        this.preferences.add(preference);
     }
 
 }

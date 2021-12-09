@@ -1,0 +1,9 @@
+databaseChangeLog:
+- changeSet:
+    id: 1636892960211-1
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: favourite_title
+        tableName: preference
+

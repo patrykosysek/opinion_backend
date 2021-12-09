@@ -1,15 +1,12 @@
 package pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 import pl.polsl.opinion_backend.entities.user.ReviewList;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,7 +24,10 @@ public class TvSeriesReview extends BasicAuditing {
     @Column(nullable = false, columnDefinition = "CLOB")
     private String comment;
 
-    private int likes = 0;
+    @OneToMany(mappedBy = "tvSeriesReview", cascade = CascadeType.ALL)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    private Set<TvSeriesReviewLike> tvSeriesReviewLikes = new HashSet<>();
 
     public void addTvSeries(TvSeries tvSeries) {
         this.tvSeries = tvSeries;
@@ -37,6 +37,11 @@ public class TvSeriesReview extends BasicAuditing {
     public void addReviewList(ReviewList reviewList) {
         this.reviewList = reviewList;
         reviewList.getTvSeriesReviews().add(this);
+    }
+
+    public void addLike(TvSeriesReviewLike tvSeriesReviewLike) {
+        tvSeriesReviewLike.setTvSeriesReview(this);
+        this.tvSeriesReviewLikes.add(tvSeriesReviewLike);
     }
 
 }

@@ -15,23 +15,34 @@ import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.genre.GameGenre;
 import pl.polsl.opinion_backend.entities.genre.MovieTvSeriesGenre;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
+import pl.polsl.opinion_backend.entities.user.Preference;
 import pl.polsl.opinion_backend.entities.user.User;
 import pl.polsl.opinion_backend.entities.worksOfCulture.anime.Anime;
+import pl.polsl.opinion_backend.entities.worksOfCulture.anime.AnimeStatistic;
 import pl.polsl.opinion_backend.entities.worksOfCulture.games.Game;
+import pl.polsl.opinion_backend.entities.worksOfCulture.games.GameStatistic;
 import pl.polsl.opinion_backend.entities.worksOfCulture.manga.Manga;
+import pl.polsl.opinion_backend.entities.worksOfCulture.manga.MangaStatistic;
 import pl.polsl.opinion_backend.entities.worksOfCulture.movies.Movie;
+import pl.polsl.opinion_backend.entities.worksOfCulture.movies.MovieStatistic;
 import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeries;
+import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesStatistic;
 import pl.polsl.opinion_backend.enums.genre.AnimeMangaGenreEnum;
 import pl.polsl.opinion_backend.enums.genre.GenreType;
 import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
+import pl.polsl.opinion_backend.enums.workOfCulture.WorkOfCultureType;
 import pl.polsl.opinion_backend.mappers.genre.GenreMapper;
 import pl.polsl.opinion_backend.services.role.RoleGroupService;
 import pl.polsl.opinion_backend.services.user.UserService;
-import pl.polsl.opinion_backend.services.works.*;
+import pl.polsl.opinion_backend.services.works.anime.AnimeService;
+import pl.polsl.opinion_backend.services.works.game.GameService;
 import pl.polsl.opinion_backend.services.works.genre.AnimeMangaGenreService;
 import pl.polsl.opinion_backend.services.works.genre.GameGenreService;
 import pl.polsl.opinion_backend.services.works.genre.GenreService;
 import pl.polsl.opinion_backend.services.works.genre.MovieTvSeriesGenreService;
+import pl.polsl.opinion_backend.services.works.manga.MangaService;
+import pl.polsl.opinion_backend.services.works.movie.MovieService;
+import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesService;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -105,6 +116,12 @@ public class BootstrapService {
                 GenreType.COMEDY,
                 "Adminos"
         );
+
+        Preference preference = new Preference();
+        preference.setFavouriteGenre(GenreType.ACTION);
+        preference.setWorkOfCultureType(WorkOfCultureType.ANIME);
+//        preference.setFavouriteTitle("Bansoukousaten");
+        user.addPreference(preference);
         user.getRoleGroups().add(roleGroupService.getByRoleName("ADMIN"));
         userService.save(user);
     }
@@ -256,13 +273,15 @@ public class BootstrapService {
                         existingAnime.getGenres().add(genre);
                         animeService.save(existingAnime);
 
-                    } else if (title != null && description != null && description.isBlank() && releaseDate != null && imageUrl != null) {
+                    } else if (title != null && description != null && !description.isBlank() && releaseDate != null && imageUrl != null) {
                         anime.setTitle(title);
                         anime.setApiId(apiId);
                         anime.setDescription(description);
                         anime.setReleaseDate(releaseDate);
                         anime.setImageUrl(imageUrl);
                         anime.getGenres().add(genre);
+                        AnimeStatistic animeStatistic = new AnimeStatistic();
+                        anime.addStatistic(animeStatistic);
                         animeService.save(anime);
 
                     }
@@ -335,7 +354,8 @@ public class BootstrapService {
                         manga.setReleaseDate(releaseDate);
                         manga.setImageUrl(imageUrl);
                         manga.getGenres().add(genre);
-
+                        MangaStatistic mangaStatistic = new MangaStatistic();
+                        manga.addStatistic(mangaStatistic);
                         mangaService.save(manga);
                     }
                 }
@@ -423,6 +443,8 @@ public class BootstrapService {
                 movie.setDescription(description);
                 movie.setReleaseDate(releaseDate);
                 movie.setImageUrl(imageUrl);
+                MovieStatistic movieStatistic = new MovieStatistic();
+                movie.addStatistic(movieStatistic);
 
                 for (int i = 0; i < generes.length(); i++) {
                     JSONObject jsonGenre = generes.getJSONObject(i);
@@ -515,6 +537,8 @@ public class BootstrapService {
                 tvSeries.setDescription(description);
                 tvSeries.setReleaseDate(releaseDate);
                 tvSeries.setImageUrl(imageUrl);
+                TvSeriesStatistic tvSeriesStatistic = new TvSeriesStatistic();
+                tvSeries.addStatistic(tvSeriesStatistic);
 
                 for (int i = 0; i < generes.length(); i++) {
                     JSONObject jsonGenre = generes.getJSONObject(i);
@@ -599,6 +623,8 @@ public class BootstrapService {
                 game.setTitle(title);
                 game.setImageUrl(imageUrl);
                 game.setReleaseDate(releaseDate);
+                GameStatistic gameStatistic = new GameStatistic();
+                game.addStatistic(gameStatistic);
 
                 for (int i = 0; i < generes.length(); i++) {
                     JSONObject jsonGenre = generes.getJSONObject(i);

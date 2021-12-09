@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 import pl.polsl.opinion_backend.dtos.user.UserResponseDTO;
+import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 
 @Component
 @Data
@@ -14,4 +15,5 @@ public class AuthResponseDTO {
     UserResponseDTO user;
     String accessToken;
     String refreshToken;
+    RoleGroupEnum role;
 }

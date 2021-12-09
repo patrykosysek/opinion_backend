@@ -32,6 +32,7 @@ public class SecurityBeans {
         configuration.setMaxAge(36000L);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
 

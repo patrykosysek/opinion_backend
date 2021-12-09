@@ -17,7 +17,13 @@ public enum SecurityEndpoints {
     SWAGGER_UI_URL("/swagger-ui/**", false),
     WEBJARS_URL("/webjars/**", false),
     V2_URL("/v2/**", false),
-    V3_URL("/v3/**", false);
+    V3_URL("/v3/**", false),
+
+    RECOMMENDATION("/work-of-culture/{workOfCultureType}", false),
+    RECOMMENDED("/work-of-culture/recommendation", false),
+    FILTRATION("/work-of-culture/{workOfCultureType}/filter", false),
+    REGISTRATION("/users/registration", false),
+    INFORMATION("/work-of-culture/{workOfCultureType}/{id}/information", false);
 
     public final String value;
     public final boolean authentication;

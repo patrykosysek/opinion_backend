@@ -17,11 +17,12 @@ import pl.polsl.opinion_backend.dtos.user.UserResponseDTO;
 import pl.polsl.opinion_backend.dtos.user.UserUpdateDTO;
 import pl.polsl.opinion_backend.mappers.user.UserMapper;
 import pl.polsl.opinion_backend.services.user.UserService;
+import pl.polsl.opinion_backend.services.works.discussion.DiscussionManagingService;
 
 import javax.validation.Valid;
 import java.util.UUID;
 
-import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_ALL;
+import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_USER_ALL;
 
 @RequiredArgsConstructor
 @RestController
@@ -31,17 +32,17 @@ import static pl.polsl.opinion_backend.enums.role.Roles.ROLE_ALL;
 public class UserController {
     private final UserMapper userMapper;
     private final UserService userService;
+    private final DiscussionManagingService discussionManagingService;
 
-    @Secured(ROLE_ALL)
     @Operation(summary = "Create user")
     @ApiResponse(responseCode = "201", description = "User successfully created")
-    @PostMapping
+    @PostMapping("/registration")
     @ResponseStatus(HttpStatus.CREATED)
     public UserResponseDTO create(@RequestBody @Valid UserCreateDTO dto) {
         return userMapper.toUserResponseDTO(userService.create(dto));
     }
 
-    @Secured(ROLE_ALL)
+    @Secured(ROLE_USER_ALL)
     @Operation(summary = "Get user")
     @ApiResponse(responseCode = "200", description = "User found")
     @GetMapping(value = "/{id}")
@@ -50,16 +51,17 @@ public class UserController {
         return userMapper.toUserResponseDTO(userService.getById(id));
     }
 
-    @Secured(ROLE_ALL)
+    @Secured(ROLE_USER_ALL)
     @Operation(summary = "Delete User")
     @ApiResponse(responseCode = "204", description = "User successfully deleted")
     @DeleteMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable UUID id) {
+        discussionManagingService.deleteAllDiscussionsAndAnswersByCreateBy(id);
         userService.delete(id);
     }
 
-    @Secured(ROLE_ALL)
+    @Secured(ROLE_USER_ALL)
     @Operation(summary = "Update user")
     @ApiResponse(responseCode = "200", description = "User successfully updated")
     @PatchMapping(value = "/{id}")
@@ -68,7 +70,7 @@ public class UserController {
         return userMapper.toUserResponseDTO(userService.update(id, dto));
     }
 
-    @Secured(ROLE_ALL)
+    @Secured(ROLE_USER_ALL)
     @Operation(summary = "Get users")
     @ApiResponse(responseCode = "200", description = "Users found")
     @GetMapping
@@ -77,7 +79,7 @@ public class UserController {
         return userService.findAll(pageable).map(userMapper::toUserResponseDTO);
     }
 
-    @Secured(ROLE_ALL)
+    @Secured(ROLE_USER_ALL)
     @Operation(summary = "Change user lock status")
     @ApiResponse(responseCode = "200", description = "User status changed")
     @PatchMapping("/lock/{id}")
@@ -86,5 +88,13 @@ public class UserController {
         return userMapper.toUserResponseDTO(userService.changeLockStatus(id));
     }
 
+    @Secured(ROLE_USER_ALL)
+    @Operation(summary = "Get users filtered by email")
+    @ApiResponse(responseCode = "200", description = "Users found")
+    @GetMapping("/filter")
+    @ResponseStatus(HttpStatus.OK)
+    public Page<UserResponseDTO> listAll(@PageableDefault Pageable pageable, @RequestParam String email) {
+        return userService.findAllFilteredByEmail(email, pageable).map(userMapper::toUserResponseDTO);
+    }
 
 }

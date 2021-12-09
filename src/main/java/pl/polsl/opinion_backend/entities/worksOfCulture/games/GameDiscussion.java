@@ -1,9 +1,6 @@
 package pl.polsl.opinion_backend.entities.worksOfCulture.games;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import pl.polsl.opinion_backend.entities.base.BasicAuditing;
 
 import javax.persistence.*;
@@ -27,6 +24,18 @@ public class GameDiscussion extends BasicAuditing {
     private String text;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "discussion")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     Set<GameDiscussionAnswer> answers = new HashSet<>();
+
+    public void addGame(Game game) {
+        this.game = game;
+        game.getDiscussions().add(this);
+    }
+
+    public void addAnswer(GameDiscussionAnswer gameDiscussionAnswer) {
+        this.answers.add(gameDiscussionAnswer);
+        gameDiscussionAnswer.setDiscussion(this);
+    }
 
 }

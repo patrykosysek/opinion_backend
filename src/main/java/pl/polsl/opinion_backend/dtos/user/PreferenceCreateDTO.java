@@ -20,7 +20,7 @@ public class PreferenceCreateDTO {
     @NotNull(message = FAVOURITE_GENRE_REQUIRED)
     private GenreType favouriteGenre;
 
-    @NotBlank(message = FAVOURITE_TITLE_REQUIRED)
-    private String favouriteTitle;
+//    @NotBlank(message = FAVOURITE_TITLE_REQUIRED)
+//    private String favouriteTitle;
 
 }

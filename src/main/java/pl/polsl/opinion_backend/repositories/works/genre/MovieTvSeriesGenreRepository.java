@@ -12,4 +12,6 @@ public interface MovieTvSeriesGenreRepository extends BasicRepository<MovieTvSer
 
     Optional<MovieTvSeriesGenre> findByName(String name);
 
+    boolean existsByName(String name);
+
 }

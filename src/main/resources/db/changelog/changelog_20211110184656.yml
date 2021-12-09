@@ -1,0 +1,301 @@
+databaseChangeLog:
+- changeSet:
+    id: 1636570036573-2
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: anime_review_likePK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: positive
+            type: BOOLEAN
+        - column:
+            name: anime_review_id
+            type: UUID
+        tableName: anime_review_like
+- changeSet:
+    id: 1636570036573-3
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: game_review_likePK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: positive
+            type: BOOLEAN
+        - column:
+            name: game_review_id
+            type: UUID
+        tableName: game_review_like
+- changeSet:
+    id: 1636570036573-4
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: manga_review_likePK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: positive
+            type: BOOLEAN
+        - column:
+            name: manga_review_id
+            type: UUID
+        tableName: manga_review_like
+- changeSet:
+    id: 1636570036573-5
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: movie_review_likePK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: positive
+            type: BOOLEAN
+        - column:
+            name: movie_review_id
+            type: UUID
+        tableName: movie_review_like
+- changeSet:
+    id: 1636570036573-6
+    author: patry (generated)
+    changes:
+    - createTable:
+        columns:
+        - column:
+            constraints:
+              nullable: false
+              primaryKey: true
+              primaryKeyName: tv_series_review_likePK
+            name: id
+            type: UUID
+        - column:
+            name: create_by
+            type: UUID
+        - column:
+            constraints:
+              nullable: false
+            name: create_date
+            type: TIMESTAMP WITH TIME ZONE
+        - column:
+            constraints:
+              nullable: false
+            name: positive
+            type: BOOLEAN
+        - column:
+            name: tv_series_review_id
+            type: UUID
+        tableName: tv_series_review_like
+- changeSet:
+    id: 1636570036573-7
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_ANIME_REVIEW_LIKEID_COL
+        tableName: anime_review_like
+- changeSet:
+    id: 1636570036573-8
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_GAME_REVIEW_LIKEID_COL
+        tableName: game_review_like
+- changeSet:
+    id: 1636570036573-9
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MANGA_REVIEW_LIKEID_COL
+        tableName: manga_review_like
+- changeSet:
+    id: 1636570036573-10
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_MOVIE_REVIEW_LIKEID_COL
+        tableName: movie_review_like
+- changeSet:
+    id: 1636570036573-11
+    author: patry (generated)
+    changes:
+    - addUniqueConstraint:
+        columnNames: id
+        constraintName: UC_TV_SERIES_REVIEW_LIKEID_COL
+        tableName: tv_series_review_like
+- changeSet:
+    id: 1636570036573-12
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: game_review_id
+        baseTableName: game_review_like
+        constraintName: FK7nlftogl223p58qilwmetd857
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: game_review
+        validate: true
+- changeSet:
+    id: 1636570036573-13
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: tv_series_review_id
+        baseTableName: tv_series_review_like
+        constraintName: FKcfv6lm85g5tg88iq3in97qh5t
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: tv_series_review
+        validate: true
+- changeSet:
+    id: 1636570036573-14
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: anime_review_id
+        baseTableName: anime_review_like
+        constraintName: FKhs3ek2ur9mbpsj0hh6wympu29
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: anime_review
+        validate: true
+- changeSet:
+    id: 1636570036573-15
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: manga_review_id
+        baseTableName: manga_review_like
+        constraintName: FKlsiiiew83m9akd4pt8wqsputj
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: manga_review
+        validate: true
+- changeSet:
+    id: 1636570036573-16
+    author: patry (generated)
+    changes:
+    - addForeignKeyConstraint:
+        baseColumnNames: movie_review_id
+        baseTableName: movie_review_like
+        constraintName: FKovp3a7kgp4a3b3w5c1hlpcson
+        deferrable: false
+        initiallyDeferred: false
+        referencedColumnNames: id
+        referencedTableName: movie_review
+        validate: true
+- changeSet:
+    id: 1636570036573-17
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: likes
+        tableName: anime_review
+- changeSet:
+    id: 1636570036573-18
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: likes
+        tableName: game_review
+- changeSet:
+    id: 1636570036573-19
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: likes
+        tableName: manga_review
+- changeSet:
+    id: 1636570036573-20
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: likes
+        tableName: movie_review
+- changeSet:
+    id: 1636570036573-21
+    author: patry (generated)
+    changes:
+    - dropColumn:
+        columnName: likes
+        tableName: tv_series_review
+- changeSet:
+    id: 1636570036573-1
+    author: patry (generated)
+    changes:
+    - addNotNullConstraint:
+        columnDataType: uuid
+        columnName: user_id
+        tableName: preference
+        validate: true
+

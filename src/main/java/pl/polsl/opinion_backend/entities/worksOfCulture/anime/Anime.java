@@ -5,6 +5,9 @@ import pl.polsl.opinion_backend.entities.base.WorkOfCulture;
 import pl.polsl.opinion_backend.entities.genre.AnimeMangaGenre;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeSeenList;
 import pl.polsl.opinion_backend.entities.list.anime.AnimeWatchList;
+import pl.polsl.opinion_backend.enums.genre.GenreType;
+import pl.polsl.opinion_backend.helpers.Interest;
+import pl.polsl.opinion_backend.mappers.qualifires.AnimeMangaGenresMapping;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -15,12 +18,17 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-public class Anime extends WorkOfCulture {
+public class Anime extends WorkOfCulture implements Interest {
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private AnimeStatistic statistic;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<AnimeMangaGenre> genres = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anime")
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<AnimeDiscussion> discussions = new HashSet<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "anime")
@@ -37,5 +45,26 @@ public class Anime extends WorkOfCulture {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private Set<AnimeSeenList> animeSeenLists = new HashSet<>();
+
+    public void addStatistic(AnimeStatistic animeStatistic) {
+        this.statistic = animeStatistic;
+        animeStatistic.setAnime(this);
+    }
+
+    @Override
+    public double workOfCultureInterest() {
+
+        int currentDiscussion = statistic.getCurrentDiscussion();
+        int currentReview = statistic.getCurrentReview();
+
+        int monthlyDiscussionGrow = currentDiscussion - statistic.getMonthDiscussion();
+        int monthlyReviewGrow = currentReview - statistic.getMonthReview();
+
+        int weeklyDiscussionGrow = currentDiscussion - statistic.getWeekDiscussion();
+        int weeklyReviewGrow = currentReview - statistic.getWeekReview();
+
+        return 0.3 * (0.6 * weeklyDiscussionGrow + 0.2 * monthlyDiscussionGrow + 0.2 * currentDiscussion) + 0.7 * (0.6 * weeklyReviewGrow + 0.2 * monthlyReviewGrow + 0.2 * currentReview);
+
+    }
 
 }

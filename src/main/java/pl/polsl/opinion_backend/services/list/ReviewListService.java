@@ -17,12 +17,16 @@ import pl.polsl.opinion_backend.entities.worksOfCulture.tvSeries.TvSeriesReview;
 import pl.polsl.opinion_backend.repositories.list.ReviewListRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 import pl.polsl.opinion_backend.services.list.review.*;
-import pl.polsl.opinion_backend.services.works.*;
+import pl.polsl.opinion_backend.services.works.anime.AnimeService;
+import pl.polsl.opinion_backend.services.works.game.GameService;
+import pl.polsl.opinion_backend.services.works.manga.MangaService;
+import pl.polsl.opinion_backend.services.works.movie.MovieService;
+import pl.polsl.opinion_backend.services.works.tvSeries.TvSeriesService;
 
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
-import static pl.polsl.opinion_backend.exceptions.ErrorMessages.WORK_OF_CULTURE_NOT_FOUND;
+import static pl.polsl.opinion_backend.exceptions.ErrorMessages.*;
 
 @RequiredArgsConstructor
 @Service
@@ -46,69 +50,75 @@ public class ReviewListService extends BasicService<ReviewList, ReviewListReposi
 
     //////////////////////////////////////////////////////////////////////// ADD
 
-    public void addAnime(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
+    public AnimeReview addAnime(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
         Anime anime = animeService.getById(workOfCultureId);
 
         if (animeReviewService.existsByReviewListAndAnimeId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("ANIME IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(ANIME_ALREADY_IN_REVIEW_LIST);
         }
         AnimeReview animeReview = new AnimeReview();
         animeReview.setComment(reviewCreateDTO.getReview());
         animeReview.addAnime(anime);
         animeReview.addReviewList(reviewList);
-        animeReviewService.save(animeReview);
+        anime.getStatistic().setCurrentReview(anime.getStatistic().getCurrentReview() + 1);
+        return animeReviewService.save(animeReview);
     }
 
-    public void addManga(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
+    public MangaReview addManga(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
         Manga manga = mangaService.getById(workOfCultureId);
 
         if (mangaReviewService.existsByReviewListAndMangaId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("MANGA IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(MANGA_ALREADY_IN_REVIEW_LIST);
         }
         MangaReview mangaReview = new MangaReview();
         mangaReview.setComment(reviewCreateDTO.getReview());
         mangaReview.addManga(manga);
         mangaReview.addReviewList(reviewList);
-        mangaReviewService.save(mangaReview);
+        manga.getStatistic().setCurrentReview(manga.getStatistic().getCurrentReview() + 1);
+        return mangaReviewService.save(mangaReview);
     }
 
-    public void addMovie(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
+    public MovieReview addMovie(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
         Movie movie = movieService.getById(workOfCultureId);
 
         if (movieReviewService.existsByReviewListAndMovieId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("MOVIE IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(MOVIE_ALREADY_IN_REVIEW_LIST);
         }
         MovieReview movieReview = new MovieReview();
         movieReview.setComment(reviewCreateDTO.getReview());
         movieReview.addMovie(movie);
         movieReview.addReviewList(reviewList);
-        movieReviewService.save(movieReview);
+        movie.getStatistic().setCurrentReview(movie.getStatistic().getCurrentReview() + 1);
+        return movieReviewService.save(movieReview);
     }
 
-    public void addTvSeries(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
+    public TvSeriesReview addTvSeries(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
         TvSeries tvSeries = tvSeriesService.getById(workOfCultureId);
 
         if (tvSeriesReviewService.existsByReviewListAndTvSeriesId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("TVSERIES IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(TV_SERIES_ALREADY_IN_REVIEW_LIST);
         }
         TvSeriesReview tvSeriesReview = new TvSeriesReview();
         tvSeriesReview.setComment(reviewCreateDTO.getReview());
         tvSeriesReview.addTvSeries(tvSeries);
         tvSeriesReview.addReviewList(reviewList);
-        tvSeriesReviewService.save(tvSeriesReview);
+        tvSeries.getStatistic().setCurrentReview(tvSeries.getStatistic().getCurrentReview() + 1);
+        return tvSeriesReviewService.save(tvSeriesReview);
     }
 
-    public void addGame(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
+    public GameReview addGame(UUID workOfCultureId, ReviewList reviewList, ReviewCreateDTO reviewCreateDTO) {
         Game game = gameService.getById(workOfCultureId);
 
         if (gameReviewService.existsByReviewListAndGameId(reviewList, workOfCultureId)) {
-            throw new IllegalArgumentException("TVSERIES IS ALREADY IN REVIEW LIST");
+            throw new IllegalArgumentException(GAME_ALREADY_IN_REVIEW_LIST);
         }
         GameReview gameReview = new GameReview();
         gameReview.setComment(reviewCreateDTO.getReview());
         gameReview.addGame(game);
         gameReview.addReviewList(reviewList);
-        gameReviewService.save(gameReview);
+        game.getStatistic().setCurrentReview(game.getStatistic().getCurrentReview() + 1);
+       // gameService.save(game);
+        return gameReviewService.save(gameReview);
     }
 
 

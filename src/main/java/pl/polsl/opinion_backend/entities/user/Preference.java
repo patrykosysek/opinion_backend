@@ -17,7 +17,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Preference extends BasicAuditing {
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User user;
 
     @Column(nullable = false)
@@ -28,7 +28,7 @@ public class Preference extends BasicAuditing {
     @Enumerated(value = EnumType.STRING)
     private GenreType favouriteGenre;
 
-    @Column(nullable = false)
-    private String favouriteTitle;
+//    @Column(nullable = false)
+//    private String favouriteTitle;
 
 }

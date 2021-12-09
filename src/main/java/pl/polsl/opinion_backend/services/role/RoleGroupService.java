@@ -3,14 +3,13 @@ package pl.polsl.opinion_backend.services.role;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.role.RoleGroup;
+import pl.polsl.opinion_backend.enums.role.RoleGroupEnum;
 import pl.polsl.opinion_backend.mappers.qualifires.RoleGroupMapping;
+import pl.polsl.opinion_backend.mappers.qualifires.UserRoleGroupMapping;
 import pl.polsl.opinion_backend.repositories.role.RoleGroupRepository;
 import pl.polsl.opinion_backend.services.basic.BasicService;
 
-import java.util.HashSet;
-import java.util.NoSuchElementException;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 import static pl.polsl.opinion_backend.exceptions.ErrorMessages.ROLE_GROUP_NOT_FOUND;
 
@@ -40,6 +39,12 @@ public class RoleGroupService extends BasicService<RoleGroup, RoleGroupRepositor
         Set<RoleGroup> roleGroups = new HashSet<>();
         roleGroups.add(getByRoleName("OPINION_USER"));
         return roleGroups;
+    }
+
+    @UserRoleGroupMapping
+    public RoleGroupEnum getOpinionUserRole(Set<RoleGroup> roleGroups) {
+        Optional<RoleGroup> roleGroup = roleGroups.stream().findFirst();
+        return RoleGroupEnum.valueOf(roleGroup.get().getName());
     }
 
 }
