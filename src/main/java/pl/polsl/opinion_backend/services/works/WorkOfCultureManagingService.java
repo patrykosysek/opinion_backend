@@ -571,8 +571,8 @@ public class WorkOfCultureManagingService {
 
         Set<StatisticGenreResponseDTO> statistic = new HashSet<>();
 
-        OffsetDateTime startDate = OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.NOON, ZoneOffset.UTC);
-        OffsetDateTime endDate = OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.NOON, ZoneOffset.UTC);
+        OffsetDateTime startDate = OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.MIN, ZoneOffset.UTC);
+        OffsetDateTime endDate = OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.MAX, ZoneOffset.UTC);
 
         for (GenreType genreType : genres) {
 
@@ -653,8 +653,8 @@ public class WorkOfCultureManagingService {
 
         Set<StatisticGenreResponseDTO> statistic = new HashSet<>();
 
-        OffsetDateTime startDate = OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.NOON, ZoneOffset.UTC);
-        OffsetDateTime endDate = OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.NOON, ZoneOffset.UTC);
+        OffsetDateTime startDate = OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.MIN, ZoneOffset.UTC);
+        OffsetDateTime endDate = OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.MAX, ZoneOffset.UTC);
 
         for (GenreType genreType : genres) {
 
@@ -734,8 +734,8 @@ public class WorkOfCultureManagingService {
 
         Set<StatisticGenreResponseDTO> statistic = new HashSet<>();
 
-        OffsetDateTime startDate = OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.NOON, ZoneOffset.UTC);
-        OffsetDateTime endDate = OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.NOON, ZoneOffset.UTC);
+        OffsetDateTime startDate = OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.MIN, ZoneOffset.UTC);
+        OffsetDateTime endDate = OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.MAX, ZoneOffset.UTC);
 
         for (GenreType genreType : genres) {
 
@@ -815,8 +815,8 @@ public class WorkOfCultureManagingService {
 
         Set<StatisticGenreResponseDTO> statistic = new HashSet<>();
 
-        OffsetDateTime startDate = OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.NOON, ZoneOffset.UTC);
-        OffsetDateTime endDate = OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.NOON, ZoneOffset.UTC);
+        OffsetDateTime startDate = OffsetDateTime.of(timeDurationDTO.getStartDate(), LocalTime.MIN, ZoneOffset.UTC);
+        OffsetDateTime endDate = OffsetDateTime.of(timeDurationDTO.getEndDate(), LocalTime.MAX, ZoneOffset.UTC);
 
         for (GenreType genreType : genres) {
 
