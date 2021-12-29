@@ -8,6 +8,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.polsl.opinion_backend.entities.bootstrap.BootstrapStatus;
@@ -55,7 +56,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Slf4j
 public class BootstrapService {
-
     private final PasswordEncoder passwordEncoder;
     private final RoleGroupService roleGroupService;
     private final UserService userService;
@@ -74,6 +74,13 @@ public class BootstrapService {
     private final MovieService movieService;
     private final TvSeriesService tvSeriesService;
     private final GameService gameService;
+
+    @Value("${IMDB_KEY}")
+    private String imdbKey;
+    @Value("${RAWQ_KEY}")
+    private String rawqKey;
+    @Value("${JIKAN_KEY}")
+    private String jikanKey;
 
     public void setup() {
         if (bootstrapStatusService.isDone()) {
@@ -120,7 +127,6 @@ public class BootstrapService {
         Preference preference = new Preference();
         preference.setFavouriteGenre(GenreType.ACTION);
         preference.setWorkOfCultureType(WorkOfCultureType.ANIME);
-//        preference.setFavouriteTitle("Bansoukousaten");
         user.addPreference(preference);
         user.getRoleGroups().add(roleGroupService.getByRoleName("ADMIN"));
         userService.save(user);
@@ -154,7 +160,7 @@ public class BootstrapService {
                 .url("https://data-imdb1.p.rapidapi.com/genres/")
                 .get()
                 .addHeader("x-rapidapi-host", "data-imdb1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "dab265cb09msha3edaa1ac59915dp1e92ccjsnb9a97ec0d817")
+                .addHeader("x-rapidapi-key", imdbKey)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -189,7 +195,7 @@ public class BootstrapService {
 
 
         Request request = new Request.Builder()
-                .url("https://api.rawg.io/api/genres?key=a63115890c184d4aaa49b2a5ec7fdbfc")
+                .url("https://api.rawg.io/api/genres?key=" + rawqKey)
                 .get()
                 .addHeader("User-Agent", "Opinion")
                 .build();
@@ -245,7 +251,7 @@ public class BootstrapService {
                     .url(url)
                     .get()
                     .addHeader("x-rapidapi-host", "jikan1.p.rapidapi.com")
-                    .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
+                    .addHeader("x-rapidapi-key", jikanKey)
                     .build();
 
             Response response = client.newCall(request).execute();
@@ -319,7 +325,7 @@ public class BootstrapService {
                     .url(url)
                     .get()
                     .addHeader("x-rapidapi-host", "jikan1.p.rapidapi.com")
-                    .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
+                    .addHeader("x-rapidapi-key", jikanKey)
                     .build();
 
             Response response = client.newCall(request).execute();
@@ -390,7 +396,7 @@ public class BootstrapService {
                 .url(url)
                 .get()
                 .addHeader("x-rapidapi-host", "data-imdb1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
+                .addHeader("x-rapidapi-key", jikanKey)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -416,7 +422,7 @@ public class BootstrapService {
                 .url(url)
                 .get()
                 .addHeader("x-rapidapi-host", "data-imdb1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
+                .addHeader("x-rapidapi-key", jikanKey)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -483,7 +489,7 @@ public class BootstrapService {
                 .url(url)
                 .get()
                 .addHeader("x-rapidapi-host", "data-imdb1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
+                .addHeader("x-rapidapi-key", jikanKey)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -509,7 +515,7 @@ public class BootstrapService {
                 .url(url)
                 .get()
                 .addHeader("x-rapidapi-host", "data-imdb1.p.rapidapi.com")
-                .addHeader("x-rapidapi-key", "72d9a3899cmsh897cee643145ec2p12af1bjsn96d67848f7a2")
+                .addHeader("x-rapidapi-key", jikanKey)
                 .build();
 
         Response response = client.newCall(request).execute();
@@ -557,7 +563,7 @@ public class BootstrapService {
         OkHttpClient client = new OkHttpClient();
 
         for (int i = 1; i < 21; i++) {
-            String url = "https://api.rawg.io/api/games?key=a63115890c184d4aaa49b2a5ec7fdbfc&page=" + i;
+            String url = "https://api.rawg.io/api/games?key=" + rawqKey + "&page=" + i;
             createGame(client, url);
         }
 
@@ -588,7 +594,7 @@ public class BootstrapService {
 
     public void createGameFromId(int id, OkHttpClient client) throws IOException {
 
-        String url = "https://api.rawg.io/api/games/" + id + "?key=a63115890c184d4aaa49b2a5ec7fdbfc";
+        String url = "https://api.rawg.io/api/games/" + id + "?key=" + rawqKey;
 
         Request request = new Request.Builder()
                 .url(url)
