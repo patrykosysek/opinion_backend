@@ -37,7 +37,6 @@ public class MovieDiscussionService extends BasicService<MovieDiscussion, MovieD
         movieDiscussion.setText(dto.getText());
         movieDiscussion.setTopic(dto.getTopic());
         movie.getStatistic().setCurrentDiscussion(movie.getStatistic().getCurrentDiscussion() + 1);
-        movieService.save(movie);
         return save(movieDiscussion);
     }
 

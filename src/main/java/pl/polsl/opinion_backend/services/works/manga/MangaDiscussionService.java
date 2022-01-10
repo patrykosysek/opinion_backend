@@ -37,7 +37,6 @@ public class MangaDiscussionService extends BasicService<MangaDiscussion, MangaD
         mangaDiscussion.setText(dto.getText());
         mangaDiscussion.setTopic(dto.getTopic());
         manga.getStatistic().setCurrentDiscussion(manga.getStatistic().getCurrentDiscussion() + 1);
-        mangaService.save(manga);
         return save(mangaDiscussion);
     }
 

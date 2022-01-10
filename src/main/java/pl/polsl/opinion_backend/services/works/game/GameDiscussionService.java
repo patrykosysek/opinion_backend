@@ -37,7 +37,6 @@ public class GameDiscussionService extends BasicService<GameDiscussion, GameDisc
         gameDiscussion.setText(dto.getText());
         gameDiscussion.setTopic(dto.getTopic());
         game.getStatistic().setCurrentDiscussion(game.getStatistic().getCurrentDiscussion() + 1);
-        gameService.save(game);
         return save(gameDiscussion);
     }
 

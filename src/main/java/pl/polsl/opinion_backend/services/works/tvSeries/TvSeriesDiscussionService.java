@@ -37,7 +37,6 @@ public class TvSeriesDiscussionService extends BasicService<TvSeriesDiscussion, 
         tvSeriesDiscussion.setText(dto.getText());
         tvSeriesDiscussion.setTopic(dto.getTopic());
         tvSeries.getStatistic().setCurrentDiscussion(tvSeries.getStatistic().getCurrentDiscussion() + 1);
-        tvSeriesService.save(tvSeries);
         return save(tvSeriesDiscussion);
     }
 

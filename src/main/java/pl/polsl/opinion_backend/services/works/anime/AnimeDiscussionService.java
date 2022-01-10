@@ -37,7 +37,6 @@ public class AnimeDiscussionService extends BasicService<AnimeDiscussion, AnimeD
         animeDiscussion.setText(dto.getText());
         animeDiscussion.setTopic(dto.getTopic());
         anime.getStatistic().setCurrentDiscussion(anime.getStatistic().getCurrentDiscussion() + 1);
-        //animeService.save(anime);
         return save(animeDiscussion);
     }
 
